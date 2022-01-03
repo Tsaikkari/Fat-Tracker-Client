@@ -1,0 +1,84 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+/*home page*/
+.home-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header-div > h1 {
+  font-size: 2.5em;
+  margin: 0.7em auto 0.5em;
+}
+
+.signup-div {
+  padding-top: 1rem;
+}
+
+.signup-btn {
+  background-color: white;
+  align-items: center;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.54);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px,
+    rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
+  padding: 0px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: Roboto, sans-serif;
+  min-width: 170px;
+  cursor: pointer;
+}
+
+.signup-icon-div {
+  background: rgb(255, 255, 255);
+  padding: 12.8px;
+  border-radius: 2px;
+}
+
+.fa-user-plus {
+  color: green;
+  padding-right: 0.7em;
+}
+
+@media (min-width: 768px) {
+  /* home page */
+  .home-header-div > h1 {
+    font-size: 3.7em;
+    margin: 1em auto 0.5em;
+  }
+
+  .home-container {
+    background-position: right 25% bottom 10%;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* home page */
+  .home-buttons-div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .home-header-div > h1 {
+    font-size: 5.5em;
+    margin: 1.5em auto 1.6em;
+  }
+
+  .signup-icon-div {
+    background: rgb(255, 255, 255);
+    padding: 12.8px;
+    border-radius: 2px;
+  }
+
+  .signup-div {
+    padding-top: 0;
+    margin-left: 2em;
+  }
+}
