@@ -1,25 +1,19 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-}
-
 /*home page*/
-/* .home-container {
+.container {
   display: flex;
   flex-direction: column;
 }
 
-.home-header-div > h1 {
+.header {
   font-size: 2.5em;
   margin: 0.7em auto 0.5em;
 }
 
-.signup-div {
+.signup__div {
   padding-top: 1rem;
 }
 
-.signup-btn {
+.signup__div__btn {
   background-color: white;
   align-items: center;
   justify-content: center;
@@ -36,47 +30,47 @@ body {
   cursor: pointer;
 }
 
-.signup-icon-div {
+.signup__div__btn > div {
   background: rgb(255, 255, 255);
   padding: 12.8px;
   border-radius: 2px;
 }
 
-.fa-user-plus {
+.signup__div__btn > div > i {
   color: green;
   padding-right: 0.7em;
 }
 
 @media (min-width: 768px) {
-  .home-header-div > h1 {
+  .header {
     font-size: 3.7em;
     margin: 1em auto 0.5em;
   }
 
-  .home-container {
+  .container {
     background-position: right 25% bottom 10%;
   }
 }
 
 @media (min-width: 1024px) {
-  .home-buttons-div {
+  .buttons__div {
     display: flex;
     flex-direction: row;
   }
 
-  .home-header-div > h1 {
+  .header {
     font-size: 5.5em;
     margin: 1.5em auto 1.6em;
   }
 
-  .signup-icon-div {
+  .signup__div {
+    padding-top: 0;
+    margin-left: 2em;
+  }
+
+  .signup__div__btn > div {
     background: rgb(255, 255, 255);
     padding: 12.8px;
     border-radius: 2px;
   }
-
-  .signup-div {
-    padding-top: 0;
-    margin-left: 2em;
-  }
-} */
+}

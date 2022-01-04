@@ -2,8 +2,9 @@ import React, { useContext } from 'react'
 import GoogleLogin from 'react-google-login'
 import axios from 'axios'
 
-import { AuthContext } from '../context/auth'
-import fatTracker from '../images/fat-tracker.jpg'
+import { AuthContext } from '../../context/auth'
+import fatTracker from '../../images/fat-tracker.jpg'
+import styles from './Home.module.css'
 
 const Home = () => {
   const { loginUser } = useContext(AuthContext)
@@ -28,7 +29,7 @@ const Home = () => {
   }
   return (
     <div
-      className='home-container'
+      className={styles.container}
       style={{
         backgroundImage: `url(${fatTracker})`,
         backgroundRepeat: 'no-repeat',
@@ -40,12 +41,12 @@ const Home = () => {
         alignItems: 'center',
       }}
     >
-      <div className='home-header-div'>
-        <h1>Fat Tracker</h1>
-      </div>
+      {/* <div className='home-header-div'> */}
+        <h1 className={styles.header}>Fat Tracker</h1>
+      {/* </div> */}
 
-      <div className='home-buttons-div'>
-      <div className='google-login-div'>
+      <div className={styles.buttons__div}>
+      <div>
         <GoogleLogin
           clientId='49262481225-ntb03gjepdqs7ocerrm96g8iclg6pbm0.apps.googleusercontent.com'
           buttonText='Login with Google'
@@ -55,13 +56,13 @@ const Home = () => {
         />
       </div>
 
-      <div className='signup-div'>
+      <div className={styles.signup__div}>
         <button
-          className='signup-btn'
+          className={styles.signup__div__btn}
           type='button'
           onClick={handleClick}
         >
-          <div className='signup-icon-div'>
+          <div>
           <i className='fas fa-user-plus'></i> Sign Up
           </div>
         </button>
