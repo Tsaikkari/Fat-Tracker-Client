@@ -24,7 +24,7 @@ const VerifyEmail = () => {
         navigate('/login')
       })
       .catch((err) => {
-        const errorMsg = err.response.data.message
+        const errorMsg = err.message
         setErrorMessage(errorMsg)
       })
   }
