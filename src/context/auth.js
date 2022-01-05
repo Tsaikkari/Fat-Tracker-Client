@@ -15,6 +15,7 @@ function AuthProviderWrapper(props) {
   const loginUser = (token) => {
     localStorage.setItem('authToken', token)
     verifyStoredToken()
+    navigate('/profile')
   }
 
   const logoutUser = () => {
@@ -32,8 +33,7 @@ function AuthProviderWrapper(props) {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          console.log(response)
-          const user = response.data
+          const user = response.data.payload
           setUser(user)
           setIsLoggedIn(true)
           setIsLoading(false)

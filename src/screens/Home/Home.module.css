@@ -1,4 +1,3 @@
-/*home page*/
 .container {
   display: flex;
   flex-direction: column;
@@ -7,10 +6,6 @@
 .header {
   font-size: 2.5em;
   margin: 0.7em auto 0.5em;
-}
-
-.signup__div {
-  padding-top: 1rem;
 }
 
 .signup__div__btn {
@@ -32,13 +27,17 @@
 
 .signup__div__btn > div {
   background: rgb(255, 255, 255);
-  padding: 12.8px;
+  padding: 10px;
   border-radius: 2px;
 }
 
 .signup__div__btn > div > i {
-  color: green;
+  color: #000;
   padding-right: 0.7em;
+}
+
+.buttons__div > b {
+  margin-left: 0.7em;
 }
 
 @media (min-width: 768px) {
@@ -53,11 +52,6 @@
 }
 
 @media (min-width: 1024px) {
-  .buttons__div {
-    display: flex;
-    flex-direction: row;
-  }
-
   .header {
     font-size: 5.5em;
     margin: 1.5em auto 1.6em;
@@ -65,12 +59,22 @@
 
   .signup__div {
     padding-top: 0;
-    margin-left: 2em;
+    margin-left: 1em;
   }
 
   .signup__div__btn > div {
     background: rgb(255, 255, 255);
-    padding: 12.8px;
+    padding: 10px;
     border-radius: 2px;
+  }
+
+  .buttons__div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .buttons__div > b {
+    margin-left: 1em;
+    margin-top: 0.6em;
   }
 }
