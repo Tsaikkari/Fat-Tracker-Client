@@ -2,6 +2,41 @@
   margin: 1rem;
 }
 
-.container h3 {
-  margin: 1em 0;
+@media (min-width: 885px) {
+  .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 2em 4em;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container {
+    margin: 2em 6em;
+  }
+}
+
+@media (min-width: 1100px) {
+  .container {
+    margin: 2em 7em;
+  }
+}
+
+@media (min-width: 1100px) {
+  .container {
+    margin: 2em 10em;
+  }
+}
+
+@media (min-width: 1300px) {
+  .container {
+    margin: 2em 15em;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    margin: 2em 17em;
+  }
 }

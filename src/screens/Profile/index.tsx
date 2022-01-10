@@ -18,18 +18,17 @@ const Profile = () => {
   useEffect(() => {
     if (user) {
       axios
-      .get(`/api/users/${user._id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setName(response.data.payload.name)
-        setEmail(response.data.payload.email)
-      })
-      .catch((err) => console.log(err))
+        .get(`/api/users/${user._id}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((response) => {
+          setName(response.data.payload.name)
+          setEmail(response.data.payload.email)
+        })
+        .catch((err) => console.log(err))
     }
     //eslint-disable-next-line
   }, [])
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -59,12 +58,14 @@ const Profile = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <>
       {isLoggedIn && (
         <>
-          <h1>Hello {user.name}!</h1>
-          <h3>Update your information</h3>
+          <h1 className='text-center m-4'>Hello {user.name}!</h1>
+          {/* TODO: instructions text */}
+          <div className={styles.container}>
           <Form onSubmit={handleSubmit}>
+          <h3>Update your information</h3>
             <Form.Group controlId='name'>
               <Form.Label>Name</Form.Label>
               <Form.Control
@@ -87,12 +88,12 @@ const Profile = () => {
               Update
             </Button>
             {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-      {isLoading && <h3>Loading ...</h3>}
+            {isLoading && <h3>Loading ...</h3>}
           </Form>
 
-          <h3>Change Password</h3>
           <Form onSubmit={handleChangePassword}>
-            <Form.Group controlId='email'>
+          <h3>Change Password</h3>
+            <Form.Group controlId='Email'>
               <Form.Label>Email Address</Form.Label>
               <Form.Control
                 type='email'
@@ -101,7 +102,7 @@ const Profile = () => {
                 onChange={(e) => setEmail(e.target.value)}
               ></Form.Control>
             </Form.Group>
-            <Form.Group controlId='name'>
+            <Form.Group controlId='Name'>
               <Form.Label>New Password</Form.Label>
               <Form.Control
                 type='password'
@@ -114,11 +115,12 @@ const Profile = () => {
               Update Password
             </Button>
             {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-      {isLoading && <h3>Loading ...</h3>}
+            {isLoading && <h3>Loading ...</h3>}
           </Form>
+          </div>
         </>
       )}
-    </div>
+    </>
   )
 }
 
