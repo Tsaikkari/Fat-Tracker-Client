@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const AddFattyFoods = () => {
-  return <div></div>;
-};
+// TODO: prop types
 
-export default AddFattyFoods;
+const AddFattyFoods = ({ refreshFattyFoods }: any) => {
+  return <div></div>
+}
+
+export default AddFattyFoods

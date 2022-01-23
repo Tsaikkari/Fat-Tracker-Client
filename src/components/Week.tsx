@@ -4,16 +4,24 @@ import Day from './Day'
 
 // TODO: prop types
 
-const Week = ({ refreshWeeks, startDate }: any) => {
+const Week = ({ startDate }: any) => {
   const [days, setDays] = useState<string[]>([])
 
   const getWeek = () => {
-    const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    const weekdays = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ]
     const result = []
     const date = new Date(startDate)
     let i = weekdays.indexOf(weekdays[date.getDay()])
     let j = weekdays.slice(0, i)
-  
+
     while (i < weekdays.length) {
       result.push(weekdays[i++])
       if (i === weekdays.length) {
@@ -27,13 +35,19 @@ const Week = ({ refreshWeeks, startDate }: any) => {
     if (startDate) {
       setDays(getWeek())
     }
+    //eslint-disable-next-line
   }, [])
 
   return (
     <>
-      <Day />
+      <p>{startDate}</p>
+      {days.map((day: string, index) => (
+        <div key={index}>
+          <Day day={day} />
+        </div>
+      ))}
     </>
   )
-};
+}
 
-export default Week;
+export default Week

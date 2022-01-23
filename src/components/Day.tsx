@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 import DayHeader from './DayHeader'
 import AddWeights from './AddWeights'
 import AddFattyFoods from './AddFattyFoods'
 import AddSports from './AddSports'
 
-const Day = () => {
+type DayProps = {
+  day: string
+}
+
+const Day = ({ day }: DayProps) => {
   const [startingWeight, setStartingWeight] = useState(0)
   const [goalWeight, setGoalWeight] = useState(0)
   const [addWeights, setAddWeights] = useState(false)
@@ -14,6 +19,10 @@ const Day = () => {
 
   // TODO:
   const getWeights = () => {}
+
+  const getFattyFoods = () => {}
+
+  const getSports = () => {}
 
   const handleShowAddWeights = () => {
     setAddWeights(!addWeights)
@@ -28,7 +37,7 @@ const Day = () => {
   }
 
   return (
-    <div>
+    <main>
       <DayHeader
         handleShowAddWeights={handleShowAddWeights}
         handleShowAddFattyFoods={handleShowAddFattyFoods}
@@ -40,12 +49,17 @@ const Day = () => {
           setStartingWeight={setStartingWeight}
           goalWeight={goalWeight}
           setGoalWeight={setGoalWeight}
+          refreshWeights={getWeights}
         />
       )}
       {/* TODO: */}
-      {addFattyFoods && <AddFattyFoods />}
-      {addSports && <AddSports />}
-    </div>
+      {addFattyFoods && <AddFattyFoods refreshFattyFoods={getFattyFoods}/>}
+      {addSports && <AddSports refreshSports={getSports} />}
+      <div>
+        <p>{day}</p>
+        blaa blaa blaa
+      </div>
+    </main>
   )
 }
 

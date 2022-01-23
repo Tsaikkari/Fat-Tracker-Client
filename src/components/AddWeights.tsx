@@ -6,18 +6,26 @@ import { config } from '../reqHeaders'
 
 // TODO: props types
 
-const AddWeights = ({ startingWeight, setStartingWeight, goalWeight, setGoalWeight }: any) => {
+const AddWeights = ({
+  startingWeight,
+  setStartingWeight,
+  goalWeight,
+  setGoalWeight,
+  refreshWeights,
+}: any) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     try {
       await axios.post('/api/weights', { startingWeight, goalWeight }, config)
+      refreshWeights()
       setStartingWeight(0)
+      setGoalWeight(0)
     } catch (err) {
       console.log(err)
     }
   }
-  
+
   return (
     <>
       <Form onSubmit={handleSubmit}>

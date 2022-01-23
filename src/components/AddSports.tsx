@@ -1,7 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-const AddSports = () => {
-  return <div></div>;
-};
+//TODO: prop types
 
-export default AddSports;
+const AddSports = ({ refreshSports }: any) => {
+  return <div></div>
+}
+
+export default AddSports
