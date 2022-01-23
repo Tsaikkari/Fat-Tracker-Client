@@ -5,6 +5,7 @@ import axios from 'axios'
 import styles from './Profile.module.css'
 import { AuthContext } from '../../context/auth'
 import Message from '../../components/Message'
+import LifeStyle from '../../components/LifeStyle'
 
 const Profile = () => {
   const { isLoading, isLoggedIn, user } = useContext(AuthContext)
@@ -63,60 +64,65 @@ const Profile = () => {
         <>
           <h1 className='text-center m-4'>Hello {user.name}!</h1>
           {/* TODO: instructions text */}
+          <LifeStyle />
           <div className={styles.container}>
-          <Form onSubmit={handleSubmit}>
-          <h3>Update your information</h3>
-            <Form.Group controlId='name'>
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Enter Name'
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId='email'>
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type='email'
-                placeholder='Enter Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Button type='submit' className='save-btn' variant=''>
-              Update
-            </Button>
-            {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-            {isLoading && <h3>Loading ...</h3>}
-          </Form>
+            <Form onSubmit={handleSubmit}>
+              <h3>Update your information</h3>
+              <Form.Group controlId='name'>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter Name'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='email'>
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type='email'
+                  placeholder='Enter Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Button type='submit' className='save-btn' variant=''>
+                Update
+              </Button>
+              {errorMessage && (
+                <Message variant='danger'>{errorMessage}</Message>
+              )}
+              {isLoading && <h3>Loading ...</h3>}
+            </Form>
 
-          <Form onSubmit={handleChangePassword}>
-          <h3>Change Password</h3>
-            <Form.Group controlId='Email'>
-              <Form.Label>Email Address</Form.Label>
-              <Form.Control
-                type='email'
-                placeholder='Enter Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group controlId='Name'>
-              <Form.Label>New Password</Form.Label>
-              <Form.Control
-                type='password'
-                placeholder='Enter New Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
-            <Button type='submit' className='save-btn' variant=''>
-              Update Password
-            </Button>
-            {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-            {isLoading && <h3>Loading ...</h3>}
-          </Form>
+            <Form onSubmit={handleChangePassword}>
+              <h3>Change Password</h3>
+              <Form.Group controlId='Email'>
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control
+                  type='email'
+                  placeholder='Enter Email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='Name'>
+                <Form.Label>New Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Enter New Password'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                ></Form.Control>
+              </Form.Group>
+              <Button type='submit' className='save-btn' variant=''>
+                Change Password
+              </Button>
+              {errorMessage && (
+                <Message variant='danger'>{errorMessage}</Message>
+              )}
+              {isLoading && <h3>Loading ...</h3>}
+            </Form>
           </div>
         </>
       )}

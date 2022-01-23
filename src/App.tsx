@@ -6,7 +6,7 @@ import Login from './screens/Login'
 import SignUp from './screens/SignUp'
 import Home from './screens/Home'
 import Profile from './screens/Profile'
-import Week from './screens/Week'
+import Weeks from './screens/Weeks'
 import VerifyEmail from './screens/VerifyEmail'
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/week' element={<Week />} />
+        <Route path='/week' element={<Weeks />} />
         <Route path='/authentication/verify/:token' element={<VerifyEmail />} />
       </Routes>
     </>

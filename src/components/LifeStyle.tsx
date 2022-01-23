@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Week = () => {
+const LifeStyle = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Week = () => {
   )
 }
 
-export default Week
+export default LifeStyle

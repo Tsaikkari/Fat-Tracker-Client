@@ -62,7 +62,7 @@ const SignUp = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' className='save-btn' variant=''>
+        <Button type='submit' className='save-btn'>
           Sign Up
         </Button>
       </Form>

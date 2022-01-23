@@ -22,7 +22,6 @@ const Home = () => {
       url: 'http://localhost:5000/api/auth/login/google',
       data: { idToken: response.tokenId },
     }).then((response) => {
-      console.log('response', response)
       loginUser(response.data.payload.token)
     })
   }
