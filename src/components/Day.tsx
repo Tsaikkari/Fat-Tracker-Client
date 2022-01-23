@@ -8,11 +8,10 @@ import AddSports from './AddSports'
 
 type DayProps = {
   day: string
+  weekId: string
 }
 
-const Day = ({ day }: DayProps) => {
-  const [startingWeight, setStartingWeight] = useState(0)
-  const [goalWeight, setGoalWeight] = useState(0)
+const Day = ({ day, weekId }: DayProps) => {
   const [addWeights, setAddWeights] = useState(false)
   const [addFattyFoods, setAddFattyFoods] = useState(false)
   const [addSports, setAddSports] = useState(false)
@@ -37,7 +36,7 @@ const Day = ({ day }: DayProps) => {
   }
 
   return (
-    <main>
+    <>
       <DayHeader
         handleShowAddWeights={handleShowAddWeights}
         handleShowAddFattyFoods={handleShowAddFattyFoods}
@@ -45,21 +44,20 @@ const Day = ({ day }: DayProps) => {
       />
       {addWeights && (
         <AddWeights
-          startingWeight={startingWeight}
-          setStartingWeight={setStartingWeight}
-          goalWeight={goalWeight}
-          setGoalWeight={setGoalWeight}
           refreshWeights={getWeights}
+          addWeights={addWeights}
+          setAddWeights={setAddWeights}
+          weekId={weekId}
         />
       )}
       {/* TODO: */}
       {addFattyFoods && <AddFattyFoods refreshFattyFoods={getFattyFoods}/>}
       {addSports && <AddSports refreshSports={getSports} />}
-      <div>
+      <div className='day-container'>
         <p>{day}</p>
         blaa blaa blaa
       </div>
-    </main>
+    </>
   )
 }
 

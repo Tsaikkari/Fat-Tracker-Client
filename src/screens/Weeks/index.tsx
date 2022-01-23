@@ -39,6 +39,7 @@ const Weeks = () => {
           <Week 
             refreshWeeks={getWeeks}
             startDate={week.date}
+            weekId={week._id}
           />
         </div>
       ))}

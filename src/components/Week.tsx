@@ -4,7 +4,7 @@ import Day from './Day'
 
 // TODO: prop types
 
-const Week = ({ startDate }: any) => {
+const Week = ({ startDate, weekId }: any) => {
   const [days, setDays] = useState<string[]>([])
 
   const getWeek = () => {
@@ -43,7 +43,7 @@ const Week = ({ startDate }: any) => {
       <p>{startDate}</p>
       {days.map((day: string, index) => (
         <div key={index}>
-          <Day day={day} />
+          <Day day={day} weekId={weekId} />
         </div>
       ))}
     </>
