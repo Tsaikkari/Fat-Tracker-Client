@@ -1,37 +1,23 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
-import axios from 'axios'
 
+import Weight from './Weight'
 //TODO: types
 
-const Weights = ({ id, refreshWeeks, startingWeight, goalWeight }: any) => {
-  const storedToken = localStorage.getItem('authToken')
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
-  }
-
-  const deleteWeights = async () => {
-    if (window.confirm('Delete weights?')) {
-      try {
-        await axios.delete(`/api/weights/${id}`, config)
-        refreshWeeks()
-      } catch (err) {
-        console.log(err)
-      }
-    }
-  }
-
+const Weights = ({ refreshWeeks, weights, weekId }: any) => {
+  const filteredWeights = weights.filter((weight: any) => weight.week === weekId)
+  
   return (
-    <div className='weight-container'>
-      <span>{startingWeight}</span>
-      <span>{goalWeight}</span>
-      <Button variant='danger' className='btn-sm' onClick={deleteWeights}>
-        <i className='fas fa-trash'></i>
-      </Button>
+    <div className=''>
+      {filteredWeights && filteredWeights.map((weight: any) => (
+        <div key={weight._id}>
+          <Weight 
+            refreshWeeks={refreshWeeks}
+            currentWeight={weight.currentWeight}
+            goalWeight={weight.goalWeight}
+            weightId={weight._id}
+          />
+        </div>
+      ))}
     </div>
   )
 }

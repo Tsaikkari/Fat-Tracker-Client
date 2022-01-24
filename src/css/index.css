@@ -55,7 +55,13 @@ a {
   height: auto;
 }
 
-.weight-container {
+/*week*/
+.date-weight-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.fattyfoods-sports-container {
   background: #fff;
   border-radius: 6px;
   box-shadow: 0 2px 5px #ccc;

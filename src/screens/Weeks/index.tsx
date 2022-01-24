@@ -7,7 +7,7 @@ import Week from '../../components/Week'
 
 const Weeks = () => {
   const [weeks, setWeeks] = useState([])
-
+  
   const storedToken = localStorage.getItem('authToken')
 
   const getWeeks = () => {
@@ -18,7 +18,6 @@ const Weeks = () => {
       .then((response) => {
         const sorted = response.data.payload.reverse()
         setWeeks(sorted)
-        console.log(weeks, 'weeks')
       })
       .catch((err) => console.log(err))
   }
@@ -31,12 +30,10 @@ const Weeks = () => {
   return (
     <div className={styles.container}>
       {/* TODO: description */}
-      <AddWeek 
-        refreshWeeks={getWeeks}
-      />
+      <AddWeek refreshWeeks={getWeeks} />
       {weeks.map((week: any) => (
         <div key={week._id}>
-          <Week 
+          <Week
             refreshWeeks={getWeeks}
             startDate={week.date}
             weekId={week._id}

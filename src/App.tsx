@@ -18,7 +18,7 @@ const App = () => {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/week' element={<Weeks />} />
+        <Route path='/weeks' element={<Weeks />} />
         <Route path='/authentication/verify/:token' element={<VerifyEmail />} />
       </Routes>
     </>

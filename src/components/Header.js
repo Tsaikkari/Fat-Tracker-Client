@@ -14,7 +14,7 @@ const Header = () => {
         <Nav className='ml-auto'>
           {isLoggedIn ? (
             <>
-              <LinkContainer to='/week'>
+              <LinkContainer to='/weeks'>
                 <Nav.Link>Week</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/chart'>

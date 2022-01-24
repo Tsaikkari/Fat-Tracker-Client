@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -10,19 +10,19 @@ const AddWeights = ({
   addWeights,
   setAddWeights,
   refreshWeights,
+  currentWeight,
+  setCurrentWeight,
+  goalWeight, 
+  setGoalWeight,
   weekId
 }: any) => {
-  const [startingWeight, setStartingWeight] = useState(0)
-  const [goalWeight, setGoalWeight] = useState(0)
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('click')
 
     try {
-      await axios.post('/api/weights', { startingWeight, goalWeight, weekId }, config)
+      await axios.post('/api/weights', { currentWeight, goalWeight, weekId }, config)
       refreshWeights()
-      setStartingWeight(0)
+      setCurrentWeight(0)
       setGoalWeight(0)
       setAddWeights(!addWeights)
     } catch (err) {
@@ -34,11 +34,11 @@ const AddWeights = ({
     <>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='startingWeight'>
-          <Form.Label>Weight</Form.Label>
+          <Form.Label>Current Weight</Form.Label>
           <Form.Control
             type='text'
-            value={startingWeight}
-            onChange={(e) => setStartingWeight(Number(e.target.value))}
+            value={currentWeight}
+            onChange={(e) => setCurrentWeight(Number(e.target.value))}
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId='goalWeight'>
@@ -49,7 +49,7 @@ const AddWeights = ({
             onChange={(e) => setGoalWeight(Number(e.target.value))}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit'>Save</Button>
+        <Button type='submit' variant='dark'>Save</Button>
       </Form>
     </>
   )

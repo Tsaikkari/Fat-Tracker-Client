@@ -1,13 +1,34 @@
 import React, { useState, useEffect } from 'react'
+import { Button } from 'react-bootstrap'
+import axios from 'axios'
 
 import Day from './Day'
+import AddWeights from './AddWeights'
+import Weights from './Weights'
 
 // TODO: prop types
 
-const Week = ({ startDate, weekId }: any) => {
-  const [days, setDays] = useState<string[]>([])
+type WeekWeights = {
+  weights: [
+    {
+      _id: string
+      currentWeight: number
+      goalWeight: number
+      user: string
+      week: string
+      createdAt: Date
+    }
+  ]
+}
 
-  const getWeek = () => {
+const Week = ({ startDate, refreshWeeks, weekId }: any) => {
+  const [days, setDays] = useState<string[]>([])
+  const [weights, setWeights] = useState<WeekWeights[]>([])
+  const [currentWeight, setCurrentWeight] = useState(0)
+  const [goalWeight, setGoalWeight] = useState(0)
+  const [addWeights, setAddWeights] = useState(false)
+
+  const getWeekDays = () => {
     const weekdays = [
       'Monday',
       'Tuesday',
@@ -33,17 +54,69 @@ const Week = ({ startDate, weekId }: any) => {
 
   useEffect(() => {
     if (startDate) {
-      setDays(getWeek())
+      setDays(getWeekDays())
     }
     //eslint-disable-next-line
   }, [])
 
+  const storedToken = localStorage.getItem('authToken')
+
+  const getWeights = () => {
+    axios
+      .get('/api/weights', {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        setWeights(response.data.payload)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  useEffect(() => {
+    getWeights()
+    //eslint-disable-next-line
+  }, [])
+
+  const handleShowAddWeights = () => {
+    setAddWeights(!addWeights)
+  }
+
   return (
     <>
-      <p>{startDate}</p>
+      <div className='date-weight-container'>
+        <p className='m-2'>{startDate}</p>
+        <Button variant='dark' className='mb-3' onClick={handleShowAddWeights}>
+          Weight
+        </Button>
+
+        <Weights
+          refreshWeeks={refreshWeeks}
+          weights={weights}
+          weekId={weekId}
+        />
+      </div>
+      {addWeights && (
+        <AddWeights
+          currentWeight={currentWeight}
+          setCurrentWeight={setCurrentWeight}
+          goalWeight={goalWeight}
+          setGoalWeight={setGoalWeight}
+          refreshWeights={getWeights}
+          addWeights={addWeights}
+          setAddWeights={setAddWeights}
+          weekId={weekId}
+        />
+      )}
       {days.map((day: string, index) => (
         <div key={index}>
-          <Day day={day} weekId={weekId} />
+          <Day
+            day={day}
+            weekId={weekId}
+            startDate={startDate}
+            refreshWeeks={refreshWeeks}
+          />
         </div>
       ))}
     </>
