@@ -13,12 +13,11 @@ type DayProps = {
   refreshWeeks: any
 }
 
-const Day = ({ day, weekId, refreshWeeks, startDate }: DayProps) => {
+const Day = ({ day }: DayProps) => {
   const [fattyFoods, setFattyFoods] = useState<[]>([])
   const [sports, setSports] = useState<[]>([])
   const [addFattyFoods, setAddFattyFoods] = useState(false)
   const [addSports, setAddSports] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(undefined)
 
   const storedToken = localStorage.getItem('authToken')
 
@@ -30,13 +29,13 @@ const Day = ({ day, weekId, refreshWeeks, startDate }: DayProps) => {
       setFattyFoods(response.data.payload)
     })
     .catch((err) => {
-      const errorMsg = err.response.data.message
-      setErrorMessage(errorMsg)
+      console.log(err)
     })
   }
 
   useEffect(() => {
     getFattyFoods()
+    //eslint-disable-next-line
   }, [])
 
   const getSports = () => {
@@ -47,13 +46,13 @@ const Day = ({ day, weekId, refreshWeeks, startDate }: DayProps) => {
       setSports(response.data.payload)
     })
     .catch((err) => {
-      const errorMsg = err.response.data.message
-      setErrorMessage(errorMsg)
+      console.log(err)
     })
   }
 
   useEffect(() => {
     getSports()
+    //eslint-disable-next-line
   }, [])
 
   const handleShowAddFattyFoods = () => {
@@ -70,20 +69,11 @@ const Day = ({ day, weekId, refreshWeeks, startDate }: DayProps) => {
         handleShowAddFattyFoods={handleShowAddFattyFoods}
         handleShowAddSports={handleShowAddSports}
       />
-      
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
       {/* TODO: */}
       {addFattyFoods && <AddFattyFoods refreshFattyFoods={getFattyFoods}/>}
       {addSports && <AddSports refreshSports={getSports} />}
       <div className='day-container'>
         <p>{day}</p>
-        {/* <Weights 
-          id={weekId}
-          refreshWeeks={refreshWeeks}
-          // startingWeight={startingWeight}
-          // goalWeight={goalWeight}
-          startDate={startDate}
-        /> */}
       </div>
     </>
   )

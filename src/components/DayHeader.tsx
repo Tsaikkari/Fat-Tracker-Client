@@ -6,8 +6,8 @@ import { Button } from 'react-bootstrap'
 const DayHeader = ({ handleShowAddFattyFoods, handleShowAddSports }: any) => {
   return (
     <header>
-      <Button onClick={handleShowAddFattyFoods}>FattyFoods</Button>
-      <Button onClick={handleShowAddSports}>Sports</Button>
+      <Button onClick={handleShowAddFattyFoods} variant='light'><i className="fas fa-pizza-slice"></i></Button>
+      <Button onClick={handleShowAddSports} variant='light'><i className="fas fa-running"></i></Button>
     </header>
   )
 }

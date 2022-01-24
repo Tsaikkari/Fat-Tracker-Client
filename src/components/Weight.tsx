@@ -27,8 +27,8 @@ const Weight = ({ currentWeight, goalWeight, refreshWeeks, weightId }: any) => {
   return (
     <div>
       <>
-        <span className='m-3'>{currentWeight}</span>
-        <span className='m-3'>{goalWeight}</span>
+        <span className='m-2'>{currentWeight}</span>
+        <span className='m-2'>{goalWeight}</span>
       </>
 
       <Button variant='danger' className='btn-sm' onClick={deleteWeights}>

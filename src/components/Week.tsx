@@ -24,8 +24,8 @@ type WeekWeights = {
 const Week = ({ startDate, refreshWeeks, weekId }: any) => {
   const [days, setDays] = useState<string[]>([])
   const [weights, setWeights] = useState<WeekWeights[]>([])
-  const [currentWeight, setCurrentWeight] = useState(0)
-  const [goalWeight, setGoalWeight] = useState(0)
+  const [currentWeight, setCurrentWeight] = useState('')
+  const [goalWeight, setGoalWeight] = useState('')
   const [addWeights, setAddWeights] = useState(false)
 
   const getWeekDays = () => {
