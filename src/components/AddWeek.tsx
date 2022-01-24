@@ -1,18 +1,17 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
 import { config } from '../reqHeaders'
 import Message from './Message'
 
-// TODO: prop type
+type AddWeekProps = {
+  refreshWeeks: () => void
+}
 
-const AddWeek = ({ refreshWeeks }: any) => {
+const AddWeek = ({ refreshWeeks }: AddWeekProps) => {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('')
-  
-  let navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -27,7 +26,6 @@ const AddWeek = ({ refreshWeeks }: any) => {
         await axios.post('/api/weeks', { date }, config)
         setDate('')
         refreshWeeks()
-        //navigate(`/weeks/${res.data.payload._id}`)
       } catch (err) {
         console.log(err)
       }

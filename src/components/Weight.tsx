@@ -2,7 +2,15 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
-const Weight = ({ currentWeight, goalWeight, refreshWeeks, weightId }: any) => {
+type WeightProps = {
+  currentWeight: number | string
+  goalWeight: number | string
+  refreshWeeks: () => void
+  refreshWeights: () => void
+  weightId: string
+}
+
+const Weight = ({ currentWeight, goalWeight, refreshWeeks, refreshWeights, weightId }: WeightProps) => {
   const storedToken = localStorage.getItem('authToken')
 
   const config = {
@@ -12,11 +20,11 @@ const Weight = ({ currentWeight, goalWeight, refreshWeeks, weightId }: any) => {
     },
   }
 
-  // TODO: deletes after refresh
   const deleteWeights = async () => {
     if (window.confirm('Delete weights?')) {
       try {
         await axios.delete(`/api/weights/${weightId}`, config)
+        refreshWeights()
         refreshWeeks()
       } catch (err) {
         console.log(err)

@@ -6,8 +6,6 @@ import Day from './Day'
 import AddWeights from './AddWeights'
 import Weights from './Weights'
 
-// TODO: prop types
-
 type WeekWeights = {
   weights: [
     {
@@ -24,8 +22,8 @@ type WeekWeights = {
 const Week = ({ startDate, refreshWeeks, weekId }: any) => {
   const [days, setDays] = useState<string[]>([])
   const [weights, setWeights] = useState<WeekWeights[]>([])
-  const [currentWeight, setCurrentWeight] = useState('')
-  const [goalWeight, setGoalWeight] = useState('')
+  const [currentWeight, setCurrentWeight] = useState<number | string>('')
+  const [goalWeight, setGoalWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
 
   const getWeekDays = () => {
@@ -93,6 +91,7 @@ const Week = ({ startDate, refreshWeeks, weekId }: any) => {
 
         <Weights
           refreshWeeks={refreshWeeks}
+          refreshWeights={getWeights}
           weights={weights}
           weekId={weekId}
         />
@@ -111,12 +110,7 @@ const Week = ({ startDate, refreshWeeks, weekId }: any) => {
       )}
       {days.map((day: string, index) => (
         <div key={index}>
-          <Day
-            day={day}
-            weekId={weekId}
-            startDate={startDate}
-            refreshWeeks={refreshWeeks}
-          />
+          <Day day={day} />
         </div>
       ))}
     </>

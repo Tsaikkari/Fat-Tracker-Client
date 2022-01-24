@@ -3,16 +3,32 @@ import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
 
-const AuthContext = React.createContext()
+type ContextProps = {
+  children: Element | any
+}
 
-function AuthProviderWrapper(props) {
+const initialState =  {
+  isLoading: false,
+  isLoggedIn: false,
+  user: {
+    _id: '',
+    name: '',
+    email: ''
+  },
+  loginUser: (token: string) => {},
+  logoutUser: () => {}
+} 
+
+const AuthContext = React.createContext(initialState)
+
+function AuthProviderWrapper(props: ContextProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({ name: '', _id: '', email: '' })
   const [isLoading, setIsLoading] = useState(true)
 
   const navigate = useNavigate()
 
-  const loginUser = (token) => {
+  const loginUser = (token: string) => {
     localStorage.setItem('authToken', token)
     verifyStoredToken()
     navigate('/profile')
@@ -21,7 +37,7 @@ function AuthProviderWrapper(props) {
   const logoutUser = () => {
     localStorage.removeItem('authToken')
     setIsLoggedIn(false)
-    setUser(null)
+    setUser({ name: '', _id: '', email: '' })
     navigate('/')
   }
 
@@ -41,7 +57,7 @@ function AuthProviderWrapper(props) {
         .catch((err) => {
           // the token is invalid
           setIsLoggedIn(false)
-          setUser(null)
+          setUser({ name: '', _id: '', email: '' })
           setIsLoading(false)
         })
     } else {

@@ -1,9 +1,15 @@
 import React from 'react'
 
 import Weight from './Weight'
-//TODO: types
 
-const Weights = ({ refreshWeeks, weights, weekId }: any) => {
+type WeightsProps = {
+  refreshWeeks: () => void
+  refreshWeights: () => void
+  weights: any[]
+  weekId: string
+}
+
+const Weights = ({ refreshWeeks, refreshWeights, weights, weekId }: WeightsProps) => {
   const filteredWeights = weights.filter((weight: any) => weight.week === weekId)
   
   return (
@@ -12,6 +18,7 @@ const Weights = ({ refreshWeeks, weights, weekId }: any) => {
         <div key={weight._id}>
           <Weight 
             refreshWeeks={refreshWeeks}
+            refreshWeights={refreshWeights}
             currentWeight={weight.currentWeight}
             goalWeight={weight.goalWeight}
             weightId={weight._id}

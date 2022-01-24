@@ -8,9 +8,6 @@ import Message from './Message'
 
 type DayProps = {
   day: string
-  weekId: string
-  startDate: string
-  refreshWeeks: any
 }
 
 const Day = ({ day }: DayProps) => {

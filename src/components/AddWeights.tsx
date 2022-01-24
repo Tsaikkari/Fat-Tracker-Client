@@ -4,7 +4,16 @@ import axios from 'axios'
 
 import { config } from '../reqHeaders'
 
-// TODO: props types
+type AddWeightsProps = {
+  addWeights: boolean
+  setAddWeights: (arg0: boolean) => void
+  refreshWeights: () => void
+  currentWeight: number | string
+  setCurrentWeight: any
+  goalWeight: number | string
+  setGoalWeight: any
+  weekId: string
+}
 
 const AddWeights = ({
   addWeights,
@@ -15,7 +24,7 @@ const AddWeights = ({
   goalWeight, 
   setGoalWeight,
   weekId
-}: any) => {
+}: AddWeightsProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -49,7 +58,7 @@ const AddWeights = ({
             onChange={(e) => setGoalWeight(Number(e.target.value))}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' variant='dark'>Save</Button>
+        <Button type='submit' className='mt-2' variant='dark'>Save</Button>
       </Form>
     </>
   )
