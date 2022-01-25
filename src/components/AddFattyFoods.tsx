@@ -29,6 +29,7 @@ const AddFattyFoods = ({
     if (day) {
       setChosenDate(day)
     }
+    //eslint-disable-next-line
   }, [])
 
   const storedToken = localStorage.getItem('authToken')
@@ -65,7 +66,7 @@ const AddFattyFoods = ({
           <Form.Label>Fatty Food</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Separate fatty foods with commas'
+            placeholder='Separate fatty foods with a comma'
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>

@@ -33,6 +33,7 @@ const AddSports = ({
     if (day) {
       setDate(day)
     }
+    //eslint-disable-next-line
   }, []) 
 
   const storedToken = localStorage.getItem('authToken')

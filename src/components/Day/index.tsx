@@ -49,7 +49,7 @@ const Day = ({
 
   // TODO: weight and actual date update components
   return (
-    <>
+    <main>
       <DayHeader
         handleShowAddFattyFoods={handleShowAddFattyFoods}
         handleShowAddSports={handleShowAddSports}
@@ -84,8 +84,8 @@ const Day = ({
         />
       )}
       <div className={styles.container}>
-        <p className='p-2 mb-0'>{day}</p>
         <div>
+          <p className='p-2 mb-0'>{day}</p>
           <FattyFoods
             fattyFoods={fattyFoods}
             dayIndex={dayIndex}
@@ -94,17 +94,17 @@ const Day = ({
             refreshWeeks={refreshWeeks}
             refreshFattyFoods={refreshFattyFoods}
           />
+          <Sports
+            sports={sports}
+            weekId={weekId}
+            days={days}
+            dayIndex={dayIndex}
+            refreshWeeks={refreshWeeks}
+            refreshSports={refreshSports}
+          />
         </div>
-        <Sports 
-          sports={sports}
-          weekId={weekId}
-          days={days}
-          dayIndex={dayIndex}
-          refreshWeeks={refreshWeeks}
-          refreshSports={refreshSports}
-        />
       </div>
-    </>
+    </main>
   )
 }
 

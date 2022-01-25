@@ -42,8 +42,8 @@ const AddWeights = ({
         config
       )
       refreshWeights()
-      setCurrentWeight(0)
-      setGoalWeight(0)
+      setCurrentWeight('')
+      setGoalWeight('')
       setAddWeights(!addWeights)
     } catch (err) {
       console.log(err)

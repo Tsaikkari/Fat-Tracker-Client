@@ -115,7 +115,6 @@ const Week = ({
           weekId={weekId}
         />
       </header>
-      {/* <hr></hr> */}
       {addWeights && (
         <AddWeights
           currentWeight={currentWeight}
@@ -128,7 +127,7 @@ const Week = ({
           weekId={weekId}
         />
       )}
-
+     <div>
       {days.map((day: string, index) => (
         <div key={index}>
           <Day
@@ -144,6 +143,7 @@ const Week = ({
           />
         </div>
       ))}
+    </div>
     </div>
   )
 }

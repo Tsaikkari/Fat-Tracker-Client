@@ -10,6 +10,8 @@ const Weeks = () => {
   const [fattyFoods, setFattyFoods] = useState<[]>([])
   const [sports, setSports] = useState<[]>([])
 
+  const storedToken = localStorage.getItem('authToken')
+
   const getWeeks = () => {
     axios
       .get('/api/weeks/user', {
@@ -26,8 +28,6 @@ const Weeks = () => {
     getWeeks()
     //eslint-disable-next-line
   }, [])
-
-  const storedToken = localStorage.getItem('authToken')
 
   const getFattyFoods = () => {
     axios

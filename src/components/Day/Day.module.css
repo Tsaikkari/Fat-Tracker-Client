@@ -1,40 +1,30 @@
 .container {
   background: #eee;
   border: 1px solid #dedede;
-  border-radius: 6px;
+  border-radius: 4px;
+  margin: 1em 0;
 }
 
 .container > p {
   font-weight: 900;
 }
 
-.container > div {
+.container > div > div {
   background: #fff;
-  border-radius: 6px;
+  border-radius: 4px;
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
   margin: 0 3px 6px;
-  height: 100px;
 }
 
 @media (min-width: 768px) {
-  .container > div {
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px #ccc;
-    padding: 10px;
-    margin: 0 3px 6px;
-    height: 150px;
+  main {
+    width: 48.8vw;
   }
 }
 
 @media (min-width: 1024px) {
-  .container > div {
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px #ccc;
-    padding: 10px;
-    margin: 0 3px 6px;
-    height: 100px;
+  main {
+    width: 32.5vw;
   }
 }
