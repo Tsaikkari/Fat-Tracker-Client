@@ -10,7 +10,13 @@ type WeightProps = {
   weightId: string
 }
 
-const Weight = ({ currentWeight, goalWeight, refreshWeeks, refreshWeights, weightId }: WeightProps) => {
+const Weight = ({
+  currentWeight,
+  goalWeight,
+  refreshWeeks,
+  refreshWeights,
+  weightId,
+}: WeightProps) => {
   const storedToken = localStorage.getItem('authToken')
 
   const config = {

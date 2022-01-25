@@ -7,17 +7,17 @@ type ContextProps = {
   children: Element | any
 }
 
-const initialState =  {
+const initialState = {
   isLoading: false,
   isLoggedIn: false,
   user: {
     _id: '',
     name: '',
-    email: ''
+    email: '',
   },
   loginUser: (token: string) => {},
-  logoutUser: () => {}
-} 
+  logoutUser: () => {},
+}
 
 const AuthContext = React.createContext(initialState)
 

@@ -110,7 +110,7 @@ const Week = ({ startDate, refreshWeeks, weekId }: any) => {
       )}
       {days.map((day: string, index) => (
         <div key={index}>
-          <Day day={day} />
+          <Day day={day} weekId={weekId} />
         </div>
       ))}
     </>

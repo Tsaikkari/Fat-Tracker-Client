@@ -21,15 +21,19 @@ const AddWeights = ({
   refreshWeights,
   currentWeight,
   setCurrentWeight,
-  goalWeight, 
+  goalWeight,
   setGoalWeight,
-  weekId
+  weekId,
 }: AddWeightsProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     try {
-      await axios.post('/api/weights', { currentWeight, goalWeight, weekId }, config)
+      await axios.post(
+        '/api/weights',
+        { currentWeight, goalWeight, weekId },
+        config
+      )
       refreshWeights()
       setCurrentWeight(0)
       setGoalWeight(0)
@@ -58,7 +62,9 @@ const AddWeights = ({
             onChange={(e) => setGoalWeight(Number(e.target.value))}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' className='mt-2' variant='dark'>Save</Button>
+        <Button type='submit' className='mt-2' variant='dark'>
+          Save
+        </Button>
       </Form>
     </>
   )
