@@ -48,23 +48,3 @@ a {
   width: 100%;
   margin: 1.9rem 0 0.1rem;
 }
-
-/*day*/
-.day-container {
-  background: #eee;
-  height: auto;
-}
-
-/*week*/
-.date-weight-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.fattyfoods-sports-container {
-  background: #fff;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px #ccc;
-  padding: 10px;
-  margin: 10px;
-}

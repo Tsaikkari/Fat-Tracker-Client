@@ -2,8 +2,6 @@ import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
-import { config } from '../reqHeaders'
-
 type AddWeightsProps = {
   addWeights: boolean
   setAddWeights: (arg0: boolean) => void
@@ -25,6 +23,15 @@ const AddWeights = ({
   setGoalWeight,
   weekId,
 }: AddWeightsProps) => {
+  const storedToken = localStorage.getItem('authToken')
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${storedToken}`,
+    },
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 

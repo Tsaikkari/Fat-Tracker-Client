@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
-import { config } from '../reqHeaders'
 import Message from './Message'
 
 type AddWeekProps = {
@@ -13,6 +12,15 @@ const AddWeek = ({ refreshWeeks }: AddWeekProps) => {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('')
 
+  const storedToken = localStorage.getItem('authToken')
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${storedToken}`,
+    },
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!date) {
@@ -21,17 +29,15 @@ const AddWeek = ({ refreshWeeks }: AddWeekProps) => {
         setMessage('')
       }, 2000)
     }
-    if (config) {
-      try {
-        await axios.post('/api/weeks', { date }, config)
-        setDate('')
-        refreshWeeks()
-      } catch (err) {
-        console.log(err)
-      }
+    try {
+      await axios.post('/api/weeks', { date }, config)
+      setDate('')
+      refreshWeeks()
+    } catch (err) {
+      console.log(err)
     }
   }
-  
+
   return (
     <>
       {/* TODO: description */}
@@ -44,11 +50,13 @@ const AddWeek = ({ refreshWeeks }: AddWeekProps) => {
             onChange={(e) => setDate(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' variant='danger' className='save-btn mb-3 mt-3'>Create Your Week</Button>
+        <Button type='submit' variant='danger' className='save-btn mb-3 mt-3'>
+          Create Your Week
+        </Button>
       </Form>
-      {message !== '' && <Message variant='danger'>{message}</Message>}
+      {message && <Message variant='danger'>{message}</Message>}
     </>
   )
-};
+}
 
-export default AddWeek;
+export default AddWeek

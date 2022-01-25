@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
-import Day from './Day'
-import AddWeights from './AddWeights'
-import Weights from './Weights'
+import Day from '../Day'
+import AddWeights from '../AddWeights'
+import Weights from '../Weights'
+import styles from './Week.module.css'
 
 type WeekWeights = {
   weights: [
@@ -19,7 +20,25 @@ type WeekWeights = {
   ]
 }
 
-const Week = ({ startDate, refreshWeeks, weekId }: any) => {
+type WeekProps = {
+  startDate: string
+  refreshWeeks: () => void
+  refreshFattyFoods: () => void
+  refreshSports: () => void
+  fattyFoods: any[]
+  sports: any[]
+  weekId: string
+}
+
+const Week = ({
+  startDate,
+  refreshWeeks,
+  refreshFattyFoods,
+  refreshSports,
+  fattyFoods,
+  sports,
+  weekId,
+}: WeekProps) => {
   const [days, setDays] = useState<string[]>([])
   const [weights, setWeights] = useState<WeekWeights[]>([])
   const [currentWeight, setCurrentWeight] = useState<number | string>('')
@@ -61,7 +80,7 @@ const Week = ({ startDate, refreshWeeks, weekId }: any) => {
 
   const getWeights = () => {
     axios
-      .get('/api/weights', {
+      .get('/api/weights/user', {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -82,8 +101,8 @@ const Week = ({ startDate, refreshWeeks, weekId }: any) => {
   }
 
   return (
-    <>
-      <div className='date-weight-container'>
+    <div className={styles.container}>
+      <header>
         <p className='m-2'>{startDate}</p>
         <Button variant='dark' className='mb-3' onClick={handleShowAddWeights}>
           Weight
@@ -95,7 +114,7 @@ const Week = ({ startDate, refreshWeeks, weekId }: any) => {
           weights={weights}
           weekId={weekId}
         />
-      </div>
+      </header>
       {addWeights && (
         <AddWeights
           currentWeight={currentWeight}
@@ -108,12 +127,23 @@ const Week = ({ startDate, refreshWeeks, weekId }: any) => {
           weekId={weekId}
         />
       )}
+
       {days.map((day: string, index) => (
         <div key={index}>
-          <Day day={day} weekId={weekId} />
+          <Day
+            day={day}
+            days={days}
+            dayIndex={index}
+            weekId={weekId}
+            refreshWeeks={refreshWeeks}
+            refreshFattyFoods={refreshFattyFoods}
+            refreshSports={refreshSports}
+            fattyFoods={fattyFoods}
+            sports={sports}
+          />
         </div>
       ))}
-    </>
+    </div>
   )
 }
 

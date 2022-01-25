@@ -1,65 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 
-import DayHeader from './DayHeader'
-import AddFattyFoods from './AddFattyFoods'
-import AddSports from './AddSports'
-import Message from './Message'
+import DayHeader from '../DayHeader'
+import AddFattyFoods from '../AddFattyFoods'
+import AddSports from '../AddSports'
+import FattyFoods from '../FattyFoods'
+import Sports from '../Sports'
+import Message from '../Message'
+import styles from './Day.module.css'
 
 type DayProps = {
+  days: string[]
   day: string
+  dayIndex: number
   weekId: string
+  fattyFoods: any[]
+  sports: any[]
+  refreshWeeks: () => void
+  refreshFattyFoods: () => void
+  refreshSports: () => void
 }
 
-const Day = ({ day, weekId }: DayProps) => {
-  const [fattyFoods, setFattyFoods] = useState<[]>([])
+const Day = ({
+  days,
+  day,
+  dayIndex,
+  weekId,
+  refreshWeeks,
+  refreshFattyFoods,
+  refreshSports,
+  fattyFoods,
+  sports,
+}: DayProps) => {
   const [name, setName] = useState('')
   const [chosenDate, setChosenDate] = useState('')
-  const [actualDate, setActualDate] = useState('')
-  const [sports, setSports] = useState<[]>([])
   const [sport, setSport] = useState('')
   const [date, setDate] = useState('')
   const [duration, setDuration] = useState(0)
   const [addFattyFoods, setAddFattyFoods] = useState(false)
   const [addSports, setAddSports] = useState(false)
-
-  const storedToken = localStorage.getItem('authToken')
-
-  const getFattyFoods = () => {
-    axios
-      .get('/api/fattyFoods', {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        setFattyFoods(response.data.payload)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  useEffect(() => {
-    getFattyFoods()
-    //eslint-disable-next-line
-  }, [])
-
-  const getSports = () => {
-    axios
-      .get('/api/sports', {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        setSports(response.data.payload)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
-  useEffect(() => {
-    getSports()
-    //eslint-disable-next-line
-  }, [])
 
   const handleShowAddFattyFoods = () => {
     setAddFattyFoods(!addFattyFoods)
@@ -69,6 +47,7 @@ const Day = ({ day, weekId }: DayProps) => {
     setAddSports(!addSports)
   }
 
+  // TODO: Weight, FattyFood, Sport update components
   return (
     <>
       <DayHeader
@@ -78,7 +57,7 @@ const Day = ({ day, weekId }: DayProps) => {
       {/* TODO: */}
       {addFattyFoods && (
         <AddFattyFoods
-          refreshFattyFoods={getFattyFoods}
+          refreshFattyFoods={refreshFattyFoods}
           weekId={weekId}
           addFattyFoods={addFattyFoods}
           setAddFattyFoods={setAddFattyFoods}
@@ -86,12 +65,12 @@ const Day = ({ day, weekId }: DayProps) => {
           setName={setName}
           chosenDate={chosenDate}
           setChosenDate={setChosenDate}
-          actualDate={setActualDate}
+          day={day}
         />
       )}
       {addSports && (
         <AddSports
-          refreshSports={getSports}
+          refreshSports={refreshSports}
           weekId={weekId}
           addSports={addSports}
           setAddSports={setAddSports}
@@ -101,10 +80,29 @@ const Day = ({ day, weekId }: DayProps) => {
           setDate={setDate}
           duration={duration}
           setDuration={setDuration}
+          day={day}
         />
       )}
-      <div className='day-container'>
-        <p>{day}</p>
+      <div className={styles.container}>
+        <p className='p-2 mb-0'>{day}</p>
+        <div>
+          <FattyFoods
+            fattyFoods={fattyFoods}
+            dayIndex={dayIndex}
+            days={days}
+            weekId={weekId}
+            refreshWeeks={refreshWeeks}
+            refreshFattyFoods={refreshFattyFoods}
+          />
+        </div>
+        <Sports 
+          sports={sports}
+          weekId={weekId}
+          days={days}
+          dayIndex={dayIndex}
+          refreshWeeks={refreshWeeks}
+          refreshSports={refreshSports}
+        />
       </div>
     </>
   )

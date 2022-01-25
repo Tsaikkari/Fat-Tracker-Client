@@ -1,0 +1,17 @@
+.container > header {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+@media (min-width: 768px) {
+  .container > header {
+    justify-content: space-between;
+  }
+
+  /* .container > div {
+    width: 48%;
+  } */
+}
+
+@media (min-width: 1024px) {
+}

@@ -17,16 +17,16 @@ const Weight = ({
   refreshWeights,
   weightId,
 }: WeightProps) => {
-  const storedToken = localStorage.getItem('authToken')
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
-  }
-
   const deleteWeights = async () => {
+    const storedToken = localStorage.getItem('authToken')
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${storedToken}`,
+      },
+    }
+
     if (window.confirm('Delete weights?')) {
       try {
         await axios.delete(`/api/weights/${weightId}`, config)
@@ -40,10 +40,8 @@ const Weight = ({
 
   return (
     <div>
-      <>
-        <span className='m-2'>{currentWeight}</span>
-        <span className='m-2'>{goalWeight}</span>
-      </>
+      <span className='m-2'>{currentWeight}</span>
+      <span className='m-2'>{goalWeight}</span>
 
       <Button variant='danger' className='btn-sm' onClick={deleteWeights}>
         <i className='fas fa-trash'></i>
