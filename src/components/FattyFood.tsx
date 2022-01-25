@@ -21,16 +21,16 @@ const FattyFood = ({
   days,
   dayIndex,
 }: FattyFoodProps) => {
-  const storedToken = localStorage.getItem('authToken')
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
-  }
-
   const deleteFattyFoods = async () => {
+    const storedToken = localStorage.getItem('authToken')
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${storedToken}`,
+      },
+    }
+
     if (window.confirm('Delete fatty foods?')) {
       try {
         await axios.delete(`/api/fattyFoods/${fattyFoodId}`, config)
@@ -43,8 +43,19 @@ const FattyFood = ({
   }
 
   return (
-    <div className=''>
-      {chosenDate === days[dayIndex] && name}
+    <div className='fattyfood-container'>
+      {chosenDate === days[dayIndex] && (
+        <>
+          <p>{name}</p>
+          <Button
+            variant='danger'
+            className='btn-sm'
+            onClick={deleteFattyFoods}
+          >
+            <i className='fas fa-trash'></i>
+          </Button>
+        </>
+      )}
     </div>
   )
 }

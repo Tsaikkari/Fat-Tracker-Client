@@ -25,6 +25,7 @@ const Sports = ({
           <Sport 
             sportId={s._id}
             sport={s.sport}
+            duration={s.duration}
             date={s.date}
             days={days}
             dayIndex={dayIndex}

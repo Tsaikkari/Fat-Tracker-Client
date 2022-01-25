@@ -56,7 +56,7 @@ const AddSports = ({
       refreshSports()
       setSport('')
       setDate('')
-      setDuration(0)
+      setDuration('')
       setAddSports(!addSports)
     } catch (err) {
       console.log(err)
@@ -70,7 +70,7 @@ const AddSports = ({
           <Form.Label>Sport</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Separate sports with commas'
+            placeholder='Separate sports with a comma'
             value={sport}
             onChange={(e) => setSport(e.target.value)}
           ></Form.Control>
@@ -79,7 +79,7 @@ const AddSports = ({
           <Form.Label>Duration</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Set approximate time'
+            placeholder='Approximate time in minutes'
             value={duration}
             onChange={(e) => setDuration(Number(e.target.value))}
           ></Form.Control>

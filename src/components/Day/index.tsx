@@ -35,7 +35,7 @@ const Day = ({
   const [chosenDate, setChosenDate] = useState('')
   const [sport, setSport] = useState('')
   const [date, setDate] = useState('')
-  const [duration, setDuration] = useState(0)
+  const [duration, setDuration] = useState('')
   const [addFattyFoods, setAddFattyFoods] = useState(false)
   const [addSports, setAddSports] = useState(false)
 
@@ -47,7 +47,7 @@ const Day = ({
     setAddSports(!addSports)
   }
 
-  // TODO: Weight, FattyFood, Sport update components
+  // TODO: weight and actual date update components
   return (
     <>
       <DayHeader

@@ -104,7 +104,7 @@ const Week = ({
     <div className={styles.container}>
       <header>
         <p className='m-2'>{startDate}</p>
-        <Button variant='dark' className='mb-3' onClick={handleShowAddWeights}>
+        <Button variant='light' onClick={handleShowAddWeights}>
           Weight
         </Button>
 
@@ -115,6 +115,7 @@ const Week = ({
           weekId={weekId}
         />
       </header>
+      {/* <hr></hr> */}
       {addWeights && (
         <AddWeights
           currentWeight={currentWeight}

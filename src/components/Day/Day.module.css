@@ -1,5 +1,11 @@
 .container {
   background: #eee;
+  border: 1px solid #dedede;
+  border-radius: 6px;
+}
+
+.container > p {
+  font-weight: 900;
 }
 
 .container > div {

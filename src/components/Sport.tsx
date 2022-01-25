@@ -7,6 +7,7 @@ type SportProps = {
   refreshSports: () => void
   refreshWeeks: () => void
   sport: string
+  duration: number
   date: string
   dayIndex: number
   days: string[]
@@ -16,20 +17,21 @@ const Sport = ({
   refreshSports,
   refreshWeeks,
   sport,
+  duration,
   date,
   dayIndex,
-  days
+  days,
 }: SportProps) => {
-  const storedToken = localStorage.getItem('authToken')
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
-  }
-
   const deleteSports = async () => {
+    const storedToken = localStorage.getItem('authToken')
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${storedToken}`,
+      },
+    }
+
     if (window.confirm('Delete sports?')) {
       try {
         await axios.delete(`/api/sports/${sportId}`, config)
@@ -43,7 +45,19 @@ const Sport = ({
 
   return (
     <div>
-      {date === days[dayIndex] && sport}
+      {date === days[dayIndex] && (
+        <div className='sport-container'>
+          <p>{sport}</p>
+          <p>{duration} min</p>
+          <Button 
+            variant='danger' 
+            className='btn-sm' 
+            onClick={deleteSports}
+          >
+            <i className='fas fa-trash'></i>
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

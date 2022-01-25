@@ -39,9 +39,9 @@ const Weight = ({
   }
 
   return (
-    <div>
-      <span className='m-2'>{currentWeight}</span>
-      <span className='m-2'>{goalWeight}</span>
+    <div className='weight-container'>
+      <span className='current-weight'>{currentWeight}</span>
+      <span className='goal-weight'>{goalWeight}</span>
 
       <Button variant='danger' className='btn-sm' onClick={deleteWeights}>
         <i className='fas fa-trash'></i>

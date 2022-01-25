@@ -1,6 +1,25 @@
 .container > header {
   display: flex;
   justify-content: space-evenly;
+  border: solid 1px red;
+  border-radius: 4px;
+  padding: 0.1em;
+}
+
+.container > header > button {
+  box-shadow: 0 2px 5px red;
+  color: red;
+  background: #fff;
+}
+
+.container > div {
+  border: solid 1px #dedede;
+  border-radius: 6px;
+  margin: 1em;
+}
+
+.container > hr {
+  background-color: red;
 }
 
 @media (min-width: 768px) {
