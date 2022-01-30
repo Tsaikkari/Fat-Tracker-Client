@@ -44,7 +44,7 @@ const Sport = ({
   }
 
   return (
-    <div>
+    <>
       {date === days[dayIndex] && (
         <div className='sport-container'>
           <p>{sport}</p>
@@ -58,7 +58,7 @@ const Sport = ({
           </Button>
         </div>
       )}
-    </div>
+    </>
   )
 }
 

@@ -27,14 +27,14 @@ const AddSports = ({
   setDate,
   duration,
   setDuration,
-  day
+  day,
 }: AddSportsProps) => {
   useEffect(() => {
     if (day) {
       setDate(day)
     }
     //eslint-disable-next-line
-  }, []) 
+  }, [])
 
   const storedToken = localStorage.getItem('authToken')
 
@@ -49,11 +49,7 @@ const AddSports = ({
     e.preventDefault()
 
     try {
-      await axios.post(
-        '/api/sports',
-        { sport, date, duration, weekId },
-        config
-      )
+      await axios.post('/api/sports', { sport, date, duration, weekId }, config)
       refreshSports()
       setSport('')
       setDate('')
@@ -65,31 +61,29 @@ const AddSports = ({
   }
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='sport'>
-          <Form.Label>Sport</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Separate sports with a comma'
-            value={sport}
-            onChange={(e) => setSport(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId='duration'>
-          <Form.Label>Duration</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Approximate time in minutes'
-            value={duration}
-            onChange={(e) => setDuration(Number(e.target.value))}
-          ></Form.Control>
-        </Form.Group>
-        <Button type='submit' className='mt-2' variant='dark'>
-          Save
-        </Button>
-      </Form>
-    </>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId='sport'>
+        <Form.Label>Sport</Form.Label>
+        <Form.Control
+          type='text'
+          placeholder='Separate sports with a comma'
+          value={sport}
+          onChange={(e) => setSport(e.target.value)}
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group controlId='duration'>
+        <Form.Label>Duration</Form.Label>
+        <Form.Control
+          type='text'
+          placeholder='Approximate time in minutes'
+          value={duration}
+          onChange={(e) => setDuration(Number(e.target.value))}
+        ></Form.Control>
+      </Form.Group>
+      <Button type='submit' className='mt-2' variant='dark'>
+        Save
+      </Button>
+    </Form>
   )
 }
 

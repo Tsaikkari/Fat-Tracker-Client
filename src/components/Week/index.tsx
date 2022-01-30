@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
@@ -6,6 +6,8 @@ import Day from '../Day'
 import AddWeights from '../AddWeights'
 import Weights from '../Weights'
 import styles from './Week.module.css'
+import Message from '../Message'
+import { AuthContext } from '../../context/auth'
 
 type WeekWeights = {
   weights: [
@@ -44,6 +46,10 @@ const Week = ({
   const [currentWeight, setCurrentWeight] = useState<number | string>('')
   const [goalWeight, setGoalWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
+
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
+  const { isLoading } = useContext(AuthContext)
 
   const getWeekDays = () => {
     const weekdays = [
@@ -87,7 +93,8 @@ const Week = ({
         setWeights(response.data.payload)
       })
       .catch((err) => {
-        console.log(err)
+        const errorMsg = err.message
+        setErrorMessage(errorMsg)
       })
   }
 
@@ -127,23 +134,25 @@ const Week = ({
           weekId={weekId}
         />
       )}
-     <div>
-      {days.map((day: string, index) => (
-        <div key={index}>
-          <Day
-            day={day}
-            days={days}
-            dayIndex={index}
-            weekId={weekId}
-            refreshWeeks={refreshWeeks}
-            refreshFattyFoods={refreshFattyFoods}
-            refreshSports={refreshSports}
-            fattyFoods={fattyFoods}
-            sports={sports}
-          />
-        </div>
-      ))}
-    </div>
+      <div>
+        {days.map((day: string, index) => (
+          <div key={index}>
+            <Day
+              day={day}
+              days={days}
+              dayIndex={index}
+              weekId={weekId}
+              refreshWeeks={refreshWeeks}
+              refreshFattyFoods={refreshFattyFoods}
+              refreshSports={refreshSports}
+              fattyFoods={fattyFoods}
+              sports={sports}
+            />
+          </div>
+        ))}
+      </div>
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {isLoading && <h3>Loading ...</h3>}
     </div>
   )
 }

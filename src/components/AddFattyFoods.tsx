@@ -2,6 +2,9 @@ import React, { useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
+import { AuthContext } from '../context/auth'
+import Message from './Message'
+
 type AddFattyFoodsProps = {
   refreshFattyFoods: () => void
   weekId: string
@@ -23,7 +26,7 @@ const AddFattyFoods = ({
   setName,
   chosenDate,
   setChosenDate,
-  day
+  day,
 }: AddFattyFoodsProps) => {
   useEffect(() => {
     if (day) {
@@ -45,11 +48,7 @@ const AddFattyFoods = ({
     e.preventDefault()
 
     try {
-      await axios.post(
-        '/api/fattyFoods',
-        { name, chosenDate, weekId },
-        config
-      )
+      await axios.post('/api/fattyFoods', { name, chosenDate, weekId }, config)
       refreshFattyFoods()
       setName('')
       setChosenDate('')
@@ -60,22 +59,20 @@ const AddFattyFoods = ({
   }
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='fattyFoodName'>
-          <Form.Label>Fatty Food</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Separate fatty foods with a comma'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          ></Form.Control>
-        </Form.Group>
-        <Button type='submit' className='mt-2' variant='dark'>
-          Save
-        </Button>
-      </Form>
-    </>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId='fattyFoodName'>
+        <Form.Label>Fatty Food</Form.Label>
+        <Form.Control
+          type='text'
+          placeholder='Separate fatty foods with a comma'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        ></Form.Control>
+      </Form.Group>
+      <Button type='submit' className='mt-2' variant='dark'>
+        Save
+      </Button>
+    </Form>
   )
 }
 

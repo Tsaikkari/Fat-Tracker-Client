@@ -1,19 +1,13 @@
-import React, { useState, useContext } from 'react'
+import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
-import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
-import { AuthContext } from '../../context/auth'
 
 const VerifyEmail = () => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
-
   const { token } = useParams()
   const navigate = useNavigate()
-
-  const { isLoading } = useContext(AuthContext)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -24,8 +18,7 @@ const VerifyEmail = () => {
         navigate('/login')
       })
       .catch((err) => {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
+        console.log(err)
       })
   }
 
@@ -37,8 +30,6 @@ const VerifyEmail = () => {
           Verify Email
         </Button>
       </Form>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-      {isLoading && <h3>Loading ...</h3>}
     </FormContainer>
   )
 }

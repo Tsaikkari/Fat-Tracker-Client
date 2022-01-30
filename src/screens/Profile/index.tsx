@@ -16,6 +16,7 @@ const Profile = () => {
 
   const token = localStorage.getItem('authToken')
 
+  // TODO: fix user info not available immediately
   useEffect(() => {
     if (user) {
       axios
@@ -26,7 +27,10 @@ const Profile = () => {
           setName(response.data.payload.name)
           setEmail(response.data.payload.email)
         })
-        .catch((err) => console.log(err))
+        .catch((err) => {
+          const errorMessage = err.message
+          setErrorMessage(errorMessage)
+        })
     }
     //eslint-disable-next-line
   }, [])

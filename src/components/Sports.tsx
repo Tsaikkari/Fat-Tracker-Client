@@ -19,7 +19,7 @@ const Sports = ({
   refreshSports
 }: SportsProps) => {
   return (
-    <div>
+    <>
       {sports && sports.map((s: any) => (
         <div key={s._id}>
           <Sport 
@@ -34,7 +34,7 @@ const Sports = ({
           />
         </div>
       ))}
-    </div>
+    </>
   )
 }
 

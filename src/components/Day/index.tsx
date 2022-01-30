@@ -54,7 +54,6 @@ const Day = ({
         handleShowAddFattyFoods={handleShowAddFattyFoods}
         handleShowAddSports={handleShowAddSports}
       />
-      {/* TODO: */}
       {addFattyFoods && (
         <AddFattyFoods
           refreshFattyFoods={refreshFattyFoods}

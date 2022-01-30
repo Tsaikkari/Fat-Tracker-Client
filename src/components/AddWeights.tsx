@@ -51,29 +51,27 @@ const AddWeights = ({
   }
 
   return (
-    <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId='startingWeight'>
-          <Form.Label>Current Weight</Form.Label>
-          <Form.Control
-            type='text'
-            value={currentWeight}
-            onChange={(e) => setCurrentWeight(Number(e.target.value))}
-          ></Form.Control>
-        </Form.Group>
-        <Form.Group controlId='goalWeight'>
-          <Form.Label>Goal Weight</Form.Label>
-          <Form.Control
-            type='text'
-            value={goalWeight}
-            onChange={(e) => setGoalWeight(Number(e.target.value))}
-          ></Form.Control>
-        </Form.Group>
-        <Button type='submit' className='mt-2' variant='dark'>
-          Save
-        </Button>
-      </Form>
-    </>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId='startingWeight'>
+        <Form.Label>Current Weight</Form.Label>
+        <Form.Control
+          type='text'
+          value={currentWeight}
+          onChange={(e) => setCurrentWeight(Number(e.target.value))}
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group controlId='goalWeight'>
+        <Form.Label>Goal Weight</Form.Label>
+        <Form.Control
+          type='text'
+          value={goalWeight}
+          onChange={(e) => setGoalWeight(Number(e.target.value))}
+        ></Form.Control>
+      </Form.Group>
+      <Button type='submit' className='mt-2' variant='dark'>
+        Save
+      </Button>
+    </Form>
   )
 }
 

@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 
 import styles from './Weeks.module.css'
 import AddWeek from '../../components/AddWeek'
-import Week from '../../components/week'
+import Week from '../../components/Week'
+import Message from '../../components/Message'
+import { AuthContext } from '../../context/auth'
 
 const Weeks = () => {
   const [weeks, setWeeks] = useState([])
   const [fattyFoods, setFattyFoods] = useState<[]>([])
   const [sports, setSports] = useState<[]>([])
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
+  const { isLoading } = useContext(AuthContext)
 
   const storedToken = localStorage.getItem('authToken')
 
@@ -21,7 +26,10 @@ const Weeks = () => {
         const sorted = response.data.payload.reverse()
         setWeeks(sorted)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        const errorMsg = err.message
+        setErrorMessage(errorMsg)
+      })
   }
 
   useEffect(() => {
@@ -82,6 +90,8 @@ const Weeks = () => {
           />
         </div>
       ))}
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {isLoading && <h3>Loading ...</h3>}
     </div>
   )
 }
