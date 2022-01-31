@@ -57,13 +57,13 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' className='save-btn' variant=''>
+        <Button type='submit' className='save-btn' variant='danger'>
           Login
         </Button>
       </Form>
       {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
       {isLoading && <h3>Loading ...</h3>}
-      <Row className='py-3'>
+      <Row>
         <Col>
           Don't have an account? <Link to={'/signup'}>Sign Up</Link>
         </Col>
