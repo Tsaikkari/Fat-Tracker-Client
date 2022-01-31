@@ -83,7 +83,13 @@ const Weeks = () => {
     <div className={styles.container}>
       {/* TODO: description */}
       <WeekHeader handleShowAddWeek={handleShowAddWeek} />
-      {addWeek && <AddWeek refreshWeeks={getWeeks} />}
+      {addWeek && (
+        <AddWeek
+          refreshWeeks={getWeeks}
+          addWeek={addWeek}
+          setAddWeek={setAddWeek}
+        />
+      )}
       {weeks.map((week: any) => (
         <div key={week._id}>
           <Week

@@ -6,9 +6,11 @@ import Message from './Message'
 
 type AddWeekProps = {
   refreshWeeks: () => void
+  addWeek: boolean
+  setAddWeek: any
 }
 
-const AddWeek = ({ refreshWeeks }: AddWeekProps) => {
+const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('')
 
@@ -33,6 +35,7 @@ const AddWeek = ({ refreshWeeks }: AddWeekProps) => {
       await axios.post('/api/weeks', { date }, config)
       setDate('')
       refreshWeeks()
+      setAddWeek(!addWeek)
     } catch (err) {
       console.log(err)
     }
