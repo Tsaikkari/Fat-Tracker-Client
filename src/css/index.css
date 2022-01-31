@@ -49,6 +49,13 @@ a {
   margin: 1rem 0;
 }
 
+/*week button*/
+.week-btn {
+  box-shadow: 0 2px 5px #debebe;
+  color: red;
+  background: #fff;
+}
+
 /*icons*/
 .fa-pizza-slice {
   color: orange;

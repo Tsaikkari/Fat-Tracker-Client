@@ -8,11 +8,11 @@ type WeekHeaderProps = {
 const WeekHeader = ({ handleShowAddWeek }: WeekHeaderProps) => {
   return (
     <header>
-      <Button onClick={handleShowAddWeek}>
+      <Button onClick={handleShowAddWeek} variant='light' className='my-2 week-btn'>
         New Week
       </Button>
     </header>
   )
 }
 
-export default WeekHeader;
+export default WeekHeader
