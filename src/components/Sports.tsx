@@ -15,12 +15,16 @@ const Sports = ({
   sports,
   days,
   dayIndex,
+  weekId,
   refreshWeeks,
   refreshSports
 }: SportsProps) => {
+  const filteredSports = sports.filter(
+    (sport: any) => sport.week === weekId
+  )
   return (
     <>
-      {sports && sports.map((s: any) => (
+      {filteredSports && filteredSports.map((s: any) => (
         <div key={s._id}>
           <Sport 
             sportId={s._id}

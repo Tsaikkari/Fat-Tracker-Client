@@ -15,13 +15,17 @@ const FattyFoods = ({
   days,
   dayIndex,
   fattyFoods,
+  weekId,
   refreshWeeks,
   refreshFattyFoods
 }: FattyFoodsProps) => {
+  const filteredFattyFoods = fattyFoods.filter(
+    (ff: any) => ff.week === weekId
+  )
   return (
     <div>
-      {fattyFoods &&
-        fattyFoods.map((ff: any) => (
+      {filteredFattyFoods &&
+        filteredFattyFoods.map((ff: any) => (
           <div key={ff._id}>
             <FattyFood
               refreshWeeks={refreshWeeks}

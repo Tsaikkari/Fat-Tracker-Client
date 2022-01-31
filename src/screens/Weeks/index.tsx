@@ -6,12 +6,18 @@ import AddWeek from '../../components/AddWeek'
 import Week from '../../components/Week'
 import Message from '../../components/Message'
 import { AuthContext } from '../../context/auth'
+import WeekHeader from '../../components/WeekHeader'
 
 const Weeks = () => {
   const [weeks, setWeeks] = useState([])
   const [fattyFoods, setFattyFoods] = useState<[]>([])
   const [sports, setSports] = useState<[]>([])
   const [errorMessage, setErrorMessage] = useState(undefined)
+  const [addWeek, setAddWeek] = useState(false)
+
+  const handleShowAddWeek = () => {
+    setAddWeek(!addWeek)
+  }
 
   const { isLoading } = useContext(AuthContext)
 
@@ -76,7 +82,8 @@ const Weeks = () => {
   return (
     <div className={styles.container}>
       {/* TODO: description */}
-      <AddWeek refreshWeeks={getWeeks} />
+      <WeekHeader handleShowAddWeek={handleShowAddWeek} />
+      {addWeek && <AddWeek refreshWeeks={getWeeks} />}
       {weeks.map((week: any) => (
         <div key={week._id}>
           <Week

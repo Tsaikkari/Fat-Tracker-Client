@@ -5,7 +5,6 @@ import AddFattyFoods from '../AddFattyFoods'
 import AddSports from '../AddSports'
 import FattyFoods from '../FattyFoods'
 import Sports from '../Sports'
-import Message from '../Message'
 import styles from './Day.module.css'
 
 type DayProps = {
