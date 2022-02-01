@@ -161,8 +161,8 @@ const Week = ({
             />
           </div>
         ))}
-        <Button variant='light' onClick={handleShowEditWeight}>
-          Update Current Weight at the End of the Week
+        <Button variant='warning' onClick={handleShowEditWeight}>
+          Weight at the End of the Week
         </Button>
         {editWeight && (
           <>

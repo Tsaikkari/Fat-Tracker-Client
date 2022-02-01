@@ -54,7 +54,7 @@ const EditWeights = ({
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId='achievedWeight'>
-        <Form.Label>Update Current Weight</Form.Label>
+        <Form.Label>Current Weight</Form.Label>
         <Form.Control
           type='text'
           value={achievedWeight}
