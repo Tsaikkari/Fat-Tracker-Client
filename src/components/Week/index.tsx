@@ -5,6 +5,7 @@ import axios from 'axios'
 import Day from '../Day'
 import AddWeights from '../AddWeights'
 import Weights from '../Weights'
+import EditWeights from '../EditWeights'
 import styles from './Week.module.css'
 import Message from '../Message'
 import { AuthContext } from '../../context/auth'
@@ -44,8 +45,10 @@ const Week = ({
   const [days, setDays] = useState<string[]>([])
   const [weights, setWeights] = useState<WeekWeights[]>([])
   const [currentWeight, setCurrentWeight] = useState<number | string>('')
+  const [achievedWeight, setAchievedWeight] = useState<number | string>('')
   const [goalWeight, setGoalWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
+  const [editWeight, setEditWeight] = useState(false)
 
   const [errorMessage, setErrorMessage] = useState(undefined)
 
@@ -107,6 +110,14 @@ const Week = ({
     setAddWeights(!addWeights)
   }
 
+  const handleShowEditWeight = () => {
+    setEditWeight(!editWeight)
+  }
+
+  const filteredWeights = weights.filter(
+    (weight: any) => weight.week === weekId
+  )
+
   return (
     <div className={styles.container}>
       <header>
@@ -150,6 +161,22 @@ const Week = ({
             />
           </div>
         ))}
+        <Button variant='light' onClick={handleShowEditWeight}>
+          Update Current Weight at the End of the Week
+        </Button>
+        {editWeight && (
+          <>
+            <EditWeights
+              achievedWeight={achievedWeight}
+              setAchievedWeight={setAchievedWeight}
+              filteredWeights={filteredWeights}
+              refreshWeights={getWeights}
+              editWeight={editWeight}
+              setEditWeight={setEditWeight}
+              weekId={weekId}
+            />
+          </>
+        )}
       </div>
       {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
       {isLoading && <h3>Loading ...</h3>}

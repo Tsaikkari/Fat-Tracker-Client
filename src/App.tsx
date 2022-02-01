@@ -8,6 +8,7 @@ import Home from './screens/Home'
 import Profile from './screens/Profile'
 import Weeks from './screens/Weeks'
 import VerifyEmail from './screens/VerifyEmail'
+import Charts from './screens/Charts'
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
         <Route path='/profile' element={<Profile />} />
         <Route path='/weeks' element={<Weeks />} />
         <Route path='/authentication/verify/:token' element={<VerifyEmail />} />
+        <Route path='/charts' element={<Charts />} />
       </Routes>
     </>
   )
