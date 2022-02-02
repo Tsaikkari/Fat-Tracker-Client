@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Button } from 'react-bootstrap'
-import axios from 'axios'
 
 import Day from '../Day'
 import AddWeights from '../AddWeights'
@@ -10,19 +9,6 @@ import styles from './Week.module.css'
 import Message from '../Message'
 import { AuthContext } from '../../context/auth'
 import { WeightContext } from '../../context/weight'
-
-type WeekWeights = {
-  weights: [
-    {
-      _id: string
-      currentWeight: number
-      goalWeight: number
-      user: string
-      week: string
-      createdAt: Date
-    }
-  ]
-}
 
 type WeekProps = {
   startDate: string
@@ -44,14 +30,11 @@ const Week = ({
   weekId,
 }: WeekProps) => {
   const [days, setDays] = useState<string[]>([])
-  //const [weights, setWeights] = useState<WeekWeights[]>([])
   const [currentWeight, setCurrentWeight] = useState<number | string>('')
   const [achievedWeight, setAchievedWeight] = useState<number | string>('')
   const [goalWeight, setGoalWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
   const [editWeight, setEditWeight] = useState(false)
-
-  //const [errorMessage, setErrorMessage] = useState(undefined)
 
   const { isLoading } = useContext(AuthContext)
   const { weights, getWeights, errorMessage } = useContext(WeightContext)
@@ -86,27 +69,6 @@ const Week = ({
     }
     //eslint-disable-next-line
   }, [])
-
-  const storedToken = localStorage.getItem('authToken')
-
-  // const getWeights = () => {
-  //   axios
-  //     .get('/api/weights/user', {
-  //       headers: { Authorization: `Bearer ${storedToken}` },
-  //     })
-  //     .then((response) => {
-  //       setWeights(response.data.payload)
-  //     })
-  //     .catch((err) => {
-  //       const errorMsg = err.message
-  //       setErrorMessage(errorMsg)
-  //     })
-  // }
-
-  // useEffect(() => {
-  //   getWeights()
-  //   //eslint-disable-next-line
-  // }, [])
 
   const handleShowAddWeights = () => {
     setAddWeights(!addWeights)
