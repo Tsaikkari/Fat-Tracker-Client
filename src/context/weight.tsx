@@ -29,7 +29,7 @@ function WeightProviderWrapper(props: ContextProps) {
         const res = await axios.get('/api/weights/user', {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
-        setWeights(res.data.payload.reverse())
+        setWeights(res.data.payload)
       } catch (err: any) {
         const errorMsg = err.message
         setErrorMessage(errorMsg)
