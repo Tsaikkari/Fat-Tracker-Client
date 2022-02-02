@@ -34,7 +34,7 @@ const LineChart = () => {
     }
   }, [weeks, sortedWeeks])
 
-  const startingDates = sortedWeeks.map((week: any) => week.date)
+  const startingDates = sortedWeeks.slice(0, 8).map((week: any) => week.date)
 
   return (
     <div>
@@ -45,19 +45,19 @@ const LineChart = () => {
           datasets: [
             {
               label: 'Starting Weight',
-              data: weights && weights.map((weight: any) => weight.currentWeight),
+              data: weights && weights.slice(0, 8).map((weight: any) => weight.currentWeight),
               backgroundColor: 'red',
               borderWidth: 1,
             },
             {
               label: 'Goal',
-              data: weights && weights.map((weight: any) => weight.goalWeight),
+              data: weights && weights.slice(0, 8).map((weight: any) => weight.goalWeight),
               backgroundColor: '#1f805e',
               borderWidth: 1,
             },
             {
               label: 'Actual',
-              data: weights && weights.map((weight: any) => weight.achievedWeight),
+              data: weights && weights.slice(0, 8).map((weight: any) => weight.achievedWeight),
               backgroundColor: 'orange',
               borderWidth: 1,
             }
