@@ -48,18 +48,21 @@ const LineChart = () => {
               data: weights && weights.slice(0, 8).map((weight: any) => weight.currentWeight),
               backgroundColor: 'red',
               borderWidth: 1,
+              borderColor: 'red'
             },
             {
               label: 'Goal',
               data: weights && weights.slice(0, 8).map((weight: any) => weight.goalWeight),
               backgroundColor: '#1f805e',
               borderWidth: 1,
+              borderColor: '#1f805e'
             },
             {
               label: 'Actual',
               data: weights && weights.slice(0, 8).map((weight: any) => weight.achievedWeight),
               backgroundColor: 'orange',
               borderWidth: 1,
+              borderColor: 'orange'
             }
           ],
         }}
