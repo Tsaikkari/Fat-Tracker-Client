@@ -6,6 +6,8 @@ import styles from './Profile.module.css'
 import { AuthContext } from '../../context/auth'
 import Message from '../../components/Message'
 import LifeStyle from '../../components/LifeStyle'
+import AddLifeStyle from '../../components/AddLifeStyle'
+import { WeekContext } from '../../context/week'
 
 const Profile = () => {
   const { isLoading, isLoggedIn, user } = useContext(AuthContext)
@@ -13,6 +15,8 @@ const Profile = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined)
+
+  const { weeks } = useContext(WeekContext)
 
   const token = localStorage.getItem('authToken')
 
@@ -30,7 +34,7 @@ const Profile = () => {
           const errorMessage = err.message
           setErrorMessage(errorMessage)
         })
-    } 
+    }
   }, [token, user])
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -64,9 +68,19 @@ const Profile = () => {
     <>
       {isLoggedIn && (
         <>
-          <h1 className='text-center m-4'>Hello {user.name}!</h1>
-          {/* TODO: instructions text */}
-          <LifeStyle />
+          <h1 className='text-center m-4'>Hello {user.name} 🧡</h1>
+          <section>
+            {/* {weeks.length === 0 &&  */}
+            <p>
+              Create your week plan(s) at the <span>Week</span> page. But first,
+              you might want to specify the life style changes that you are
+              taking on:
+            </p>
+            {/* } */}
+            <LifeStyle />
+            <AddLifeStyle />
+          </section>
+          {/* TODO: */}
           <div className={styles.container}>
             <Form onSubmit={handleSubmit}>
               <h3>Update your information</h3>

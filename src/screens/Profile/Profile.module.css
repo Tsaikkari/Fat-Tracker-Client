@@ -1,5 +1,11 @@
-.container {
+.container,
+section {
   margin: 1rem;
+}
+
+section > p > span {
+  color: orange;
+  font-weight: 900;
 }
 
 @media (min-width: 850px) {

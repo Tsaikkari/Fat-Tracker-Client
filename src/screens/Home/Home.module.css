@@ -4,9 +4,9 @@
 }
 
 .header {
-  font-size: 2.6em;
+  font-size: 2.8em;
   font-weight: 900;
-  margin: 0.7em auto 0.5em;
+  margin: 0.7em auto 0.6em;
 }
 
 .buttons__div > div > button {
@@ -18,12 +18,6 @@
   background: white;
   width: 100%;
 }
-
-/* .signup__div__btn > div {
-  background: rgb(255, 255, 255);
-  padding: 10px;
-  border-radius: 2px;
-} */
 
 .signup__div__btn > div > i {
   color: #fff;
