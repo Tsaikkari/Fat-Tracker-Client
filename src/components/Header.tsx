@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useContext } from 'react'
 import { AuthContext } from '../context/auth'
+import { WeekContext } from '../context/week'
+import { WeightContext } from '../context/weight'
 
 const Header = () => {
   const { isLoggedIn, logoutUser, user } = useContext(AuthContext)
+  const { weeks, getWeeks } = useContext(WeekContext)
+  const { weights, getWeights } = useContext(WeightContext)
+
+  useEffect(() => {
+    if (isLoggedIn && weeks.length === 0) {
+      getWeeks()
+    }
+  }, [weeks, getWeeks, isLoggedIn])
+
+  useEffect(() => {
+    if (isLoggedIn && weights.length === 0) {
+      getWeights()
+    }
+  }, [weights, getWeights, isLoggedIn])
 
   return (
     <Navbar bg='light' expand='lg' collapseOnSelect className='navbar'>
@@ -17,7 +33,7 @@ const Header = () => {
               <LinkContainer to='/weeks'>
                 <Nav.Link>Week</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/chart'>
+              <LinkContainer to='/charts'>
                 <Nav.Link>Chart</Nav.Link>
               </LinkContainer>
               <NavDropdown title={user.name.split(' ')[0]} id='name'>

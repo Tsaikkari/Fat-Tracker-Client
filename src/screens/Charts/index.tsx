@@ -1,7 +1,11 @@
-import React from 'react';
+import React from 'react'
+
+import LineChart from '../../components/LineChart'
 
 const Charts = () => {
-  return <div></div>;
-};
+  return (
+    <LineChart />
+  )
+}
 
-export default Charts;
+export default Charts

@@ -16,9 +16,8 @@ const Profile = () => {
 
   const token = localStorage.getItem('authToken')
 
-  // TODO: fix user info not available immediately
   useEffect(() => {
-    if (user) {
+    if (user && user.name) {
       axios
         .get(`/api/users/${user._id}`, {
           headers: { Authorization: `Bearer ${token}` },
@@ -31,9 +30,8 @@ const Profile = () => {
           const errorMessage = err.message
           setErrorMessage(errorMessage)
         })
-    }
-    //eslint-disable-next-line
-  }, [])
+    } 
+  }, [token, user])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

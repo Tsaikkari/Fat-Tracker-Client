@@ -3,16 +3,15 @@ import axios from 'axios'
 
 import styles from './Weeks.module.css'
 import AddWeek from '../../components/AddWeek'
+import WeekHeader from '../../components/WeekHeader'
 import Week from '../../components/Week'
 import Message from '../../components/Message'
 import { AuthContext } from '../../context/auth'
-import WeekHeader from '../../components/WeekHeader'
+import { WeekContext } from '../../context/week'
 
 const Weeks = () => {
-  const [weeks, setWeeks] = useState([])
   const [fattyFoods, setFattyFoods] = useState<[]>([])
   const [sports, setSports] = useState<[]>([])
-  const [errorMessage, setErrorMessage] = useState(undefined)
   const [addWeek, setAddWeek] = useState(false)
 
   const handleShowAddWeek = () => {
@@ -20,28 +19,9 @@ const Weeks = () => {
   }
 
   const { isLoading } = useContext(AuthContext)
+  const { weeks, getWeeks, errorMessage } = useContext(WeekContext)
 
   const storedToken = localStorage.getItem('authToken')
-
-  const getWeeks = () => {
-    axios
-      .get('/api/weeks/user', {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        const sorted = response.data.payload.reverse()
-        setWeeks(sorted)
-      })
-      .catch((err) => {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
-      })
-  }
-
-  useEffect(() => {
-    getWeeks()
-    //eslint-disable-next-line
-  }, [])
 
   const getFattyFoods = () => {
     axios
@@ -90,7 +70,7 @@ const Weeks = () => {
           setAddWeek={setAddWeek}
         />
       )}
-      {weeks.map((week: any) => (
+      {weeks && weeks.map((week: any) => (
         <div key={week._id}>
           <Week
             refreshFattyFoods={getFattyFoods}

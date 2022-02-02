@@ -9,6 +9,7 @@ import EditWeights from '../EditWeights'
 import styles from './Week.module.css'
 import Message from '../Message'
 import { AuthContext } from '../../context/auth'
+import { WeightContext } from '../../context/weight'
 
 type WeekWeights = {
   weights: [
@@ -43,16 +44,17 @@ const Week = ({
   weekId,
 }: WeekProps) => {
   const [days, setDays] = useState<string[]>([])
-  const [weights, setWeights] = useState<WeekWeights[]>([])
+  //const [weights, setWeights] = useState<WeekWeights[]>([])
   const [currentWeight, setCurrentWeight] = useState<number | string>('')
   const [achievedWeight, setAchievedWeight] = useState<number | string>('')
   const [goalWeight, setGoalWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
   const [editWeight, setEditWeight] = useState(false)
 
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  //const [errorMessage, setErrorMessage] = useState(undefined)
 
   const { isLoading } = useContext(AuthContext)
+  const { weights, getWeights, errorMessage } = useContext(WeightContext)
 
   const getWeekDays = () => {
     const weekdays = [
@@ -87,24 +89,24 @@ const Week = ({
 
   const storedToken = localStorage.getItem('authToken')
 
-  const getWeights = () => {
-    axios
-      .get('/api/weights/user', {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        setWeights(response.data.payload)
-      })
-      .catch((err) => {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
-      })
-  }
+  // const getWeights = () => {
+  //   axios
+  //     .get('/api/weights/user', {
+  //       headers: { Authorization: `Bearer ${storedToken}` },
+  //     })
+  //     .then((response) => {
+  //       setWeights(response.data.payload)
+  //     })
+  //     .catch((err) => {
+  //       const errorMsg = err.message
+  //       setErrorMessage(errorMsg)
+  //     })
+  // }
 
-  useEffect(() => {
-    getWeights()
-    //eslint-disable-next-line
-  }, [])
+  // useEffect(() => {
+  //   getWeights()
+  //   //eslint-disable-next-line
+  // }, [])
 
   const handleShowAddWeights = () => {
     setAddWeights(!addWeights)
