@@ -50,11 +50,17 @@ const LineChart = () => {
               borderWidth: 1,
             },
             {
-              label: 'Goal Weight',
+              label: 'Goal',
               data: weights && weights.map((weight: any) => weight.goalWeight),
-              backgroundColor: 'green',
+              backgroundColor: '#1f805e',
               borderWidth: 1,
             },
+            {
+              label: 'Actual',
+              data: weights && weights.map((weight: any) => weight.achievedWeight),
+              backgroundColor: 'orange',
+              borderWidth: 1,
+            }
           ],
         }}
         height={400}
