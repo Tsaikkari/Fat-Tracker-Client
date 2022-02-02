@@ -9,31 +9,24 @@
   margin: 0.7em auto 0.5em;
 }
 
-.signup__div__btn {
-  background-color: white;
-  align-items: center;
-  justify-content: center;
-  color: rgba(0, 0, 0, 0.54);
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px 0px,
-    rgba(0, 0, 0, 0.24) 0px 0px 1px 0px;
-  padding: 0px;
-  border-radius: 2px;
-  border: 1px solid transparent;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: Roboto, sans-serif;
-  min-width: 170px;
-  cursor: pointer;
+.buttons__div > div > button {
+  background: red;
+  border: none;
 }
 
-.signup__div__btn > div {
+.signup__div__btn {
+  background: white;
+  width: 100%;
+}
+
+/* .signup__div__btn > div {
   background: rgb(255, 255, 255);
   padding: 10px;
   border-radius: 2px;
-}
+} */
 
 .signup__div__btn > div > i {
-  color: #000;
+  color: #fff;
   padding-right: 0.7em;
 }
 
@@ -44,7 +37,7 @@
 @media (min-width: 768px) {
   .header {
     font-size: 3.7em;
-    margin: 1em auto 0.5em;
+    margin: 0.5em auto 0.5em;
   }
 
   .container {
@@ -55,7 +48,7 @@
 @media (min-width: 1024px) {
   .header {
     font-size: 5.7em;
-    margin: 1.5em auto 1.6em;
+    margin: 1em auto 0.1em;
   }
 
   .signup__div {
@@ -63,10 +56,8 @@
     margin-left: 1em;
   }
 
-  .signup__div__btn > div {
-    background: rgb(255, 255, 255);
-    padding: 10px;
-    border-radius: 2px;
+  .signup__div__btn {
+    width: 100%;
   }
 
   .buttons__div {

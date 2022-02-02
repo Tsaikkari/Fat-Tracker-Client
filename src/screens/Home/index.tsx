@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import GoogleLogin from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
 import { AuthContext } from '../../context/auth'
@@ -46,9 +47,11 @@ const Home = () => {
       <h1 className={styles.header}>Fat Tracker</h1>
       <div className={styles.buttons__div}>
         <div>
-          {/* TODO: custom button? */}
           <GoogleLogin
             clientId='49262481225-ntb03gjepdqs7ocerrm96g8iclg6pbm0.apps.googleusercontent.com'
+            render={renderProps => (
+              <Button onClick={renderProps.onClick}>Login With Google</Button>
+            )}
             buttonText='Login with Google'
             onSuccess={responseSuccessGoogle}
             onFailure={responseFailureGoogle}
@@ -57,7 +60,7 @@ const Home = () => {
         </div>
         <b>or</b>
         <div className={styles.signup__div}>
-          <button
+          <Button
             className={styles.signup__div__btn}
             type='button'
             onClick={handleClick}
@@ -65,7 +68,7 @@ const Home = () => {
             <div>
               <i className='fas fa-user-plus'></i> Sign Up
             </div>
-          </button>
+          </Button>
         </div>
       </div>
     </div>
