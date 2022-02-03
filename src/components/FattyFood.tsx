@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
+
+import Message from './Message'
 
 type FattyFoodProps = {
   fattyFoodId: string
@@ -21,6 +23,7 @@ const FattyFood = ({
   days,
   dayIndex,
 }: FattyFoodProps) => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
   const deleteFattyFoods = async () => {
     const storedToken = localStorage.getItem('authToken')
 
@@ -36,8 +39,9 @@ const FattyFood = ({
         await axios.delete(`/api/fattyFoods/${fattyFoodId}`, config)
         refreshFattyFoods()
         refreshWeeks()
-      } catch (err) {
-        console.log(err)
+      } catch (err: any) {
+        const errorMsg = err.message
+        setErrorMessage(errorMsg)
       }
     }
   }
@@ -56,6 +60,7 @@ const FattyFood = ({
           </Button>
         </>
       )}
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </div>
   )
 }

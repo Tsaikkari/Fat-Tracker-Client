@@ -18,12 +18,20 @@
   border-radius: 4px;
   display: flex;
   flex-direction: column;
-  margin: 0em;
+  margin: 0 0 2em;
 }
 
 @media (min-width: 768px) {
   .container > header {
     justify-content: space-between;
+    border: none;
+    box-shadow: 0 2px 3px grey;
+  }
+
+  .container > header > button {
+    box-shadow: none;
+    background: #000;
+    color: white;
   }
 
   .container > div {

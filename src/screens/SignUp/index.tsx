@@ -5,7 +5,6 @@ import axios from 'axios'
 
 import FormContainer from '../../components/FormContainer'
 import Message from '../../components/Message'
-import { AuthContext } from '../../context/auth'
 
 const SignUp = () => {
   const [email, setEmail] = useState('')
@@ -13,8 +12,6 @@ const SignUp = () => {
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined)
   const [verifyEmailMsg, setVerifyEmailMsg] = useState('')
-
-  const { isLoading } = useContext(AuthContext)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

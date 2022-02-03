@@ -7,7 +7,6 @@ import { AuthContext } from '../../context/auth'
 import Message from '../../components/Message'
 import LifeStyle from '../../components/LifeStyle'
 import AddLifeStyle from '../../components/AddLifeStyle'
-import { WeekContext } from '../../context/week'
 
 const Profile = () => {
   const { isLoading, isLoggedIn, user } = useContext(AuthContext)
@@ -15,8 +14,6 @@ const Profile = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined)
-
-  const { weeks } = useContext(WeekContext)
 
   const token = localStorage.getItem('authToken')
 
@@ -77,10 +74,10 @@ const Profile = () => {
               taking on:
             </p>
             {/* } */}
+            {/* TODO: */}
             <LifeStyle />
             <AddLifeStyle />
           </section>
-          {/* TODO: */}
           <div className={styles.container}>
             <Form onSubmit={handleSubmit}>
               <h3>Update your information</h3>

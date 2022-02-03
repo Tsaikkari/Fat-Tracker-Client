@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
+
+import Message from './Message'
 
 type WeightProps = {
   currentWeight: number | string
@@ -17,6 +19,7 @@ const Weight = ({
   refreshWeights,
   weightId,
 }: WeightProps) => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
   const deleteWeights = async () => {
     const storedToken = localStorage.getItem('authToken')
 
@@ -32,8 +35,9 @@ const Weight = ({
         await axios.delete(`/api/weights/${weightId}`, config)
         refreshWeights()
         refreshWeeks()
-      } catch (err) {
-        console.log(err)
+      } catch (err: any) {
+        const errorMsg = err.message
+        setErrorMessage(errorMsg)
       }
     }
   }
@@ -46,6 +50,7 @@ const Weight = ({
       <Button variant='danger' className='btn-sm' onClick={deleteWeights}>
         <i className='fas fa-trash'></i>
       </Button>
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </div>
   )
 }

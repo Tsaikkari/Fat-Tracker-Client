@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import GoogleLogin from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
@@ -7,8 +7,11 @@ import axios from 'axios'
 import { AuthContext } from '../../context/auth'
 import fatTracker from '../../images/fat-tracker.jpg'
 import styles from './Home.module.css'
+import Message from '../../components/Message'
 
 const Home = () => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
   const { loginUser } = useContext(AuthContext)
 
   const navigate = useNavigate()
@@ -23,12 +26,13 @@ const Home = () => {
       url: 'http://localhost:5000/api/auth/login/google',
       data: { idToken: response.tokenId },
     }).then((response) => {
+      console.log(response.data, 'response.data')
       loginUser(response.data.payload.token)
     })
   }
 
   const responseFailureGoogle = (res: any) => {
-    console.log('error')
+    setErrorMessage(res.data.message)
   }
   return (
     <div
@@ -49,7 +53,7 @@ const Home = () => {
         <div>
           <GoogleLogin
             clientId='49262481225-ntb03gjepdqs7ocerrm96g8iclg6pbm0.apps.googleusercontent.com'
-            render={renderProps => (
+            render={(renderProps) => (
               <Button onClick={renderProps.onClick}>Login With Google</Button>
             )}
             buttonText='Login with Google'
@@ -71,6 +75,7 @@ const Home = () => {
           </Button>
         </div>
       </div>
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </div>
   )
 }

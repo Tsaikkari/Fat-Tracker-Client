@@ -7,12 +7,13 @@ import Message from './Message'
 type AddWeekProps = {
   refreshWeeks: () => void
   addWeek: boolean
-  setAddWeek: any
+  setAddWeek: (arg0: boolean) => void
 }
 
 const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
   const storedToken = localStorage.getItem('authToken')
 
@@ -36,8 +37,9 @@ const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
       setDate('')
       refreshWeeks()
       setAddWeek(!addWeek)
-    } catch (err) {
-      console.log(err)
+    } catch (err: any) {
+      const errorMsg = err.message
+      setErrorMessage(errorMsg)
     }
   }
 
@@ -58,6 +60,7 @@ const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
         </Button>
       </Form>
       {message && <Message variant='danger'>{message}</Message>}
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </>
   )
 }

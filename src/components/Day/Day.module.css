@@ -9,7 +9,7 @@
   font-weight: 900;
 }
 
-.container > div > div {
+.container > div {
   background: #fff;
   border-radius: 4px;
   box-shadow: 0 2px 5px #ccc;

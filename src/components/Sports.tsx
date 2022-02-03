@@ -11,33 +11,32 @@ type SportsProps = {
   dayIndex: number
 }
 
-const Sports = ({ 
+const Sports = ({
   sports,
   days,
   dayIndex,
   weekId,
   refreshWeeks,
-  refreshSports
+  refreshSports,
 }: SportsProps) => {
-  const filteredSports = sports.filter(
-    (sport: any) => sport.week === weekId
-  )
+  const filteredSports = sports.filter((sport: any) => sport.week === weekId)
   return (
     <>
-      {filteredSports && filteredSports.map((s: any) => (
-        <div key={s._id}>
-          <Sport 
-            sportId={s._id}
-            sport={s.sport}
-            duration={s.duration}
-            date={s.date}
-            days={days}
-            dayIndex={dayIndex}
-            refreshWeeks={refreshWeeks}
-            refreshSports={refreshSports}
-          />
-        </div>
-      ))}
+      {filteredSports &&
+        filteredSports.map((s: any) => (
+          <div key={s._id}>
+            <Sport
+              sportId={s._id}
+              sport={s.sport}
+              duration={s.duration}
+              date={s.date}
+              days={days}
+              dayIndex={dayIndex}
+              refreshWeeks={refreshWeeks}
+              refreshSports={refreshSports}
+            />
+          </div>
+        ))}
     </>
   )
 }

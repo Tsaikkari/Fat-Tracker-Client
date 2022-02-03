@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
+
+import Message from './Message'
 
 type EditWeightsProps = {
   refreshWeights: () => void
   editWeight: boolean
-  setEditWeight: any
+  setEditWeight: (arg0: boolean) => void
   achievedWeight: number | string
   setAchievedWeight: any
   weekId: string
@@ -19,8 +21,9 @@ const EditWeights = ({
   achievedWeight,
   setAchievedWeight,
   weekId,
-  filteredWeights
+  filteredWeights,
 }: EditWeightsProps) => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
   const storedToken = localStorage.getItem('authToken')
 
   const config = {
@@ -47,8 +50,9 @@ const EditWeights = ({
       refreshWeights()
       setAchievedWeight('')
       setEditWeight(!editWeight)
-    } catch (err) {
-      console.log(err)
+    } catch (err: any) {
+      const errorMsg = err.message
+      setErrorMessage(errorMsg)
     }
   }
   return (
@@ -64,6 +68,7 @@ const EditWeights = ({
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </Form>
   )
 }

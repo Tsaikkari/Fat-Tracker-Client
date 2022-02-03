@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import FattyFood from './FattyFood'
+import { AuthContext } from '../context/auth'
 
 type FattyFoodsProps = {
   fattyFoods: any[]
@@ -17,11 +18,10 @@ const FattyFoods = ({
   fattyFoods,
   weekId,
   refreshWeeks,
-  refreshFattyFoods
+  refreshFattyFoods,
 }: FattyFoodsProps) => {
-  const filteredFattyFoods = fattyFoods.filter(
-    (ff: any) => ff.week === weekId
-  )
+  const filteredFattyFoods = fattyFoods.filter((ff: any) => ff.week === weekId)
+
   return (
     <div>
       {filteredFattyFoods &&

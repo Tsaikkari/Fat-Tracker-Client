@@ -48,7 +48,7 @@ function WeekProviderWrapper(props: ContextProps) {
       value={{
         weeks,
         getWeeks,
-        errorMessage,
+        errorMessage
       }}
     >
       {props.children}

@@ -1,10 +1,13 @@
 import React from 'react'
 
 import LineChart from '../../components/LineChart'
+import styles from './Charts.module.css'
 
 const Charts = () => {
   return (
-    <LineChart />
+    <div className={styles.container}>
+      <LineChart />
+    </div>
   )
 }
 

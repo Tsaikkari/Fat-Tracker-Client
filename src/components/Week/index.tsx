@@ -129,17 +129,15 @@ const Week = ({
           Weight at the End of the Week
         </Button>
         {editWeight && (
-          <>
-            <EditWeights
-              achievedWeight={achievedWeight}
-              setAchievedWeight={setAchievedWeight}
-              filteredWeights={filteredWeights}
-              refreshWeights={getWeights}
-              editWeight={editWeight}
-              setEditWeight={setEditWeight}
-              weekId={weekId}
-            />
-          </>
+          <EditWeights
+            achievedWeight={achievedWeight}
+            setAchievedWeight={setAchievedWeight}
+            filteredWeights={filteredWeights}
+            refreshWeights={getWeights}
+            editWeight={editWeight}
+            setEditWeight={setEditWeight}
+            weekId={weekId}
+          />
         )}
       </div>
       {/* TODO: info */}

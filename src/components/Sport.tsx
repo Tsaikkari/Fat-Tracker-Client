@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
+
+import Message from './Message'
 
 type SportProps = {
   sportId: string
@@ -22,6 +24,8 @@ const Sport = ({
   dayIndex,
   days,
 }: SportProps) => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
   const deleteSports = async () => {
     const storedToken = localStorage.getItem('authToken')
 
@@ -37,8 +41,9 @@ const Sport = ({
         await axios.delete(`/api/sports/${sportId}`, config)
         refreshSports()
         refreshWeeks()
-      } catch (err) {
-        console.log(err)
+      } catch (err: any) {
+        const errorMsg = err.message
+        setErrorMessage(errorMsg)
       }
     }
   }
@@ -49,15 +54,12 @@ const Sport = ({
         <div className='sport-container'>
           <p>{sport}</p>
           <p>{duration} min</p>
-          <Button 
-            variant='danger' 
-            className='btn-sm' 
-            onClick={deleteSports}
-          >
+          <Button variant='danger' className='btn-sm' onClick={deleteSports}>
             <i className='fas fa-trash'></i>
           </Button>
         </div>
       )}
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </>
   )
 }

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
-import { AuthContext } from '../context/auth'
 import Message from './Message'
 
 type AddFattyFoodsProps = {
@@ -28,6 +27,8 @@ const AddFattyFoods = ({
   setChosenDate,
   day,
 }: AddFattyFoodsProps) => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
   useEffect(() => {
     if (day) {
       setChosenDate(day)
@@ -53,8 +54,9 @@ const AddFattyFoods = ({
       setName('')
       setChosenDate('')
       setAddFattyFoods(!addFattyFoods)
-    } catch (err) {
-      console.log(err)
+    } catch (err: any) {
+      const errorMsg = err.message
+      setErrorMessage(errorMsg)
     }
   }
 
@@ -72,6 +74,7 @@ const AddFattyFoods = ({
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </Form>
   )
 }

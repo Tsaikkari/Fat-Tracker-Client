@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
 
 import FormContainer from '../../components/FormContainer'
+import Message from '../../components/Message'
 
 const VerifyEmail = () => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
   const { token } = useParams()
   const navigate = useNavigate()
 
@@ -17,8 +19,9 @@ const VerifyEmail = () => {
       .then((res) => {
         navigate('/login')
       })
-      .catch((err) => {
-        console.log(err)
+      .catch((err: any) => {
+        const errorMsg = err.message
+        setErrorMessage(errorMsg)
       })
   }
 
@@ -30,6 +33,7 @@ const VerifyEmail = () => {
           Verify Email
         </Button>
       </Form>
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </FormContainer>
   )
 }

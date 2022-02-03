@@ -46,7 +46,6 @@ const Day = ({
     setAddSports(!addSports)
   }
 
-  // TODO: weight and actual date update components
   return (
     <main>
       <DayHeader
@@ -82,8 +81,8 @@ const Day = ({
         />
       )}
       <div className={styles.container}>
+        <p className='p-2 mb-0'>{day}</p>
         <div>
-          <p className='p-2 mb-0'>{day}</p>
           <FattyFoods
             fattyFoods={fattyFoods}
             dayIndex={dayIndex}

@@ -13,13 +13,14 @@ const Weeks = () => {
   const [fattyFoods, setFattyFoods] = useState<[]>([])
   const [sports, setSports] = useState<[]>([])
   const [addWeek, setAddWeek] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(undefined)
 
   const handleShowAddWeek = () => {
     setAddWeek(!addWeek)
   }
 
   const { isLoading } = useContext(AuthContext)
-  const { weeks, getWeeks, errorMessage } = useContext(WeekContext)
+  const { weeks, getWeeks } = useContext(WeekContext)
 
   const storedToken = localStorage.getItem('authToken')
 
@@ -31,8 +32,9 @@ const Weeks = () => {
       .then((response) => {
         setFattyFoods(response.data.payload)
       })
-      .catch((err) => {
-        console.log(err)
+      .catch((err: any) => {
+        const errorMsg = err.message
+        setErrorMessage(errorMsg)
       })
   }
 

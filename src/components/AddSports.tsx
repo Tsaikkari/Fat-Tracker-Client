@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import axios from 'axios'
+
+import Message from './Message'
 
 type AddSportsProps = {
   refreshSports: () => void
@@ -29,6 +31,8 @@ const AddSports = ({
   setDuration,
   day,
 }: AddSportsProps) => {
+  const [errorMessage, setErrorMessage] = useState(undefined)
+
   useEffect(() => {
     if (day) {
       setDate(day)
@@ -55,8 +59,9 @@ const AddSports = ({
       setDate('')
       setDuration('')
       setAddSports(!addSports)
-    } catch (err) {
-      console.log(err)
+    } catch (err: any) {
+      const errorMsg = err.message
+      setErrorMessage(errorMsg)
     }
   }
 
@@ -83,6 +88,7 @@ const AddSports = ({
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
+      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </Form>
   )
 }
