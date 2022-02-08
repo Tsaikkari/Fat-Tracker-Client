@@ -35,6 +35,7 @@ const Week = ({
   const [goalWeight, setGoalWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
   const [editWeight, setEditWeight] = useState(false)
+  const [message, setMessage] = useState('')
 
   const { isLoading } = useContext(AuthContext)
   const { weights, getWeights, errorMessage } = useContext(WeightContext)
@@ -76,9 +77,14 @@ const Week = ({
 
   const handleShowEditWeight = () => {
     setEditWeight(!editWeight)
+    weights.filter((weight: any) => weight.currentWeight === 0) &&
+      setMessage('Please add your previous weight and goal weight first')
+      setTimeout(() => {
+        setMessage('')
+      }, 8000)
   }
 
-  const filteredWeights = weights.filter(
+  const filteredWeights = weights && weights.filter(
     (weight: any) => weight.week === weekId
   )
 
@@ -125,6 +131,7 @@ const Week = ({
             />
           </div>
         ))}
+        {message && <Message variant='danger'>{message}</Message>}
         <Button variant='warning' onClick={handleShowEditWeight}>
           Weight at the End of the Week
         </Button>

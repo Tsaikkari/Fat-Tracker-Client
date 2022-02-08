@@ -26,11 +26,12 @@ const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
     if (!date) {
       setMessage('Missing Starting Date')
       setTimeout(() => {
         setMessage('')
-      }, 2000)
+      }, 3000)
     }
     try {
       await axios.post('/api/weeks', { date }, config)
