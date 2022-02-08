@@ -1,0 +1,70 @@
+.container {
+  margin: 0.6em 0.1em;
+  text-align: justify;
+  font-size: 4.3vw;
+}
+
+.container span:nth-child(1),
+.container span:nth-child(2) {
+  color: red;
+}
+
+.container span:nth-child(3) {
+  font-weight: 800;
+}
+
+.container span:nth-child(4) {
+  text-decoration: underline;
+}
+
+.container p b {
+  color: #404040;
+  font-weight: 800;
+}
+
+@media (min-width: 425px) {
+  .container {
+    text-align: justify;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    text-align: justify;
+    font-size: 1.2em;
+    padding: 1em 1.5em;
+  }
+}
+
+@media (min-width: 900px) {
+  .container {
+    padding: 1.2em 2.5em;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container {
+    font-size: 1em;
+    padding: 1.5em 7em;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    padding: 2em 9em;
+  }
+
+  .container > h4 {
+    font-size: 1.6em;
+    font-weight: 600;
+    padding-bottom: 0.7em;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    font-size: 1.2em;
+    padding: 0.1em 16.4em;
+  }
+}

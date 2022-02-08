@@ -6,6 +6,7 @@ import AddWeek from '../../components/AddWeek'
 import WeekHeader from '../../components/WeekHeader'
 import Week from '../../components/Week'
 import Message from '../../components/Message'
+import Info from '../../components/Info'
 import { AuthContext } from '../../context/auth'
 import { WeekContext } from '../../context/week'
 
@@ -72,23 +73,7 @@ const Weeks = () => {
         />
       )}
       {weeks.length === 0 && (
-        <div>
-          <h4 className='my-3'>Creating Your Weekly Plans</h4>
-          <p>The best way to loose weight is to eat less fatty foods and 
-            exercise more. Adding the day(s) into your plan when you are going to / when you have eaten
-            fatty foods will help you reduce the habit. Adding the day(s) you are going to exercise 
-            during the week will help you to increase that habit and fasten the weight loss as well as 
-            make your body fit.
-          </p>
-          <p>Start by clicking on the <span>New Week</span> button to add your week plan. Add your current
-            and goal weight for the week by clicking the <span>Weight</span> button. It's wise to set a moderate goal; 
-            normally, people can loose around <span>0.5 - 1 kg in a week</span>.
-          </p>
-          <p>Add your fatty foods and exercise days into the plan. At the end of the week, add your new 
-            weight by clicking the yellow button. 
-          </p>
-          <p>You can monitor your progress at the <b>Chart</b> page.</p>
-        </div>
+        <Info />
       )}
       {weeks &&
         weeks.map((week: any) => (

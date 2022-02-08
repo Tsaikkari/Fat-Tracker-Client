@@ -41,7 +41,7 @@ a {
   background-color: red;
   color: white;
   width: 100%;
-  margin: 1rem 0;
+  margin: 1rem auto;
 }
 
 /*week button*/
@@ -57,6 +57,10 @@ a {
   margin: 1em 1em 0;
 }
 
+.fa-weight {
+  font-size: 1.3em;
+}
+
 .fa-pizza-slice {
   color: orange;
   font-size: 1.5em;
@@ -65,6 +69,14 @@ a {
 .fa-running {
   color: #1f805e;
   font-size: 1.6em;
+}
+
+.fa-cookie {
+  color: orange;
+}
+
+.fa-chart-pie {
+  color: #1f805e;
 }
 
 /*weight*/

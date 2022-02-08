@@ -47,7 +47,7 @@ const Week = ({
       'Wednesday',
       'Thursday',
       'Friday',
-      'Saturday'
+      'Saturday',
     ]
     const result = []
     const date = new Date(startDate)
@@ -87,7 +87,7 @@ const Week = ({
       <header>
         <p className='m-2'>{startDate}</p>
         <Button variant='light' onClick={handleShowAddWeights}>
-          Weight
+          <i className='fas fa-weight'></i>
         </Button>
 
         <Weights

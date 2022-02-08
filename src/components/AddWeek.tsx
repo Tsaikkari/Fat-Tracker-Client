@@ -44,7 +44,7 @@ const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
   }
 
   return (
-    <>
+    <div>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='date'>
           <Form.Label>Starting Date</Form.Label>
@@ -54,13 +54,13 @@ const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
             onChange={(e) => setDate(e.target.value)}
           ></Form.Control>
         </Form.Group>
-        <Button type='submit' variant='danger' className='save-btn mb-3 mt-3'>
+        <Button type='submit' variant='danger' className='save-btn create-week-btn mb-3 mt-3'>
           Create Your Week
         </Button>
       </Form>
       {message && <Message variant='danger'>{message}</Message>}
       {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-    </>
+    </div>
   )
 }
 

@@ -7,6 +7,7 @@
 
 .container > p {
   font-weight: 900;
+  font-size: 16px;
 }
 
 .container > div {
@@ -19,12 +20,12 @@
 
 @media (min-width: 768px) {
   main {
-    width: 47.58vw;
+    width: 45.7vw;
   }
 }
 
 @media (min-width: 1024px) {
   main {
-    width: 32.47vw;
+    width: 31vw;
   }
 }

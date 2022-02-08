@@ -34,17 +34,18 @@
 
   .container > header > button {
     box-shadow: none;
-    background: #000;
-    color: white;
+    color: black;
+    font-size: 1.2em;
   }
 
   .container > div {
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .container > div > button {
     height: 50%;
-    margin: 0 0.3em;
+    margin: 5.4em 0.3em;
   }
 }
