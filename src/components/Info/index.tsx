@@ -8,8 +8,8 @@ const Info = () => {
       <h4 className='my-3'>Creating Your Weekly Plans</h4>
       <p>
         The best way to loose weight is to eat less fatty foods and exercise
-        more. Adding the day(s) into your plan when you are going to / when you
-        have eaten fatty foods will help you reduce the habit. Adding the day(s)
+        more. Setting into your plan when you are going to eat fatty foods / when you
+        have eaten fatty foods will help you reduce the habit. Adding the days
         you are going to exercise during the week will help you to increase that
         habit and fasten the weight loss as well as make your body fit.
       </p>
