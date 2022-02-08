@@ -45,7 +45,6 @@ const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
 
   return (
     <>
-      {/* TODO: description */}
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId='date'>
           <Form.Label>Starting Date</Form.Label>

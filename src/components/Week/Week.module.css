@@ -21,6 +21,10 @@
   margin: 0 0 2em;
 }
 
+.container > div > button {
+  margin-bottom: 0.7em;
+}
+
 @media (min-width: 768px) {
   .container > header {
     justify-content: space-between;

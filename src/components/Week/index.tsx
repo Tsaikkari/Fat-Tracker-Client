@@ -140,7 +140,6 @@ const Week = ({
           />
         )}
       </div>
-      {/* TODO: info */}
       {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
       {isLoading && <h3>Loading ...</h3>}
     </div>
