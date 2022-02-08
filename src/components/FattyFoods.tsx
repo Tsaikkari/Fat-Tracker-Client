@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import FattyFood from './FattyFood'
-import { AuthContext } from '../context/auth'
 
 type FattyFoodsProps = {
   fattyFoods: any[]

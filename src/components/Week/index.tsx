@@ -41,13 +41,13 @@ const Week = ({
 
   const getWeekDays = () => {
     const weekdays = [
+      'Sunday',
       'Monday',
       'Tuesday',
       'Wednesday',
       'Thursday',
       'Friday',
-      'Saturday',
-      'Sunday',
+      'Saturday'
     ]
     const result = []
     const date = new Date(startDate)
