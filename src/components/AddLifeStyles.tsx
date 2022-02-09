@@ -1,39 +1,25 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Message from './Message'
-import { AuthContext } from '../context/auth'
+import { AppState } from '../redux/types'
 
-type LifeStyleProps = {
-  lifeStyles: string
-  setLifeStyles: any
-}
+const AddLifeStyles = () => {
+  const [lifeStyles, setLifeStyles] = useState('')
 
-const AddLifeStyles = ({ lifeStyles, setLifeStyles }: LifeStyleProps) => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
-
-  const { user } = useContext(AuthContext)
-
-  const storedToken = localStorage.getItem('authToken')
-
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
-  }
+  const { error, loading, isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    try {
-      await axios.put( `/api/users/${user._id}`, { lifeStyles }, config)
-      setLifeStyles('')
-    } catch (err: any) {
-      const errorMsg = err.message
-      setErrorMessage(errorMsg)
-    }
+    // try {
+    //   await axios.put( `/api/users/${user._id}`, { lifeStyles }, config)
+    //   setLifeStyles('')
+    // } catch (err: any) {
+    //   const errorMsg = err.message
+    //   setErrorMessage(errorMsg)
+    // }
   }
   return (
     <Form onSubmit={handleSubmit}>
@@ -48,7 +34,7 @@ const AddLifeStyles = ({ lifeStyles, setLifeStyles }: LifeStyleProps) => {
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
     </Form>
   )
 }

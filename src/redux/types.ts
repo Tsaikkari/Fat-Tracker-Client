@@ -1,3 +1,13 @@
-export const GET_USER_REQUEST = 'GET_USER_REQUEST'
-export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
-export const GET_USER_FAIL = 'GET_USER_FAIL'
+import { User } from '../redux/actions/types'
+
+export type AppState = {
+  auth: {
+    userInfo: User
+    loading: boolean
+    isLoggedIn: boolean
+    error: any
+  }
+  user: {
+    
+  }
+}

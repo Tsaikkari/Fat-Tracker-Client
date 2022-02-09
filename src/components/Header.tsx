@@ -1,27 +1,28 @@
 import React, { useEffect } from 'react'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 import { useContext } from 'react'
 import { AuthContext } from '../context/auth'
-import { WeekContext } from '../context/week'
-import { WeightContext } from '../context/weight'
+import { AppState } from '../redux/types'
 
 const Header = () => {
-  const { isLoggedIn, logoutUser, user } = useContext(AuthContext)
-  const { weeks, getWeeks } = useContext(WeekContext)
-  const { weights, getWeights } = useContext(WeightContext)
+  const { isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
 
-  useEffect(() => {
-    if (isLoggedIn && weeks.length === 0) {
-      getWeeks()
-    }
-  }, [weeks, getWeeks, isLoggedIn])
+  // TODO: logout, weeks, weights
+  const { logoutUser } = useContext(AuthContext)
 
-  useEffect(() => {
-    if (isLoggedIn && weights.length === 0) {
-      getWeights()
-    }
-  }, [weights, getWeights, isLoggedIn])
+  // useEffect(() => {
+  //   if (isLoggedIn && weeks.length === 0) {
+  //     getWeeks()
+  //   }
+  // }, [weeks, getWeeks, isLoggedIn])
+
+  // useEffect(() => {
+  //   if (isLoggedIn && weights.length === 0) {
+  //     getWeights()
+  //   }
+  // }, [weights, getWeights, isLoggedIn])
 
   return (
     <Navbar bg='light' expand='lg' collapseOnSelect className='navbar'>
@@ -36,7 +37,7 @@ const Header = () => {
               <LinkContainer to='/charts'>
                 <Nav.Link>Chart</Nav.Link>
               </LinkContainer>
-              <NavDropdown title={user.name.split(' ')[0]} id='name'>
+              <NavDropdown title={userInfo.name.split(' ')[0]} id='name'>
                 <LinkContainer to='/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
                 </LinkContainer>

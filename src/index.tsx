@@ -1,24 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import axios from 'axios'
 
-import { AuthProviderWrapper } from './context/auth'
-import { WeekProviderWrapper } from './context/week'
-import { WeightProviderWrapper } from './context/weight'
-import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/index.css'
 
-//TODO: fix this s
+import App from './App'
+import makeStore from './redux/store'
+import LocalStorage from './local-storage'
+axios.defaults.baseURL = 'http://localhost:5000/api'
+
+const store = makeStore()
+
+axios.interceptors.request.use((config: any) => {
+  const token = LocalStorage.getToken()
+  if (token) {
+    config.headers['Authorization'] = `Bearer ${token}`
+  }
+  return config
+})
+
 ReactDOM.render(
   <Router>
-    <AuthProviderWrapper>
-      <WeekProviderWrapper>
-        <WeightProviderWrapper>
-          <App />
-        </WeightProviderWrapper>
-      </WeekProviderWrapper>
-    </AuthProviderWrapper>
+    <Provider store={store}>
+      <App />
+    </Provider>
   </Router>,
   document.getElementById('root')
 )

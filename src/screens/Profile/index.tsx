@@ -1,73 +1,94 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './Profile.module.css'
-import { AuthContext } from '../../context/auth'
 import Message from '../../components/Message'
 import LifeStyles from '../../components/LifeStyles'
 import AddLifeStyles from '../../components/AddLifeStyles'
+import { AppState } from '../../redux/types'
+import { updateUserRequest } from '../../redux/actions/user'
+import { getUserProfileRequest } from '../../redux/actions'
 
 const Profile = () => {
-  const { isLoading, isLoggedIn, user } = useContext(AuthContext)
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [lifeStyles, setLifeStyles] = useState('')
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    lifeStyles: ''
+  })
+  const [credentials, setCredentials] = useState({
+    email: '',
+    password: ''
+  })
 
-  const token = localStorage.getItem('authToken')
+  const { error, loading, isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
+  
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (user && user.name) {
-      axios
-        .get(`/api/users/${user._id}`, {
-          headers: { Authorization: `Bearer ${token}` },
+    if (!isLoggedIn) {
+      navigate('/login')
+    } else {
+      if (!userInfo.name && userInfo._id !== '') {
+        dispatch(getUserProfileRequest(userInfo._id))
+      } else {
+        setFormData((prevValue: any) => {
+          return {
+            ...prevValue,
+            name: userInfo.name,
+            email: userInfo.email,
+            lifeStyles: userInfo.lifeStyles,
+          }
         })
-        .then((response) => {
-          setName(response.data.payload.name)
-          setEmail(response.data.payload.email)
-          //setLifeStyles(response.data.lifeStyles)
-        })
-        .catch((err) => {
-          const errorMessage = err.message
-          setErrorMessage(errorMessage)
-        })
+      }
     }
-  }, [token, user])
+  }, [dispatch, userInfo.name, userInfo.email, userInfo.lifeStyles, userInfo._id, isLoggedIn, navigate])
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
+
+    setFormData((prevValue: any) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      }
+    })
+  }
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target 
+
+    setCredentials((prevValue: any) => {
+      return {
+        ...prevValue,
+        [name]: value
+      }
+    })
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const updateUser = { email, name }
-
-    axios
-      .put(`/api/users/${user._id}`, updateUser, config)
-      .then((res) => {
-        console.log(res.data.payload)
-      })
-      .catch((err) => {
-        const errorMsg = err.response.data.message
-        setErrorMessage(errorMsg)
-      })
+    dispatch(updateUserRequest({
+      email: formData.email,
+      name: formData.name,
+      lifeStyles: formData.lifeStyles
+    }))
   }
 
   //TODO:
   const handleChangePassword = () => {
-    console.log('click')
+    dispatch({
+      email: credentials.email,
+      password: credentials.password
+    })
   }
 
   return (
     <>
       {isLoggedIn && (
         <>
-          <h1 className='text-center m-4'>Hello {user.name} 🧡</h1>
+          <h1 className='text-center m-4'>Hello {userInfo.name} 🧡</h1>
           <section>
             {/* {weeks.length === 0 &&  */}
             <p>
@@ -75,12 +96,9 @@ const Profile = () => {
               you might want to specify the life style changes that you are
               taking on:
             </p>
-            {/* } */}
-            <LifeStyles lifeStyles={lifeStyles} />
-            <AddLifeStyles 
-              lifeStyles={lifeStyles}
-              setLifeStyles={setLifeStyles}
-            />
+            {/* }  */}
+            <LifeStyles lifeStyles={userInfo.lifeStyles} />
+            <AddLifeStyles />
           </section>
           <div className={styles.container}>
             <Form onSubmit={handleSubmit}>
@@ -90,8 +108,9 @@ const Profile = () => {
                 <Form.Control
                   type='text'
                   placeholder='Enter Name'
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  value={formData.name}
+                  name='name'
+                  onChange={handleChange}
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId='email'>
@@ -99,17 +118,18 @@ const Profile = () => {
                 <Form.Control
                   type='email'
                   placeholder='Enter Email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name='email'
+                  value={formData.email}
+                  onChange={handleChange}
                 ></Form.Control>
               </Form.Group>
               <Button type='submit' className='save-btn' variant=''>
                 Update
               </Button>
-              {errorMessage && (
-                <Message variant='danger'>{errorMessage}</Message>
+              {error && (
+                <Message variant='danger'>{error.message}</Message>
               )}
-              {isLoading && <h3>Loading ...</h3>}
+              {loading && <h3>Loading ...</h3>}
             </Form>
 
             <Form onSubmit={handleChangePassword}>
@@ -119,8 +139,9 @@ const Profile = () => {
                 <Form.Control
                   type='email'
                   placeholder='Enter Email'
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name='email'
+                  value={credentials.email}
+                  onChange={handlePassword}
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId='Name'>
@@ -128,17 +149,17 @@ const Profile = () => {
                 <Form.Control
                   type='password'
                   placeholder='Enter New Password'
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={credentials.password}
+                  onChange={handlePassword}
                 ></Form.Control>
               </Form.Group>
               <Button type='submit' className='save-btn' variant=''>
                 Change Password
               </Button>
-              {errorMessage && (
-                <Message variant='danger'>{errorMessage}</Message>
+              {error && (
+                <Message variant='danger'>{error.message}</Message>
               )}
-              {isLoading && <h3>Loading ...</h3>}
+              {loading && <h3>Loading ...</h3>}
             </Form>
           </div>
         </>

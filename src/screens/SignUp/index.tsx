@@ -1,34 +1,28 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import axios from 'axios'
 
 import FormContainer from '../../components/FormContainer'
 import Message from '../../components/Message'
+import { signupUserRequest } from '../../redux/actions/auth'
+import { AppState } from '../../redux/types'
 
 const SignUp = () => {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState(undefined)
   const [verifyEmailMsg, setVerifyEmailMsg] = useState('')
+
+  const error = useSelector((state: AppState) => state.auth.error)
+
+  const dispatch = useDispatch()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const requestBody = { email, password, name }
 
-    axios
-      .post('/api/auth/signup', requestBody)
-      .then((response) => {
-        setVerifyEmailMsg(`A link to activate your account has been sent to ${email}. Check your spam folder.`)
-        setEmail('')
-        setName('')
-        setPassword('')
-      })
-      .catch((err) => {
-        const errorDescrition = err.message
-        setErrorMessage(errorDescrition)
-      })
+    dispatch(signupUserRequest({ name, email, password }))
+    setVerifyEmailMsg(`A link to activate your account has been sent to ${email}. Check your spam folder.`)
   }
 
   return (
@@ -66,7 +60,7 @@ const SignUp = () => {
           Sign Up
         </Button>
       </Form>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
       {verifyEmailMsg && <Message variant='success'>{verifyEmailMsg}</Message>}
       <Row>
         <Col>

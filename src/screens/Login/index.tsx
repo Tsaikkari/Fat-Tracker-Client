@@ -1,38 +1,29 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Form, Row, Col, Button } from 'react-bootstrap'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
-import { AuthContext } from '../../context/auth'
+import { AppState } from '../../redux/types'
+import { loginUserRequest } from '../../redux/actions'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState(undefined)
 
+  const { error, loading, isLoggedIn } = useSelector((state: AppState) => state.auth)
+
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const { loginUser, isLoading } = useContext(AuthContext)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    const credentials = { email, password }
-
-    axios
-      .post('/api/auth/login', credentials)
-      .then((res) => {
-        const token = res.data.payload.token
-        loginUser(token)
-        setEmail('')
-        setPassword('')
-        navigate('/profile')
-      })
-      .catch((err) => {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
-      })
+    dispatch(loginUserRequest({ email, password }))
+    setEmail('')
+    setPassword('')
+    navigate('/profile')
+    console.log(isLoggedIn, 'ISLI')
   }
 
   return (
@@ -61,8 +52,8 @@ const Login = () => {
           Login
         </Button>
       </Form>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-      {isLoading && <h3>Loading ...</h3>}
+      {error && <Message variant='danger'>{error.message}</Message>}
+      {loading && <h3>Loading ...</h3>}
       <Row>
         <Col>
           Don't have an account? <Link to={'/signup'}>Sign Up</Link>

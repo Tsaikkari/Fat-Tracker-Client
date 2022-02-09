@@ -9,8 +9,11 @@ import Profile from './screens/Profile'
 import Weeks from './screens/Weeks'
 import VerifyEmail from './screens/VerifyEmail'
 import Charts from './screens/Charts'
+import useLogin from './hooks/useLogin'
 
 const App = () => {
+  //TODO: persistant login
+  useLogin()
   return (
     <>
       <Header />
