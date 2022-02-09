@@ -5,14 +5,15 @@ import axios from 'axios'
 import styles from './Profile.module.css'
 import { AuthContext } from '../../context/auth'
 import Message from '../../components/Message'
-import LifeStyle from '../../components/LifeStyle'
-import AddLifeStyle from '../../components/AddLifeStyle'
+import LifeStyles from '../../components/LifeStyles'
+import AddLifeStyles from '../../components/AddLifeStyles'
 
 const Profile = () => {
   const { isLoading, isLoggedIn, user } = useContext(AuthContext)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [lifeStyles, setLifeStyles] = useState('')
   const [errorMessage, setErrorMessage] = useState(undefined)
 
   const token = localStorage.getItem('authToken')
@@ -26,6 +27,7 @@ const Profile = () => {
         .then((response) => {
           setName(response.data.payload.name)
           setEmail(response.data.payload.email)
+          //setLifeStyles(response.data.lifeStyles)
         })
         .catch((err) => {
           const errorMessage = err.message
@@ -74,9 +76,11 @@ const Profile = () => {
               taking on:
             </p>
             {/* } */}
-            {/* TODO: */}
-            <LifeStyle />
-            <AddLifeStyle />
+            <LifeStyles lifeStyles={lifeStyles} />
+            <AddLifeStyles 
+              lifeStyles={lifeStyles}
+              setLifeStyles={setLifeStyles}
+            />
           </section>
           <div className={styles.container}>
             <Form onSubmit={handleSubmit}>

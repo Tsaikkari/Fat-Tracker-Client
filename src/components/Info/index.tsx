@@ -17,9 +17,10 @@ const Info = () => {
         <span>
           <i className='fas fa-play-circle'></i>
         </span>{' '}
-        Start by clicking on the <span>New Week</span> button to add your week
-        plan. Add your current and goal weight for the week by clicking the{' '}
-        <span><i className='fas fa-weight'></i></span> button. It's wise to set a moderate goal; normally,
+        Get started by clicking on the <span>New Week</span> button to add your week
+        plan. Add your current and goal weight for the week by clicking {' '}
+        <span><i className='fas fa-weight'></i></span> on that page. 
+        It's wise to set a moderate goal; normally,
         people can loose around <span>0.5 - 1 kg in a week</span>.
       </p>
       <p>

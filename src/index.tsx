@@ -9,6 +9,7 @@ import App from './App'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/index.css'
 
+//TODO: fix this s
 ReactDOM.render(
   <Router>
     <AuthProviderWrapper>
