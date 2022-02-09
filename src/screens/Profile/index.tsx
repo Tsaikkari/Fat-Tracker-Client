@@ -15,15 +15,17 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    lifeStyles: ''
+    lifeStyles: '',
   })
   const [credentials, setCredentials] = useState({
     email: '',
-    password: ''
+    password: '',
   })
 
-  const { error, loading, isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
-  
+  const { error, loading, isLoggedIn, userInfo } = useSelector(
+    (state: AppState) => state.auth
+  )
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -44,7 +46,15 @@ const Profile = () => {
         })
       }
     }
-  }, [dispatch, userInfo.name, userInfo.email, userInfo.lifeStyles, userInfo._id, isLoggedIn, navigate])
+  }, [
+    dispatch,
+    userInfo.name,
+    userInfo.email,
+    userInfo.lifeStyles,
+    userInfo._id,
+    isLoggedIn,
+    navigate,
+  ])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
@@ -58,29 +68,31 @@ const Profile = () => {
   }
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target 
+    const { value, name } = e.target
 
     setCredentials((prevValue: any) => {
       return {
         ...prevValue,
-        [name]: value
+        [name]: value,
       }
     })
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    dispatch(updateUserRequest({
-      email: formData.email,
-      name: formData.name,
-      lifeStyles: formData.lifeStyles
-    }))
+    dispatch(
+      updateUserRequest({
+        email: formData.email,
+        name: formData.name,
+        lifeStyles: formData.lifeStyles,
+      })
+    )
   }
 
   //TODO:
   const handleChangePassword = () => {
     dispatch({
       email: credentials.email,
-      password: credentials.password
+      password: credentials.password,
     })
   }
 
@@ -126,9 +138,7 @@ const Profile = () => {
               <Button type='submit' className='save-btn' variant=''>
                 Update
               </Button>
-              {error && (
-                <Message variant='danger'>{error.message}</Message>
-              )}
+              {error && <Message variant='danger'>{error.message}</Message>}
               {loading && <h3>Loading ...</h3>}
             </Form>
 
@@ -156,9 +166,7 @@ const Profile = () => {
               <Button type='submit' className='save-btn' variant=''>
                 Change Password
               </Button>
-              {error && (
-                <Message variant='danger'>{error.message}</Message>
-              )}
+              {error && <Message variant='danger'>{error.message}</Message>}
               {loading && <h3>Loading ...</h3>}
             </Form>
           </div>

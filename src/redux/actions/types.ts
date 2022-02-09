@@ -36,11 +36,7 @@ export type User = SignupForm & {
 // Signup
 export type SignupRequestAction = {
   type: typeof SIGNUP_USER_REQUEST
-  payload: { 
-    name: string
-    email: string
-    password: string 
-  }
+  payload: SignupForm
 }
 
 export type SignupSuccessAction = {
@@ -55,10 +51,7 @@ export type SignupFailAction = {
 // Login
 export type LoginRequestAction = {
   type: typeof LOGIN_USER_REQUEST
-  payload: {
-    email: string
-    password: string
-  }
+  payload: LoginForm
 }
 
 export type LoginSuccessAction = {
