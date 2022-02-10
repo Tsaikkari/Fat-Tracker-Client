@@ -25,7 +25,21 @@ export const GET_USER_WEEKS_REQUEST = 'GET_USER_WEEKS_REQUEST'
 export const GET_USER_WEEKS_SUCCESS = 'GET_USER_WEEKS_SUCCESS'
 export const GET_USER_WEEKS_FAIL = 'GET_USER_WEEKS_FAIL'
 
-// Error type 
+export const CREATE_FATTYFOOD_REQUEST = 'CREATE_FATTYFOOD_REQUEST'
+export const CREATE_FATTYFOOD_SUCCESS = 'CREATE_FATTYFOOD_SUCCESS'
+export const CREATE_FATTYFOOD_FAIL = 'CREATE_FATTYFOOD_FAIL'
+export const GET_USER_FATTYFOODS_REQUEST = 'GET_USER_FATTYFOODS_REQUEST'
+export const GET_USER_FATTYFOODS_SUCCESS = 'GET_USER_FATTYFOODS_SUCCESS'
+export const GET_USER_FATTYFOODS_FAIL = 'GET_USER_FATTYFOODS_FAIL'
+
+export const CREATE_SPORT_REQUEST = 'CREATE_SPORT_REQUEST'
+export const CREATE_SPORT_SUCCESS = 'CREATE_SPORT_SUCCESS'
+export const CREATE_SPORT_FAIL = 'CREATE_SPORT_FAIL'
+export const GET_USER_SPORTS_REQUEST = 'GET_USER_SPORTS_REQUEST'
+export const GET_USER_SPORTS_SUCCESS = 'GET_USER_SPORTS_SUCCESS'
+export const GET_USER_SPORTS_FAIL = 'GET_USER_SPORTS_FAIL'
+
+// Error type
 export type Err = {
   error: any
 }
@@ -132,7 +146,7 @@ export type DeleteUserFailAction = {
   payload: Err
 }
 
-// Week types 
+// Week types
 export type Week = {
   date: string
 }
@@ -164,18 +178,119 @@ export type Weeks = {
 }
 
 // Weeks actions
-// User weeks
-export type GetUserWeeksRequest = {
+// Get user weeks
+export type GetUserWeeksRequestAction = {
   type: typeof GET_USER_WEEKS_REQUEST
 }
 
-export type GetUserWeeksSuccess = {
+export type GetUserWeeksSuccessAction = {
   type: typeof GET_USER_WEEKS_SUCCESS
   payload: Week
 }
 
-export type GetUserWeeksFail = {
+export type GetUserWeeksFailAction = {
   type: typeof GET_USER_WEEKS_FAIL
+  payload: Err
+}
+
+// Fatty food types
+export type FattyFood = {
+  name: string
+  chosenDate: string
+  weekId: string
+}
+
+// Fatty food actions
+// Create user fatty foods
+export type CreateFattyFoodRequestAction = {
+  type: typeof CREATE_FATTYFOOD_REQUEST
+  payload: {
+    fattyFood: FattyFood
+  }
+}
+
+export type CreateFattyFoodSuccessAction = {
+  type: typeof CREATE_FATTYFOOD_SUCCESS
+  payload: {
+    fattyFood: FattyFood
+  }
+}
+
+export type CreateFattyFoodFailAction = {
+  type: typeof CREATE_FATTYFOOD_FAIL
+  payload: Err
+}
+
+// Fatty foods types
+export type FattyFoods = {
+  list: FattyFood[]
+}
+
+// Fatty foods actions
+// Get user fatty food list
+export type GetUserFattyFoodsRequestAction = {
+  type: typeof GET_USER_FATTYFOODS_REQUEST
+  payload: FattyFood
+}
+
+export type GetUserFattyFoodsSuccessAction = {
+  type: typeof GET_USER_FATTYFOODS_SUCCESS
+  payload: FattyFood
+}
+
+export type GetUserFattyFoodsFailAction = {
+  type: typeof GET_USER_FATTYFOODS_FAIL
+  payload: Err
+}
+
+// Sport types
+export type Sport = {
+  sport: string
+  date: string
+  duration: number | string
+  weekId: string
+}
+
+// Sport actions
+// Create sport
+export type CreateSportRequestAction = {
+  type: typeof CREATE_SPORT_REQUEST
+  payload: {
+    sport: Sport
+  }
+}
+
+export type CreateSportSuccessAction = {
+  type: typeof CREATE_SPORT_SUCCESS
+  payload: {
+    sport: Sport
+  }
+}
+
+export type CreateSportFailAction = {
+  type: typeof CREATE_SPORT_FAIL
+  payload: Err
+}
+
+// Sports types
+export type Sports = {
+  list: Sport[]
+}
+
+// Sports actions
+// Get user sport list
+export type GetUserSportsRequestAction = {
+  type: typeof GET_USER_SPORTS_REQUEST
+  payload: Sport
+}
+
+export type GetUserSportsSuccessAction = {
+  type: typeof GET_USER_SPORTS_SUCCESS
+  payload: Sport
+}
+
+export type GetUserSportsFailAction = {
+  type: typeof GET_USER_SPORTS_FAIL
   payload: Err
 }
 
@@ -199,12 +314,32 @@ export type UserActions =
   | DeleteUserSuccessAction
   | DeleteUserFailAction
 
-  export type WeekActions = 
+export type WeekActions =
   | CreateWeekRequestAction
   | CreateWeekSuccessAction
   | CreateWeekFailAction
 
-  export type WeeksActions = 
-  | GetUserWeeksRequest
-  | GetUserWeeksSuccess
-  | GetUserWeeksFail
+export type WeeksActions =
+  | GetUserWeeksRequestAction
+  | GetUserWeeksSuccessAction
+  | GetUserWeeksFailAction
+
+export type FattyFoodActions =
+  | CreateFattyFoodRequestAction
+  | CreateFattyFoodSuccessAction
+  | CreateFattyFoodFailAction
+
+export type FattyFoodsActions =
+  | GetUserFattyFoodsRequestAction
+  | GetUserFattyFoodsSuccessAction
+  | GetUserFattyFoodsFailAction
+
+export type SportActions =
+  | CreateSportRequestAction
+  | CreateSportSuccessAction
+  | CreateSportFailAction
+
+export type SportsActions =
+  | GetUserSportsRequestAction
+  | GetUserSportsSuccessAction
+  | GetUserSportsFailAction

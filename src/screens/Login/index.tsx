@@ -12,7 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { error, loading, isLoggedIn } = useSelector((state: AppState) => state.auth)
+  const { error, loading, userInfo } = useSelector((state: AppState) => state.auth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -23,7 +23,6 @@ const Login = () => {
     setEmail('')
     setPassword('')
     navigate('/profile')
-    console.log(isLoggedIn, 'ISLI')
   }
 
   return (
@@ -53,7 +52,6 @@ const Login = () => {
         </Button>
       </Form>
       {error && <Message variant='danger'>{error.message}</Message>}
-      {loading && <h3>Loading ...</h3>}
       <Row>
         <Col>
           Don't have an account? <Link to={'/signup'}>Sign Up</Link>

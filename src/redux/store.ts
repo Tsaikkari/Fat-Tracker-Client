@@ -20,12 +20,39 @@ export const initState: AppState = {
     error: undefined,
   },
   user: {
-    
+    userInfo: {
+      _id: '',
+      name: '',
+      email: '',
+      password: '',
+      isAdmin: false,
+      lifeStyles: ''
+    },
+    isLoggedIn: false, 
+    loading: true,
+    error: undefined,
   },
   week: {
     date: ''
   },
   weeks: {
+    list: []
+  },
+  fattyFood: {
+    name: '',
+    chosenDate: '',
+    week: ''
+  },
+  fattyFoods: {
+    list: []
+  },
+  sport: {
+    sport: '',
+    date: '',
+    duration: '',
+    week: ''
+  },
+  sports: {
     list: []
   }
 }

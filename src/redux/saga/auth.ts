@@ -33,8 +33,9 @@ function* loginUserSaga(action: LoginRequestAction) {
       password,
     })
 
+    console.log(res.data.payload)
     if (res.data.status === 200) {
-      yield put(loginUserSuccess(res.data.payload.userInfo))
+      yield put(loginUserSuccess(res.data.payload))
       yield LocalStorage.saveToken(res.data.payload.token)
       yield put(setLoggedIn())
     }

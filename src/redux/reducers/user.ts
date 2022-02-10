@@ -1,22 +1,23 @@
 import {
+  GET_USER_PROFILE_SUCCESS,
   UPDATE_USER_SUCCESS, 
   DELETE_USER_SUCCESS,
   UserActions
 } from '../actions/types'
 
 const initState = {
-  userInfo: {
     id: '',
     name: '',
     email: '',
     password: '',
     isAdmin: false,
-    lifeStyles: ''
-  }
+    lifeStyle: ''
 }
 
 const user = (state = initState, action: UserActions) => {
   switch (action.type) {
+    case GET_USER_PROFILE_SUCCESS:
+      return { ...state, ...action.payload, loading: false }
     case UPDATE_USER_SUCCESS:
       return { ...state, ...action.payload, loading: false }
     case DELETE_USER_SUCCESS:

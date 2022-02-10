@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
-import axios from 'axios'
 
 import Message from './Message'
+import { AppState } from '../redux/types'
+import { createSportRequest } from '../redux/actions/sport'
 
 type AddSportsProps = {
   weekId: string
   addSports: boolean
   setAddSports: (arg0: boolean) => void
-  sport: string
-  setSport: any
-  date: string
-  setDate: any
-  duration: number | string
-  setDuration: any
   day: string
 }
 
@@ -21,15 +17,18 @@ const AddSports = ({
   weekId,
   addSports,
   setAddSports,
-  sport,
-  setSport,
-  date,
-  setDate,
-  duration,
-  setDuration,
   day,
 }: AddSportsProps) => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [data, setData] = useState({
+    sport: '',
+    date: '',
+    duration: '',
+    weekId: ''
+  })
+  const [date, setDate] = useState('')
+  const { error, loading } = useSelector((state: AppState) => state.auth)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (day) {
@@ -38,27 +37,35 @@ const AddSports = ({
     //eslint-disable-next-line
   }, [])
 
-  const storedToken = localStorage.getItem('authToken')
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
+    setData((prevValue: any) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      }
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    try {
-      await axios.post('/api/sports', { sport, date, duration, weekId }, config)
-      setSport('')
+    if (weekId) {
+      dispatch(createSportRequest({
+        sport: data.sport,
+        date,
+        duration: Number(data.duration),
+        weekId: weekId
+      }))
+      setData({
+        sport: '',
+        date: '',
+        duration: '',
+        weekId: ''
+      })
       setDate('')
-      setDuration('')
       setAddSports(!addSports)
-    } catch (err: any) {
-      const errorMsg = err.message
-      setErrorMessage(errorMsg)
     }
   }
 
@@ -69,8 +76,9 @@ const AddSports = ({
         <Form.Control
           type='text'
           placeholder='Separate sports with a comma'
-          value={sport}
-          onChange={(e) => setSport(e.target.value)}
+          name='sport'
+          value={data.sport}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
       <Form.Group controlId='duration'>
@@ -78,14 +86,16 @@ const AddSports = ({
         <Form.Control
           type='text'
           placeholder='Approximate time in minutes'
-          value={duration}
-          onChange={(e) => setDuration(Number(e.target.value))}
+          name='duration'
+          value={data.duration}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
+      {loading && <p>... loading</p>}
     </Form>
   )
 }

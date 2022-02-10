@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
-import axios from 'axios'
 
 import Message from './Message'
+import { AppState } from '../redux/types'
+import { createFattyFoodRequest } from '../redux/actions/fattyFood'
 
 type AddFattyFoodsProps = {
   weekId: string
   addFattyFoods: boolean
-  setAddFattyFoods: any
-  name: string
-  setName: any
-  chosenDate: string
-  setChosenDate: any
+  setAddFattyFoods: (arg0: boolean) => void
   day: string
 }
 
@@ -19,13 +17,17 @@ const AddFattyFoods = ({
   weekId,
   addFattyFoods,
   setAddFattyFoods,
-  name,
-  setName,
-  chosenDate,
-  setChosenDate,
   day,
 }: AddFattyFoodsProps) => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [data, setData] = useState({
+    name: '',
+    chosenDate: '',
+    weekId: '',
+  })
+  const [chosenDate, setChosenDate] = useState('')
+  const { error, loading } = useSelector((state: AppState) => state.auth)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (day) {
@@ -34,26 +36,33 @@ const AddFattyFoods = ({
     //eslint-disable-next-line
   }, [])
 
-  const storedToken = localStorage.getItem('authToken')
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
+    setData((prevValue: any) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      }
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    try {
-      await axios.post('/api/fattyFoods', { name, chosenDate, weekId }, config)
-      setName('')
+    if (weekId) {
+      dispatch(createFattyFoodRequest({
+        name: data.name,
+        chosenDate,
+        weekId: weekId
+      }))
+      setData({
+        name: '',
+        chosenDate: '',
+        weekId: ''
+      })
       setChosenDate('')
       setAddFattyFoods(!addFattyFoods)
-    } catch (err: any) {
-      const errorMsg = err.message
-      setErrorMessage(errorMsg)
     }
   }
 
@@ -64,14 +73,16 @@ const AddFattyFoods = ({
         <Form.Control
           type='text'
           placeholder='Separate fatty foods with a comma'
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          name='name'
+          value={data.name}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
+      {loading && <p>... loading</p>}
     </Form>
   )
 }

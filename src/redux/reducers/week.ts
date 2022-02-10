@@ -14,8 +14,7 @@ const initState = {
 const week = (state = initState, action: WeekActions) => {
   switch (action.type) {
     case CREATE_WEEK_SUCCESS:
-      console.log(action.payload, 'action payload')
-      return { ...state, week: { ...state, ...action.payload }}
+      return { ...state, week: action.payload }
     default: 
       return state
   }

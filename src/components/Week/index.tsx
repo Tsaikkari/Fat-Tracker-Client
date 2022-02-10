@@ -114,8 +114,6 @@ const Week = ({
               days={days}
               dayIndex={index}
               weekId={weekId}
-              fattyFoods={fattyFoods}
-              sports={sports}
             />
           </div>
         ))}

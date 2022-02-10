@@ -4,7 +4,6 @@ import {
   LOGIN_USER_SUCCESS,
   LOGOUT_USER,
   SET_LOGGED_IN,
-  GET_USER_PROFILE_SUCCESS,
 } from '../actions/types'
 
 const initState = {
@@ -26,13 +25,11 @@ const auth = (state = initState, action: AuthActions) => {
     case SINGUP_USER_SUCCESS: 
       return { ...state }
     case LOGIN_USER_SUCCESS:
-      return { ...state, userInfo: { ...state, ...action.payload }}
+      return { ...state, isLoggedIn: true, loading: false, userInfo: action.payload}
     case SET_LOGGED_IN:
       return { ...state, isLoggedIn: true, loading: false }
     case LOGOUT_USER:
-      return { ...state, isLoggedIn: false, loading: false }
-    case GET_USER_PROFILE_SUCCESS:
-      return { ...state, loading: false }
+      return {}
     default:
       return state
   }

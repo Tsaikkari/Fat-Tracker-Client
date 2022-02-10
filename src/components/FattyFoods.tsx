@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import FattyFood from './FattyFood'
+import { AppState } from '../redux/types'
+import { getUserFattyFoodsRequest } from '../redux/actions/fattyFoods'
 
 type FattyFoodsProps = {
-  fattyFoods: any[]
   weekId: string
   days: string[]
   dayIndex: number
@@ -12,9 +14,15 @@ type FattyFoodsProps = {
 const FattyFoods = ({
   days,
   dayIndex,
-  fattyFoods,
   weekId,
 }: FattyFoodsProps) => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserFattyFoodsRequest())
+  }, [])
+
+  const fattyFoods = useSelector((state: AppState) => state.fattyFoods.list)
   const filteredFattyFoods = fattyFoods.filter((ff: any) => ff.week === weekId)
 
   return (

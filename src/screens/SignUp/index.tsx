@@ -22,7 +22,8 @@ const SignUp = () => {
     e.preventDefault()
 
     dispatch(signupUserRequest({ name, email, password }))
-    setVerifyEmailMsg(`A link to activate your account has been sent to ${email}. Check your spam folder.`)
+    setVerifyEmailMsg(`A link to activate your account has been sent to ${email}. 
+    Check your spam folder.`)
   }
 
   return (

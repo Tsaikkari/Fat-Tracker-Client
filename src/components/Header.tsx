@@ -1,28 +1,34 @@
 import React, { useEffect } from 'react'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { useContext } from 'react'
-import { AuthContext } from '../context/auth'
+
 import { AppState } from '../redux/types'
+import { getUserProfileRequest } from '../redux/actions/user'
+import { getUserWeeksRequest } from '../redux/actions/weeks'
+import LocalStorage from '../local-storage'
 
 const Header = () => {
   const { isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
-
-  // TODO: logout, weeks, weights
-  const { logoutUser } = useContext(AuthContext)
-
-  // useEffect(() => {
-  //   if (isLoggedIn && weeks.length === 0) {
-  //     getWeeks()
-  //   }
-  // }, [weeks, getWeeks, isLoggedIn])
+  const name = userInfo.name
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   // useEffect(() => {
-  //   if (isLoggedIn && weights.length === 0) {
-  //     getWeights()
+  //   if (isLoggedIn) {
+  //     dispatch(getUserProfileRequest(userInfo._id))
   //   }
-  // }, [weights, getWeights, isLoggedIn])
+  // })
+
+  const handleWeeks = () => {
+    dispatch(getUserWeeksRequest())
+  }
+
+  const handleLogout = () => {
+    LocalStorage.removeToken()
+    navigate('/')
+  }
 
   return (
     <Navbar bg='light' expand='lg' collapseOnSelect className='navbar'>
@@ -32,16 +38,16 @@ const Header = () => {
           {isLoggedIn ? (
             <>
               <LinkContainer to='/weeks'>
-                <Nav.Link>Week</Nav.Link>
+                <Nav.Link onClick={handleWeeks}>Week</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/charts'>
                 <Nav.Link>Chart</Nav.Link>
               </LinkContainer>
-              <NavDropdown title={userInfo.name.split(' ')[0]} id='name'>
+              <NavDropdown title={name && name.split(' ')[0]} id='name'>
                 <LinkContainer to='/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
                 </LinkContainer>
-                <NavDropdown.Item onClick={logoutUser}>Logout</NavDropdown.Item>
+                <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
               </NavDropdown>
             </>
           ) : (

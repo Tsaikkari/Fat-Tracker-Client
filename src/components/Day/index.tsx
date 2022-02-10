@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import DayHeader from '../DayHeader'
 import AddFattyFoods from '../AddFattyFoods'
@@ -6,14 +7,14 @@ import AddSports from '../AddSports'
 import FattyFoods from '../FattyFoods'
 import Sports from '../Sports'
 import styles from './Day.module.css'
+import { getUserFattyFoodsRequest } from '../../redux/actions'
+import { getUserSportsRequest } from '../../redux/actions/sports'
 
 type DayProps = {
   days: string[]
   day: string
   dayIndex: number
   weekId: string
-  fattyFoods: any[]
-  sports: any[]
 }
 
 const Day = ({
@@ -21,16 +22,19 @@ const Day = ({
   day,
   dayIndex,
   weekId,
-  fattyFoods,
-  sports,
 }: DayProps) => {
-  const [name, setName] = useState('')
-  const [chosenDate, setChosenDate] = useState('')
-  const [sport, setSport] = useState('')
-  const [date, setDate] = useState('')
-  const [duration, setDuration] = useState('')
   const [addFattyFoods, setAddFattyFoods] = useState(false)
   const [addSports, setAddSports] = useState(false)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getUserSportsRequest())
+  }, [])
+
+  useEffect(() => {
+    dispatch(getUserFattyFoodsRequest())
+  }, [])
 
   const handleShowAddFattyFoods = () => {
     setAddFattyFoods(!addFattyFoods)
@@ -51,10 +55,6 @@ const Day = ({
           weekId={weekId}
           addFattyFoods={addFattyFoods}
           setAddFattyFoods={setAddFattyFoods}
-          name={name}
-          setName={setName}
-          chosenDate={chosenDate}
-          setChosenDate={setChosenDate}
           day={day}
         />
       )}
@@ -63,12 +63,6 @@ const Day = ({
           weekId={weekId}
           addSports={addSports}
           setAddSports={setAddSports}
-          sport={sport}
-          setSport={setSport}
-          date={date}
-          setDate={setDate}
-          duration={duration}
-          setDuration={setDuration}
           day={day}
         />
       )}
@@ -76,13 +70,11 @@ const Day = ({
         <p className='p-2 mb-0'>{day}</p>
         <div>
           <FattyFoods
-            fattyFoods={fattyFoods}
             dayIndex={dayIndex}
             days={days}
             weekId={weekId}
           />
           <Sports
-            sports={sports}
             weekId={weekId}
             days={days}
             dayIndex={dayIndex}
