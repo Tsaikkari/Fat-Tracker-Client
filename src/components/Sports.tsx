@@ -5,8 +5,6 @@ import Sport from './Sport'
 type SportsProps = {
   sports: any[]
   weekId: string
-  refreshWeeks: () => void
-  refreshSports: () => void
   days: string[]
   dayIndex: number
 }
@@ -16,8 +14,6 @@ const Sports = ({
   days,
   dayIndex,
   weekId,
-  refreshWeeks,
-  refreshSports,
 }: SportsProps) => {
   const filteredSports = sports.filter((sport: any) => sport.week === weekId)
   return (
@@ -32,8 +28,6 @@ const Sports = ({
               date={s.date}
               days={days}
               dayIndex={dayIndex}
-              refreshWeeks={refreshWeeks}
-              refreshSports={refreshSports}
             />
           </div>
         ))}

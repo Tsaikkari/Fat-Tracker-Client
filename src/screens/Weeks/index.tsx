@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './Weeks.module.css'
 import AddWeek from '../../components/AddWeek'
@@ -7,67 +7,71 @@ import WeekHeader from '../../components/WeekHeader'
 import Week from '../../components/Week'
 import Message from '../../components/Message'
 import Info from '../../components/Info'
-import { AuthContext } from '../../context/auth'
-import { WeekContext } from '../../context/week'
+import { AppState } from '../../redux/types'
+import { getUserWeeksRequest } from '../../redux/actions'
 
 const Weeks = () => {
   const [fattyFoods, setFattyFoods] = useState<[]>([])
   const [sports, setSports] = useState<[]>([])
   const [addWeek, setAddWeek] = useState(false)
-  const [errorMessage, setErrorMessage] = useState(undefined)
 
+  const { error, loading } = useSelector((state: AppState) => state.auth)
+  const weeks = useSelector((state: AppState) => state.weeks.list)
+
+  const dispatch = useDispatch()
+  
   const handleShowAddWeek = () => {
     setAddWeek(!addWeek)
   }
 
-  const { isLoading } = useContext(AuthContext)
-  const { weeks, getWeeks } = useContext(WeekContext)
-
-  const storedToken = localStorage.getItem('authToken')
-
-  const getFattyFoods = () => {
-    axios
-      .get('/api/fattyFoods/user', {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        setFattyFoods(response.data.payload)
-      })
-      .catch((err: any) => {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
-      })
-  }
-
   useEffect(() => {
-    getFattyFoods()
-    //eslint-disable-next-line
-  }, [])
+    dispatch(getUserWeeksRequest())
+  }, [dispatch])
 
-  const getSports = () => {
-    axios
-      .get('/api/sports/user', {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        setSports(response.data.payload)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+  console.log(weeks, 'weeks')
 
-  useEffect(() => {
-    getSports()
-    //eslint-disable-next-line
-  }, [])
+  // const getFattyFoods = () => {
+  //   axios
+  //     .get('/api/fattyFoods/user', {
+  //       headers: { Authorization: `Bearer ${storedToken}` },
+  //     })
+  //     .then((response) => {
+  //       setFattyFoods(response.data.payload)
+  //     })
+  //     .catch((err: any) => {
+  //       const errorMsg = err.message
+  //       setErrorMessage(errorMsg)
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   getFattyFoods()
+  //   //eslint-disable-next-line
+  // }, [])
+
+  // const getSports = () => {
+  //   axios
+  //     .get('/api/sports/user', {
+  //       headers: { Authorization: `Bearer ${storedToken}` },
+  //     })
+  //     .then((response) => {
+  //       setSports(response.data.payload)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //     })
+  // }
+
+  // useEffect(() => {
+  //   getSports()
+  //   //eslint-disable-next-line
+  // }, [])
 
   return (
     <div className={styles.container}>
       <WeekHeader handleShowAddWeek={handleShowAddWeek} />
       {addWeek && (
         <AddWeek
-          refreshWeeks={getWeeks}
           addWeek={addWeek}
           setAddWeek={setAddWeek}
         />
@@ -79,9 +83,6 @@ const Weeks = () => {
         weeks.map((week: any) => (
           <div key={week._id}>
             <Week
-              refreshFattyFoods={getFattyFoods}
-              refreshSports={getSports}
-              refreshWeeks={getWeeks}
               startDate={week.date}
               weekId={week._id}
               fattyFoods={fattyFoods}
@@ -89,8 +90,8 @@ const Weeks = () => {
             />
           </div>
         ))}
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-      {isLoading && <h3>Loading ...</h3>}
+      {error && <Message variant='danger'>{error.message}</Message>}
+      {loading && <h3>Loading ...</h3>}
     </div>
   )
 }

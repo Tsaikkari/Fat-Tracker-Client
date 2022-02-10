@@ -5,10 +5,9 @@ import axios from 'axios'
 import Message from './Message'
 
 type AddFattyFoodsProps = {
-  refreshFattyFoods: () => void
   weekId: string
   addFattyFoods: boolean
-  setAddFattyFoods: (arg0: boolean) => void
+  setAddFattyFoods: any
   name: string
   setName: any
   chosenDate: string
@@ -17,7 +16,6 @@ type AddFattyFoodsProps = {
 }
 
 const AddFattyFoods = ({
-  refreshFattyFoods,
   weekId,
   addFattyFoods,
   setAddFattyFoods,
@@ -50,7 +48,6 @@ const AddFattyFoods = ({
 
     try {
       await axios.post('/api/fattyFoods', { name, chosenDate, weekId }, config)
-      refreshFattyFoods()
       setName('')
       setChosenDate('')
       setAddFattyFoods(!addFattyFoods)

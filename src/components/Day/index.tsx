@@ -14,9 +14,6 @@ type DayProps = {
   weekId: string
   fattyFoods: any[]
   sports: any[]
-  refreshWeeks: () => void
-  refreshFattyFoods: () => void
-  refreshSports: () => void
 }
 
 const Day = ({
@@ -24,9 +21,6 @@ const Day = ({
   day,
   dayIndex,
   weekId,
-  refreshWeeks,
-  refreshFattyFoods,
-  refreshSports,
   fattyFoods,
   sports,
 }: DayProps) => {
@@ -54,7 +48,6 @@ const Day = ({
       />
       {addFattyFoods && (
         <AddFattyFoods
-          refreshFattyFoods={refreshFattyFoods}
           weekId={weekId}
           addFattyFoods={addFattyFoods}
           setAddFattyFoods={setAddFattyFoods}
@@ -67,7 +60,6 @@ const Day = ({
       )}
       {addSports && (
         <AddSports
-          refreshSports={refreshSports}
           weekId={weekId}
           addSports={addSports}
           setAddSports={setAddSports}
@@ -88,16 +80,12 @@ const Day = ({
             dayIndex={dayIndex}
             days={days}
             weekId={weekId}
-            refreshWeeks={refreshWeeks}
-            refreshFattyFoods={refreshFattyFoods}
           />
           <Sports
             sports={sports}
             weekId={weekId}
             days={days}
             dayIndex={dayIndex}
-            refreshWeeks={refreshWeeks}
-            refreshSports={refreshSports}
           />
         </div>
       </div>

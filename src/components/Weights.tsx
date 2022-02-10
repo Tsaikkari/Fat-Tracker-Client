@@ -3,15 +3,11 @@ import React from 'react'
 import Weight from './Weight'
 
 type WeightsProps = {
-  refreshWeeks: () => void
-  refreshWeights: () => void
   weights: any[]
   weekId: string
 }
 
 const Weights = ({
-  refreshWeeks,
-  refreshWeights,
   weights,
   weekId,
 }: WeightsProps) => {
@@ -25,8 +21,6 @@ const Weights = ({
         filteredWeights.map((weight: any) => (
           <div key={weight._id}>
             <Weight
-              refreshWeeks={refreshWeeks}
-              refreshWeights={refreshWeights}
               currentWeight={weight.currentWeight}
               goalWeight={weight.goalWeight}
               weightId={weight._id}

@@ -7,6 +7,7 @@ export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL'
 export const LOGOUT_USER = 'LOGOUT_USER'
 export const SET_LOGGED_IN = 'SET_LOGGED_IN'
 export const SET_LOADING = 'SET_LOADING'
+
 export const GET_USER_PROFILE_REQUEST = 'GET_USER_PROFILE_REQUEST'
 export const GET_USER_PROFILE_SUCCESS = 'GET_USER_PROFILE_SUCCESS'
 export const GET_USER_PROFILE_FAIL = 'GET_USER_PROFILE_FAIL'
@@ -17,6 +18,19 @@ export const DELETE_USER_REQUEST = 'DELETE_USER_REQUEST'
 export const DELETE_USER_SUCCESS = 'DELETE_USER_SUCCESS'
 export const DELETE_USER_FAIL = 'DELETE_USER_FAIL'
 
+export const CREATE_WEEK_REQUEST = 'CREATE_WEEK_REQUEST'
+export const CREATE_WEEK_SUCCESS = 'CREATE_WEEK_SUCCESS'
+export const CREATE_WEEK_FAIL = 'CREATE_WEEK_FAIL'
+export const GET_USER_WEEKS_REQUEST = 'GET_USER_WEEKS_REQUEST'
+export const GET_USER_WEEKS_SUCCESS = 'GET_USER_WEEKS_SUCCESS'
+export const GET_USER_WEEKS_FAIL = 'GET_USER_WEEKS_FAIL'
+
+// Error type 
+export type Err = {
+  error: any
+}
+
+// Auth types
 export type LoginForm = {
   email: string
   password: string
@@ -45,7 +59,7 @@ export type SignupSuccessAction = {
 
 export type SignupFailAction = {
   type: typeof SIGNUP_USER_FAIL
-  payload: any
+  payload: Err
 }
 
 // Login
@@ -64,6 +78,7 @@ export type LoginFailAction = {
   payload: any
 }
 
+// User actions
 // Get user
 export type GetUserProfileRequestAction = {
   type: typeof GET_USER_PROFILE_REQUEST
@@ -77,10 +92,9 @@ export type GetUserProfileSuccessAction = {
 
 export type GetUserProfileFailAction = {
   type: typeof GET_USER_PROFILE_FAIL
-  payload: any
+  payload: Err
 }
 
-// User actions
 // Update user
 export type UserUpdate = {
   email: string
@@ -100,9 +114,7 @@ export type UpdateUserSuccessAction = {
 
 export type UpdateUserFailAction = {
   type: typeof UPDATE_USER_FAIL
-  payload: {
-    error: any
-  }
+  payload: Err
 }
 
 // Delete user
@@ -117,11 +129,57 @@ export type DeleteUserSuccessAction = {
 
 export type DeleteUserFailAction = {
   type: typeof DELETE_USER_FAIL
+  payload: Err
+}
+
+// Week types 
+export type Week = {
+  date: string
+}
+
+// Week actions
+// Create week
+export type CreateWeekRequestAction = {
+  type: typeof CREATE_WEEK_REQUEST
   payload: {
-    error: any
+    week: Week
   }
 }
 
+export type CreateWeekSuccessAction = {
+  type: typeof CREATE_WEEK_SUCCESS
+  payload: {
+    week: Week
+  }
+}
+
+export type CreateWeekFailAction = {
+  type: typeof CREATE_WEEK_FAIL
+  payload: Err
+}
+
+// Weeks types
+export type Weeks = {
+  list: Week[]
+}
+
+// Weeks actions
+// User weeks
+export type GetUserWeeksRequest = {
+  type: typeof GET_USER_WEEKS_REQUEST
+}
+
+export type GetUserWeeksSuccess = {
+  type: typeof GET_USER_WEEKS_SUCCESS
+  payload: Week
+}
+
+export type GetUserWeeksFail = {
+  type: typeof GET_USER_WEEKS_FAIL
+  payload: Err
+}
+
+// Unions
 export type AuthActions =
   | SignupRequestAction
   | SignupSuccessAction
@@ -140,3 +198,13 @@ export type UserActions =
   | DeleteUserRequestAction
   | DeleteUserSuccessAction
   | DeleteUserFailAction
+
+  export type WeekActions = 
+  | CreateWeekRequestAction
+  | CreateWeekSuccessAction
+  | CreateWeekFailAction
+
+  export type WeeksActions = 
+  | GetUserWeeksRequest
+  | GetUserWeeksSuccess
+  | GetUserWeeksFail

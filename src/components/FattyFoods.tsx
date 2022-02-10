@@ -5,8 +5,6 @@ import FattyFood from './FattyFood'
 type FattyFoodsProps = {
   fattyFoods: any[]
   weekId: string
-  refreshWeeks: () => void
-  refreshFattyFoods: () => void
   days: string[]
   dayIndex: number
 }
@@ -16,8 +14,6 @@ const FattyFoods = ({
   dayIndex,
   fattyFoods,
   weekId,
-  refreshWeeks,
-  refreshFattyFoods,
 }: FattyFoodsProps) => {
   const filteredFattyFoods = fattyFoods.filter((ff: any) => ff.week === weekId)
 
@@ -27,8 +23,6 @@ const FattyFoods = ({
         filteredFattyFoods.map((ff: any) => (
           <div key={ff._id}>
             <FattyFood
-              refreshWeeks={refreshWeeks}
-              refreshFattyFoods={refreshFattyFoods}
               fattyFoodId={ff._id}
               name={ff.name}
               chosenDate={ff.chosenDate}

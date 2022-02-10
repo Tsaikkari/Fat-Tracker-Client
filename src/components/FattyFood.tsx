@@ -6,8 +6,6 @@ import Message from './Message'
 
 type FattyFoodProps = {
   fattyFoodId: string
-  refreshFattyFoods: () => void
-  refreshWeeks: () => void
   name: string
   chosenDate: string
   dayIndex: number
@@ -16,8 +14,6 @@ type FattyFoodProps = {
 
 const FattyFood = ({
   fattyFoodId,
-  refreshFattyFoods,
-  refreshWeeks,
   name,
   chosenDate,
   days,
@@ -37,8 +33,6 @@ const FattyFood = ({
     if (window.confirm('Delete fatty foods?')) {
       try {
         await axios.delete(`/api/fattyFoods/${fattyFoodId}`, config)
-        refreshFattyFoods()
-        refreshWeeks()
       } catch (err: any) {
         const errorMsg = err.message
         setErrorMessage(errorMsg)

@@ -139,7 +139,6 @@ const Profile = () => {
                 Update
               </Button>
               {error && <Message variant='danger'>{error.message}</Message>}
-              {loading && <h3>Loading ...</h3>}
             </Form>
 
             <Form onSubmit={handleChangePassword}>
@@ -159,6 +158,7 @@ const Profile = () => {
                 <Form.Control
                   type='password'
                   placeholder='Enter New Password'
+                  name='passwore'
                   value={credentials.password}
                   onChange={handlePassword}
                 ></Form.Control>
@@ -167,7 +167,6 @@ const Profile = () => {
                 Change Password
               </Button>
               {error && <Message variant='danger'>{error.message}</Message>}
-              {loading && <h3>Loading ...</h3>}
             </Form>
           </div>
         </>

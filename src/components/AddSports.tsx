@@ -5,7 +5,6 @@ import axios from 'axios'
 import Message from './Message'
 
 type AddSportsProps = {
-  refreshSports: () => void
   weekId: string
   addSports: boolean
   setAddSports: (arg0: boolean) => void
@@ -19,7 +18,6 @@ type AddSportsProps = {
 }
 
 const AddSports = ({
-  refreshSports,
   weekId,
   addSports,
   setAddSports,
@@ -54,7 +52,6 @@ const AddSports = ({
 
     try {
       await axios.post('/api/sports', { sport, date, duration, weekId }, config)
-      refreshSports()
       setSport('')
       setDate('')
       setDuration('')

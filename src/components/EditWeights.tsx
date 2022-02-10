@@ -5,7 +5,6 @@ import axios from 'axios'
 import Message from './Message'
 
 type EditWeightsProps = {
-  refreshWeights: () => void
   editWeight: boolean
   setEditWeight: (arg0: boolean) => void
   achievedWeight: number | string
@@ -15,7 +14,6 @@ type EditWeightsProps = {
 }
 
 const EditWeights = ({
-  refreshWeights,
   editWeight,
   setEditWeight,
   achievedWeight,
@@ -47,7 +45,6 @@ const EditWeights = ({
         { achievedWeight, weekId },
         config
       )
-      refreshWeights()
       setAchievedWeight('')
       setEditWeight(!editWeight)
     } catch (err: any) {

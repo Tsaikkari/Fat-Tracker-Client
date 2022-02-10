@@ -1,4 +1,4 @@
-import { User } from '../redux/actions/types'
+import { User, Weeks } from '../redux/actions/types'
 
 export type AppState = {
   auth: {
@@ -10,4 +10,8 @@ export type AppState = {
   user: {
     
   }
+  week: {
+    date: ''
+  },
+  weeks: Weeks
 }

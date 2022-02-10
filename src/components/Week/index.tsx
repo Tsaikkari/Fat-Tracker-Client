@@ -12,9 +12,6 @@ import { WeightContext } from '../../context/weight'
 
 type WeekProps = {
   startDate: string
-  refreshWeeks: () => void
-  refreshFattyFoods: () => void
-  refreshSports: () => void
   fattyFoods: any[]
   sports: any[]
   weekId: string
@@ -22,9 +19,6 @@ type WeekProps = {
 
 const Week = ({
   startDate,
-  refreshWeeks,
-  refreshFattyFoods,
-  refreshSports,
   fattyFoods,
   sports,
   weekId,
@@ -97,8 +91,6 @@ const Week = ({
         </Button>
 
         <Weights
-          refreshWeeks={refreshWeeks}
-          refreshWeights={getWeights}
           weights={weights}
           weekId={weekId}
         />
@@ -109,7 +101,6 @@ const Week = ({
           setCurrentWeight={setCurrentWeight}
           goalWeight={goalWeight}
           setGoalWeight={setGoalWeight}
-          refreshWeights={getWeights}
           addWeights={addWeights}
           setAddWeights={setAddWeights}
           weekId={weekId}
@@ -123,9 +114,6 @@ const Week = ({
               days={days}
               dayIndex={index}
               weekId={weekId}
-              refreshWeeks={refreshWeeks}
-              refreshFattyFoods={refreshFattyFoods}
-              refreshSports={refreshSports}
               fattyFoods={fattyFoods}
               sports={sports}
             />
@@ -140,7 +128,6 @@ const Week = ({
             achievedWeight={achievedWeight}
             setAchievedWeight={setAchievedWeight}
             filteredWeights={filteredWeights}
-            refreshWeights={getWeights}
             editWeight={editWeight}
             setEditWeight={setEditWeight}
             weekId={weekId}

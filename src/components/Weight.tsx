@@ -7,16 +7,12 @@ import Message from './Message'
 type WeightProps = {
   currentWeight: number | string
   goalWeight: number | string
-  refreshWeeks: () => void
-  refreshWeights: () => void
   weightId: string
 }
 
 const Weight = ({
   currentWeight,
   goalWeight,
-  refreshWeeks,
-  refreshWeights,
   weightId,
 }: WeightProps) => {
   const [errorMessage, setErrorMessage] = useState(undefined)
@@ -33,8 +29,6 @@ const Weight = ({
     if (window.confirm('Delete weights?')) {
       try {
         await axios.delete(`/api/weights/${weightId}`, config)
-        refreshWeights()
-        refreshWeeks()
       } catch (err: any) {
         const errorMsg = err.message
         setErrorMessage(errorMsg)

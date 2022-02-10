@@ -7,7 +7,6 @@ import Message from './Message'
 type AddWeightsProps = {
   addWeights: boolean
   setAddWeights: (arg0: boolean) => void
-  refreshWeights: () => void
   currentWeight: number | string
   setCurrentWeight: any
   goalWeight: number | string
@@ -18,7 +17,6 @@ type AddWeightsProps = {
 const AddWeights = ({
   addWeights,
   setAddWeights,
-  refreshWeights,
   currentWeight,
   setCurrentWeight,
   goalWeight,
@@ -44,7 +42,6 @@ const AddWeights = ({
         { currentWeight, goalWeight, weekId },
         config
       )
-      refreshWeights()
       setCurrentWeight('')
       setGoalWeight('')
       setAddWeights(!addWeights)

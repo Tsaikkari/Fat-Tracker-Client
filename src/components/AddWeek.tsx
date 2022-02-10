@@ -1,47 +1,36 @@
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Message from './Message'
+import { AppState } from '../redux/types'
+import { createWeekRequest } from '../redux/actions/week'
 
 type AddWeekProps = {
-  refreshWeeks: () => void
   addWeek: boolean
   setAddWeek: (arg0: boolean) => void
 }
 
-const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
+const AddWeek = ({ addWeek, setAddWeek }: AddWeekProps) => {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('')
-  const [errorMessage, setErrorMessage] = useState(undefined)
 
-  const storedToken = localStorage.getItem('authToken')
+  const { error, loading } = useSelector((state: AppState) => state.auth)
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
-  }
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
+
     if (!date) {
       setMessage('Missing Starting Date')
       setTimeout(() => {
         setMessage('')
       }, 3000)
     }
-    try {
-      await axios.post('/api/weeks', { date }, config)
+    dispatch(createWeekRequest({ date }))
       setDate('')
-      refreshWeeks()
       setAddWeek(!addWeek)
-    } catch (err: any) {
-      const errorMsg = err.message
-      setErrorMessage(errorMsg)
-    }
   }
 
   return (
@@ -60,7 +49,7 @@ const AddWeek = ({ refreshWeeks, addWeek, setAddWeek }: AddWeekProps) => {
         </Button>
       </Form>
       {message && <Message variant='danger'>{message}</Message>}
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
     </div>
   )
 }

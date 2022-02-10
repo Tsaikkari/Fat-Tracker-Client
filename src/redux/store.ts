@@ -21,6 +21,12 @@ export const initState: AppState = {
   },
   user: {
     
+  },
+  week: {
+    date: ''
+  },
+  weeks: {
+    list: []
   }
 }
 

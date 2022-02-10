@@ -6,8 +6,6 @@ import Message from './Message'
 
 type SportProps = {
   sportId: string
-  refreshSports: () => void
-  refreshWeeks: () => void
   sport: string
   duration: number
   date: string
@@ -16,8 +14,6 @@ type SportProps = {
 }
 const Sport = ({
   sportId,
-  refreshSports,
-  refreshWeeks,
   sport,
   duration,
   date,
@@ -39,8 +35,6 @@ const Sport = ({
     if (window.confirm('Delete sports?')) {
       try {
         await axios.delete(`/api/sports/${sportId}`, config)
-        refreshSports()
-        refreshWeeks()
       } catch (err: any) {
         const errorMsg = err.message
         setErrorMessage(errorMsg)
