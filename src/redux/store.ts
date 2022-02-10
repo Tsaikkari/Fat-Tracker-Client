@@ -33,7 +33,16 @@ export const initState: AppState = {
     error: undefined,
   },
   week: {
-    date: ''
+    date: '',
+    weights: {
+      list: []
+    },
+    fattyFoods: {
+      list: []
+    },
+    sports: {
+      list: []
+    }
   },
   weeks: {
     list: []
