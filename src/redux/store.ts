@@ -28,9 +28,6 @@ export const initState: AppState = {
       isAdmin: false,
       lifeStyles: ''
     },
-    isLoggedIn: false, 
-    loading: true,
-    error: undefined,
   },
   week: {
     date: ''

@@ -11,13 +11,15 @@ const initState = {
     email: '',
     password: '',
     isAdmin: false,
-    lifeStyle: ''
+    lifeStyle: '',
+    isLoggedIn: false,
+    loading: true
 }
 
 const user = (state = initState, action: UserActions) => {
   switch (action.type) {
     case GET_USER_PROFILE_SUCCESS:
-      return { ...state, ...action.payload, loading: false }
+      return { ...state, ...action.payload, isLoggedIn: true, loading: false }
     case UPDATE_USER_SUCCESS:
       return { ...state, ...action.payload, loading: false }
     case DELETE_USER_SUCCESS:

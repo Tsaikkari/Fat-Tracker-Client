@@ -9,9 +9,6 @@ export type AppState = {
   }
   user: {
     userInfo: User
-    loading: boolean
-    isLoggedIn: boolean
-    error: any
   }
   week: {
     date: string
