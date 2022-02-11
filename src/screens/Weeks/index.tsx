@@ -9,7 +9,6 @@ import Message from '../../components/Message'
 import Info from '../../components/Info'
 import { AppState } from '../../redux/types'
 import { getUserWeeksRequest } from '../../redux/actions/weeks'
-import { getUserFattyFoodsRequest } from '../../redux/actions/fattyFoods'
 
 const Weeks = () => {
   const [addWeek, setAddWeek] = useState(false)

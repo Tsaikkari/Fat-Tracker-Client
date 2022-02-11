@@ -12,7 +12,6 @@ function* createFattyFoodSaga(action: CreateFattyFoodRequestAction) {
   try {
     //@ts-ignore
     const res = yield axios.post('fattyfoods', fattyFood) 
-    console.log(res.data.payload, 'saga ff')
     yield put(createFattyFoodSuccess(res.data.payload))
   } catch (err) {
     yield put(createFattyFoodFail(err))

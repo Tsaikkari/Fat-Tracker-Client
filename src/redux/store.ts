@@ -35,10 +35,18 @@ export const initState: AppState = {
   weeks: {
     list: []
   },
+  weight: {
+    currentWeight: '',
+    goalWeight: '',
+    weekId: ''
+  },
+  weights: {
+    list: []
+  },
   fattyFood: {
     name: '',
     chosenDate: '',
-    week: ''
+    weekId: ''
   },
   fattyFoods: {
     list: []
@@ -47,7 +55,7 @@ export const initState: AppState = {
     sport: '',
     date: '',
     duration: '',
-    week: ''
+    weekId: ''
   },
   sports: {
     list: []

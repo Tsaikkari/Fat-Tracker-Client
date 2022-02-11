@@ -22,7 +22,10 @@ export const getUserFattyFoodsFail = (error: any) => {
   return {
     type: GET_USER_FATTYFOODS_FAIL,
     payload: {
-      error
+      error:
+        error.response && error.data.message
+          ? error.response.data.message
+          : error.message,
     }
   }
 }

@@ -9,9 +9,7 @@ const initState = {
     date: '',
     duration: 0,
     week: ''
-  },
-  loading: true,
-  error: undefined
+  }
 }
 
 const sport = (state = initState, action: SportActions) => {

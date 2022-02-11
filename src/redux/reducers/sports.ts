@@ -7,7 +7,7 @@ const initState = {
   list: []
 }
 
-const sports = (state = initState, action: SportsActions ) => {
+const sports = (state = initState, action: SportsActions) => {
   switch (action.type) {
     case GET_USER_SPORTS_SUCCESS:
       return { ...state, list: action.payload }

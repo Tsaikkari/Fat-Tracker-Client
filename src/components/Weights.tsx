@@ -1,19 +1,22 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import Weight from './Weight'
+import { AppState } from '../redux/types'
 
 type WeightsProps = {
-  weights: any[]
   weekId: string
 }
 
 const Weights = ({
-  weights,
   weekId,
 }: WeightsProps) => {
-  const filteredWeights = weights.filter(
+  const weights = useSelector((state: AppState) => state.weights.list)
+  const filteredWeights = weights && weights.filter(
     (weight: any) => weight.week === weekId
   )
+
+  console.log(filteredWeights, 'filteredWeights')
 
   return (
     <div className=''>

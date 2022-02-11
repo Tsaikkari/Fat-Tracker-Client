@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import DayHeader from '../DayHeader'
 import AddFattyFoods from '../AddFattyFoods'
@@ -30,10 +30,12 @@ const Day = ({
 
   useEffect(() => {
     dispatch(getUserSportsRequest())
+    //eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     dispatch(getUserFattyFoodsRequest())
+    //eslint-disable-next-line
   }, [])
 
   const handleShowAddFattyFoods = () => {

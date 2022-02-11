@@ -22,7 +22,10 @@ export const getUserSportsFail = (error: any) => {
   return {
     type: GET_USER_SPORTS_FAIL,
     payload: {
-      error
+      error:
+        error.response && error.data.message
+          ? error.response.data.message
+          : error.message,
     }
   }
 }

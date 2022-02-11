@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Day from '../Day'
 import AddWeights from '../AddWeights'
@@ -7,8 +8,8 @@ import Weights from '../Weights'
 import EditWeights from '../EditWeights'
 import styles from './Week.module.css'
 import Message from '../Message'
-import { AuthContext } from '../../context/auth'
-import { WeightContext } from '../../context/weight'
+import { AppState } from '../../redux/types'
+import { getUserWeightsRequest } from '../../redux/actions/weights'
 
 type WeekProps = {
   startDate: string
@@ -19,20 +20,27 @@ type WeekProps = {
 
 const Week = ({
   startDate,
-  fattyFoods,
-  sports,
   weekId,
 }: WeekProps) => {
   const [days, setDays] = useState<string[]>([])
-  const [currentWeight, setCurrentWeight] = useState<number | string>('')
   const [achievedWeight, setAchievedWeight] = useState<number | string>('')
-  const [goalWeight, setGoalWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
   const [editWeight, setEditWeight] = useState(false)
   const [message, setMessage] = useState('')
 
-  const { isLoading } = useContext(AuthContext)
-  const { weights, getWeights, errorMessage } = useContext(WeightContext)
+  useEffect(() => {
+    dispatch(getUserWeightsRequest())
+    //eslint-disable-next-line
+  }, [])
+
+  const weights = useSelector((state: AppState) => state.weights.list)
+  const { error, loading } = useSelector((state: AppState) => state.auth)
+
+  const dispatch = useDispatch()
+
+  const handleShowAddWeights = () => {
+    setAddWeights(!addWeights)
+  }
 
   const getWeekDays = () => {
     const weekdays = [
@@ -65,10 +73,6 @@ const Week = ({
     //eslint-disable-next-line
   }, [])
 
-  const handleShowAddWeights = () => {
-    setAddWeights(!addWeights)
-  }
-
   const handleShowEditWeight = () => {
     setEditWeight(!editWeight)
     weights.filter((weight: any) => weight.currentWeight === 0) &&
@@ -91,16 +95,11 @@ const Week = ({
         </Button>
 
         <Weights
-          weights={weights}
           weekId={weekId}
         />
       </header>
       {addWeights && (
         <AddWeights
-          currentWeight={currentWeight}
-          setCurrentWeight={setCurrentWeight}
-          goalWeight={goalWeight}
-          setGoalWeight={setGoalWeight}
           addWeights={addWeights}
           setAddWeights={setAddWeights}
           weekId={weekId}
@@ -132,8 +131,8 @@ const Week = ({
           />
         )}
       </div>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
-      {isLoading && <h3>Loading ...</h3>}
+      {error && <Message variant='danger'>{error.message}</Message>}
+      {loading && <h3>Loading ...</h3>}
     </div>
   )
 }

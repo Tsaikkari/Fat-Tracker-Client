@@ -25,6 +25,13 @@ export const GET_USER_WEEKS_REQUEST = 'GET_USER_WEEKS_REQUEST'
 export const GET_USER_WEEKS_SUCCESS = 'GET_USER_WEEKS_SUCCESS'
 export const GET_USER_WEEKS_FAIL = 'GET_USER_WEEKS_FAIL'
 
+export const CREATE_WEIGHT_REQUEST = 'CREATE_WEIGHT_REQUEST'
+export const CREATE_WEIGHT_SUCCESS = 'CREATE_WEIGHT_SUCCESS'
+export const CREATE_WEIGHT_FAIL = 'CREATE_WEIGHT_FAIL'
+export const GET_USER_WEIGHTS_REQUEST = 'GET_USER_WEIGHTS_REQUEST'
+export const GET_USER_WEIGHTS_SUCCESS = 'GET_USER_WEIGHTS_SUCCESS'
+export const GET_USER_WEIGHTS_FAIL = 'GET_USER_WEIGHTS_FAIL'
+
 export const CREATE_FATTYFOOD_REQUEST = 'CREATE_FATTYFOOD_REQUEST'
 export const CREATE_FATTYFOOD_SUCCESS = 'CREATE_FATTYFOOD_SUCCESS'
 export const CREATE_FATTYFOOD_FAIL = 'CREATE_FATTYFOOD_FAIL'
@@ -39,6 +46,7 @@ export const GET_USER_SPORTS_REQUEST = 'GET_USER_SPORTS_REQUEST'
 export const GET_USER_SPORTS_SUCCESS = 'GET_USER_SPORTS_SUCCESS'
 export const GET_USER_SPORTS_FAIL = 'GET_USER_SPORTS_FAIL'
 
+/////// State types ///////
 // Error type
 export type Err = {
   error: any
@@ -60,6 +68,50 @@ export type User = SignupForm & {
   lifeStyles: string
 }
 
+// Week types
+export type Week = {
+  date: string
+}
+
+export type Weeks = {
+  list: Week[]
+}
+
+// Weight types
+export type Weight = {
+  currentWeight: number | string
+  goalWeight: number | string
+  weekId: string
+}
+
+export type Weights = {
+  list: Weight[]
+}
+
+// Fatty food types
+export type FattyFood = {
+  name: string
+  chosenDate: string
+  weekId: string
+}
+
+export type FattyFoods = {
+  list: FattyFood[]
+}
+
+// Sport types
+export type Sport = {
+  sport: string
+  date: string
+  duration: number | string
+  weekId: string
+}
+
+export type Sports = {
+  list: Sport[]
+}
+
+/////// Action types ///////
 // Auth actions
 // Signup
 export type SignupRequestAction = {
@@ -146,11 +198,6 @@ export type DeleteUserFailAction = {
   payload: Err
 }
 
-// Week types
-export type Week = {
-  date: string
-}
-
 // Week actions
 // Create week
 export type CreateWeekRequestAction = {
@@ -172,11 +219,6 @@ export type CreateWeekFailAction = {
   payload: Err
 }
 
-// Weeks types
-export type Weeks = {
-  list: Week[]
-}
-
 // Weeks actions
 // Get user weeks
 export type GetUserWeeksRequestAction = {
@@ -185,7 +227,7 @@ export type GetUserWeeksRequestAction = {
 
 export type GetUserWeeksSuccessAction = {
   type: typeof GET_USER_WEEKS_SUCCESS
-  payload: Week
+  payload: Weeks
 }
 
 export type GetUserWeeksFailAction = {
@@ -193,11 +235,41 @@ export type GetUserWeeksFailAction = {
   payload: Err
 }
 
-// Fatty food types
-export type FattyFood = {
-  name: string
-  chosenDate: string
-  weekId: string
+// Weight actions
+// Create weight
+export type CreateWeightRequestAction = {
+  type: typeof CREATE_WEIGHT_REQUEST
+  payload: {
+    weight: Weight
+  }
+}
+
+export type CreateWeightSuccessAction = {
+  type: typeof CREATE_WEIGHT_SUCCESS
+  payload: {
+    weight: Weight
+  }
+}
+
+export type CreateWeightFailAction = {
+  type: typeof CREATE_WEIGHT_FAIL
+  payload: Err
+}
+
+// Weights actions
+// Get user weights
+export type GetUserWeightsRequestAction = {
+  type: typeof GET_USER_WEIGHTS_REQUEST
+}
+
+export type GetUserWeightsSuccessAction = {
+  type: typeof GET_USER_WEIGHTS_SUCCESS
+  payload: Weights
+}
+
+export type GetUserWeightsFailAction = {
+  type: typeof GET_USER_WEIGHTS_FAIL
+  payload: Err
 }
 
 // Fatty food actions
@@ -221,34 +293,20 @@ export type CreateFattyFoodFailAction = {
   payload: Err
 }
 
-// Fatty foods types
-export type FattyFoods = {
-  list: FattyFood[]
-}
-
 // Fatty foods actions
 // Get user fatty food list
 export type GetUserFattyFoodsRequestAction = {
   type: typeof GET_USER_FATTYFOODS_REQUEST
-  payload: FattyFood
 }
 
 export type GetUserFattyFoodsSuccessAction = {
   type: typeof GET_USER_FATTYFOODS_SUCCESS
-  payload: FattyFood
+  payload: FattyFoods
 }
 
 export type GetUserFattyFoodsFailAction = {
   type: typeof GET_USER_FATTYFOODS_FAIL
   payload: Err
-}
-
-// Sport types
-export type Sport = {
-  sport: string
-  date: string
-  duration: number | string
-  weekId: string
 }
 
 // Sport actions
@@ -272,11 +330,6 @@ export type CreateSportFailAction = {
   payload: Err
 }
 
-// Sports types
-export type Sports = {
-  list: Sport[]
-}
-
 // Sports actions
 // Get user sport list
 export type GetUserSportsRequestAction = {
@@ -294,7 +347,7 @@ export type GetUserSportsFailAction = {
   payload: Err
 }
 
-// Unions
+/////// Unions ///////
 export type AuthActions =
   | SignupRequestAction
   | SignupSuccessAction
@@ -323,6 +376,16 @@ export type WeeksActions =
   | GetUserWeeksRequestAction
   | GetUserWeeksSuccessAction
   | GetUserWeeksFailAction
+
+export type WeightActions =
+  | CreateWeightRequestAction
+  | CreateWeightSuccessAction
+  | CreateWeightFailAction
+
+export type WeightsActions =
+  | GetUserWeightsRequestAction
+  | GetUserWeightsSuccessAction
+  | GetUserWeightsFailAction
 
 export type FattyFoodActions =
   | CreateFattyFoodRequestAction

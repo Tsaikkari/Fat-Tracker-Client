@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { AppState } from '../redux/types'
-import { getUserProfileRequest } from '../redux/actions/user'
 import { getUserWeeksRequest } from '../redux/actions/weeks'
 import LocalStorage from '../local-storage'
 
@@ -14,12 +13,6 @@ const Header = () => {
   const name = userInfo.name
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     dispatch(getUserProfileRequest(userInfo._id))
-  //   }
-  // })
 
   const handleWeeks = () => {
     dispatch(getUserWeeksRequest())

@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import Message from './Message'
 import { AppState } from '../redux/types'
 import { createSportRequest } from '../redux/actions/sport'
-import { getUserSportsRequest } from '../redux/actions'
+import { getUserSportsRequest } from '../redux/actions/sports'
 
 type AddSportsProps = {
   weekId: string
@@ -57,7 +57,7 @@ const AddSports = ({
         sport: data.sport,
         date,
         duration: Number(data.duration),
-        weekId: weekId
+        weekId
       }))
       setData({
         sport: '',
