@@ -33,7 +33,7 @@ function* loginUserSaga(action: LoginRequestAction) {
       password,
     })
 
-    console.log(res.data.payload)
+    // TODO: redirect to profile page
     if (res.data.status === 200) {
       yield put(loginUserSuccess(res.data.payload))
       yield LocalStorage.saveToken(res.data.payload.token)

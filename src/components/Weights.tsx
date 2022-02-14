@@ -16,6 +16,7 @@ const Weights = ({
     (weight: any) => weight.week === weekId
   )
 
+  // TODO: Fix []
   console.log(filteredWeights, 'filteredWeights')
 
   return (
