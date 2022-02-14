@@ -2,10 +2,10 @@ import {
   CREATE_WEEK_REQUEST,
   CREATE_WEEK_SUCCESS,
   CREATE_WEEK_FAIL,
-  WeekForm
+  Week
 } from './types'
 
-export const createWeekRequest = (week: WeekForm) => {
+export const createWeekRequest = (week: Week) => {
   return {
     type: CREATE_WEEK_REQUEST,
     payload: {
@@ -14,7 +14,7 @@ export const createWeekRequest = (week: WeekForm) => {
   }
 }
 
-export const createWeekSuccess = (week: WeekForm) => {
+export const createWeekSuccess = (week: Week) => {
   return {
     type: CREATE_WEEK_SUCCESS,
     payload: {

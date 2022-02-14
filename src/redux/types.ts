@@ -1,4 +1,4 @@
-import { User, Week, Weeks, FattyFood, FattyFoods, Sport, Sports, Weights } from '../redux/actions/types'
+import { User, Week, Weeks, FattyFood, FattyFoods, Sport, Sports, Weight, Weights } from '../redux/actions/types'
 
 export type AppState = {
   auth: {
@@ -9,28 +9,13 @@ export type AppState = {
   }
   user: {
     userInfo: User
-    loading: boolean
-    isLoggedIn: boolean
-    error: any
   }
-  week: {
-    date: string
-    fattyFoods: FattyFoods
-    sports: Sports
-    weights: Weights
-  },
-  weeks: Weeks
-  fattyFood: {
-    name: string
-    chosenDate: string
-    week: string
-  },
-  fattyFoods: FattyFoods
-  sport: {
-    sport: string
-    date: string
-    duration: number | string
-    week: string
-  },
+  week: Week
+  weeks: Weeks,
+  weight: Weight,
+  weights: Weights,
+  fattyFood: FattyFood
+  fattyFoods: FattyFoods,
+  sport: Sport,
   sports: Sports
 }

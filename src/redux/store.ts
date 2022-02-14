@@ -28,29 +28,25 @@ export const initState: AppState = {
       isAdmin: false,
       lifeStyles: ''
     },
-    isLoggedIn: false, 
-    loading: true,
-    error: undefined,
   },
   week: {
     date: '',
-    weights: {
-      list: []
-    },
-    fattyFoods: {
-      list: []
-    },
-    sports: {
-      list: []
-    }
   },
   weeks: {
+    list: []
+  },
+  weight: {
+    currentWeight: '',
+    goalWeight: '',
+    weekId: ''
+  },
+  weights: {
     list: []
   },
   fattyFood: {
     name: '',
     chosenDate: '',
-    week: ''
+    weekId: ''
   },
   fattyFoods: {
     list: []
@@ -59,7 +55,7 @@ export const initState: AppState = {
     sport: '',
     date: '',
     duration: '',
-    week: ''
+    weekId: ''
   },
   sports: {
     list: []

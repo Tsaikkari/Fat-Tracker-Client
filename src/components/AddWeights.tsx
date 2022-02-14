@@ -1,53 +1,59 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
-import axios from 'axios'
 
 import Message from './Message'
+import { AppState } from '../redux/types'
+import { createWeightRequest } from '../redux/actions/weight'
+import { getUserWeightsRequest } from '../redux/actions/weights'
 
 type AddWeightsProps = {
   addWeights: boolean
   setAddWeights: (arg0: boolean) => void
-  currentWeight: number | string
-  setCurrentWeight: any
-  goalWeight: number | string
-  setGoalWeight: any
   weekId: string
 }
 
 const AddWeights = ({
   addWeights,
   setAddWeights,
-  currentWeight,
-  setCurrentWeight,
-  goalWeight,
-  setGoalWeight,
   weekId,
 }: AddWeightsProps) => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
-  const storedToken = localStorage.getItem('authToken')
+  const [data, setData] = useState({
+    currentWeight: '',
+    goalWeight: '',
+    weekId: ''
+  })
+  const { error, loading } = useSelector((state: AppState) => state.auth)
 
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${storedToken}`,
-    },
+  const dispatch = useDispatch()
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
+
+    setData((prevValue: any) => {
+      return {
+        ...prevValue,
+        [name]: value,
+      }
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    try {
-      await axios.post(
-        '/api/weights',
-        { currentWeight, goalWeight, weekId },
-        config
-      )
-      setCurrentWeight('')
-      setGoalWeight('')
+    if (weekId) {
+      dispatch(createWeightRequest({
+        currentWeight: Number(data.currentWeight),
+        goalWeight: Number(data.goalWeight),
+        weekId
+      }))
+      setData({
+        currentWeight: '',
+        goalWeight: '',
+        weekId: ''
+      })
       setAddWeights(!addWeights)
-    } catch (err: any) {
-      const errorMsg = err.message
-      setErrorMessage(errorMsg)
+      dispatch(getUserWeightsRequest())
     }
   }
 
@@ -57,22 +63,25 @@ const AddWeights = ({
         <Form.Label>Current Weight</Form.Label>
         <Form.Control
           type='text'
-          value={currentWeight}
-          onChange={(e) => setCurrentWeight(Number(e.target.value))}
+          name='currentWeight'
+          value={data.currentWeight}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
       <Form.Group controlId='goalWeight'>
         <Form.Label>Goal Weight</Form.Label>
         <Form.Control
           type='text'
-          value={goalWeight}
-          onChange={(e) => setGoalWeight(Number(e.target.value))}
+          name='goalWeight'
+          value={data.goalWeight}
+          onChange={handleChange}
         ></Form.Control>
       </Form.Group>
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
+      {loading && <p>... loading</p>}
     </Form>
   )
 }

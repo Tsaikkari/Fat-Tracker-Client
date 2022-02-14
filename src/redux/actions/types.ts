@@ -69,14 +69,8 @@ export type User = SignupForm & {
 }
 
 // Week types
-export type WeekForm = {
+export type Week = {
   date: string
-}
-
-export type Week = WeekForm & {
-  fattyFoods: FattyFoods
-  sports: Sports
-  weight: Weights
 }
 
 export type Weeks = {
@@ -85,8 +79,9 @@ export type Weeks = {
 
 // Weight types
 export type Weight = {
-  currentWeight: number
-  goalWeight: number
+  currentWeight: number | string
+  goalWeight: number | string
+  weekId: string
 }
 
 export type Weights = {
@@ -208,14 +203,14 @@ export type DeleteUserFailAction = {
 export type CreateWeekRequestAction = {
   type: typeof CREATE_WEEK_REQUEST
   payload: {
-    week: WeekForm
+    week: Week
   }
 }
 
 export type CreateWeekSuccessAction = {
   type: typeof CREATE_WEEK_SUCCESS
   payload: {
-    week: WeekForm
+    week: Week
   }
 }
 
@@ -244,12 +239,16 @@ export type GetUserWeeksFailAction = {
 // Create weight
 export type CreateWeightRequestAction = {
   type: typeof CREATE_WEIGHT_REQUEST
-  payload: Weight
+  payload: {
+    weight: Weight
+  }
 }
 
 export type CreateWeightSuccessAction = {
   type: typeof CREATE_WEIGHT_SUCCESS
-  payload: Weight
+  payload: {
+    weight: Weight
+  }
 }
 
 export type CreateWeightFailAction = {
@@ -378,12 +377,12 @@ export type WeeksActions =
   | GetUserWeeksSuccessAction
   | GetUserWeeksFailAction
 
-export type WeightActions = 
+export type WeightActions =
   | CreateWeightRequestAction
   | CreateWeightSuccessAction
   | CreateWeightFailAction
 
-export type WeightsActions = 
+export type WeightsActions =
   | GetUserWeightsRequestAction
   | GetUserWeightsSuccessAction
   | GetUserWeightsFailAction

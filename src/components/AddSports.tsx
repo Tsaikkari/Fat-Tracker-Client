@@ -57,7 +57,7 @@ const AddSports = ({
         sport: data.sport,
         date,
         duration: Number(data.duration),
-        weekId: weekId
+        weekId
       }))
       setData({
         sport: '',

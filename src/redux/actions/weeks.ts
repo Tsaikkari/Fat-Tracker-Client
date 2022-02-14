@@ -22,7 +22,10 @@ export const getUserWeeksFail = (error: any) => {
   return {
     type: GET_USER_WEEKS_FAIL,
     payload: {
-      error
+      error:
+        error.response && error.data.message
+          ? error.response.data.message
+          : error.message,
     }
   }
 }

@@ -5,7 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import Message from './Message'
 import { AppState } from '../redux/types'
 import { createFattyFoodRequest } from '../redux/actions/fattyFood'
-import { getUserFattyFoodsRequest } from '../redux/actions/fattyFoods'
+import { getUserFattyFoodsRequest } from '../redux/actions'
 
 type AddFattyFoodsProps = {
   weekId: string

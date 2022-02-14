@@ -16,7 +16,6 @@ const initState = {
 const fattyFood = (state = initState, action: FattyFoodActions) => {
   switch (action.type) {
     case CREATE_FATTYFOOD_SUCCESS:
-      console.log(action.payload, 'reducerff')
       return { ...state, fattyFood: action.payload }
     default: 
       return state
