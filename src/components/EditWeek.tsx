@@ -4,24 +4,20 @@ import { Form, Button } from 'react-bootstrap'
 
 import Message from './Message'
 import { AppState } from '../redux/types'
-import { createWeightRequest } from '../redux/actions/weight'
-import { getUserWeightsRequest } from '../redux/actions/weights'
+import { updateWeekRequest } from '../redux/actions/week'
 
-type AddWeightsProps = {
+type EditWeekProps = {
   addWeights: boolean
   setAddWeights: (arg0: boolean) => void
-  weekId: string
 }
 
-const AddWeights = ({
-  addWeights,
-  setAddWeights,
-  weekId,
-}: AddWeightsProps) => {
+const AddWeights = ({ addWeights, setAddWeights }: EditWeekProps) => {
   const [data, setData] = useState({
-    currentWeight: '',
-    goalWeight: '',
-    weekId: ''
+    weights: {
+      currentWeight: '',
+      goalWeight: '',
+      achievedWeight: '',
+    },
   })
   const { error, loading } = useSelector((state: AppState) => state.auth)
 
@@ -41,20 +37,23 @@ const AddWeights = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (weekId) {
-      dispatch(createWeightRequest({
-        currentWeight: Number(data.currentWeight),
-        goalWeight: Number(data.goalWeight),
-        weekId
-      }))
-      setData({
+    dispatch(
+      updateWeekRequest({
+        weights: {
+          currentWeight: Number(data.weights.currentWeight),
+          goalWeight: Number(data.weights.goalWeight),
+          achievedWeight: Number(data.weights.achievedWeight),
+        },
+      })
+    )
+    setData({
+      weights: {
         currentWeight: '',
         goalWeight: '',
-        weekId: ''
-      })
-      setAddWeights(!addWeights)
-      dispatch(getUserWeightsRequest())
-    }
+        achievedWeight: '',
+      },
+    })
+    setAddWeights(!addWeights)
   }
 
   return (
@@ -64,7 +63,7 @@ const AddWeights = ({
         <Form.Control
           type='text'
           name='currentWeight'
-          value={data.currentWeight}
+          value={data.weights.currentWeight}
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>
@@ -73,7 +72,7 @@ const AddWeights = ({
         <Form.Control
           type='text'
           name='goalWeight'
-          value={data.goalWeight}
+          value={data.weights.goalWeight}
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>

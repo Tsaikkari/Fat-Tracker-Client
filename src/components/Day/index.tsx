@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState } from 'react'
 
 import DayHeader from '../DayHeader'
 import AddFattyFoods from '../AddFattyFoods'
@@ -7,8 +6,6 @@ import AddSports from '../AddSports'
 import FattyFoods from '../FattyFoods'
 import Sports from '../Sports'
 import styles from './Day.module.css'
-import { getUserFattyFoodsRequest } from '../../redux/actions'
-import { getUserSportsRequest } from '../../redux/actions/sports'
 
 type DayProps = {
   days: string[]
@@ -25,18 +22,6 @@ const Day = ({
 }: DayProps) => {
   const [addFattyFoods, setAddFattyFoods] = useState(false)
   const [addSports, setAddSports] = useState(false)
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getUserSportsRequest())
-    //eslint-disable-next-line
-  }, [])
-
-  useEffect(() => {
-    dispatch(getUserFattyFoodsRequest())
-    //eslint-disable-next-line
-  }, [])
 
   const handleShowAddFattyFoods = () => {
     setAddFattyFoods(!addFattyFoods)

@@ -1,4 +1,4 @@
-import { User, Week, Weeks, FattyFood, FattyFoods, Sport, Sports, Weight, Weights } from '../redux/actions/types'
+import { User, Week, Weeks, FattyFood, Sport } from '../redux/actions/types'
 
 export type AppState = {
   auth: {
@@ -12,10 +12,6 @@ export type AppState = {
   }
   week: Week
   weeks: Weeks,
-  weight: Weight,
-  weights: Weights,
   fattyFood: FattyFood
-  fattyFoods: FattyFoods,
-  sport: Sport,
-  sports: Sports
+  sport: Sport
 }

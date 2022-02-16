@@ -2,10 +2,15 @@ import {
   CREATE_WEEK_REQUEST,
   CREATE_WEEK_SUCCESS,
   CREATE_WEEK_FAIL,
-  Week
+  UPDATE_WEEK_REQUEST,
+  UPDATE_WEEK_SUCCESS,
+  UPDATE_WEEK_FAIL,
+  Week,
+  Date,
+  WeekUpdate
 } from './types'
 
-export const createWeekRequest = (week: Week) => {
+export const createWeekRequest = (week: Date) => {
   return {
     type: CREATE_WEEK_REQUEST,
     payload: {
@@ -32,6 +37,32 @@ export const createWeekFail = (error: any) => {
           ? error.response.data.message
           : error.message,
     }
+  }
+}
+
+export const updateWeekRequest = (week: Partial<WeekUpdate>) => {
+  return {
+    type: UPDATE_WEEK_REQUEST,
+    payload: week
+  }
+}
+
+export const updateWeekSuccess = (week: WeekUpdate) => {
+  return {
+    type: UPDATE_WEEK_SUCCESS,
+    payload: week
+  }
+}
+
+export const updateWeekFail = (error: any) => {
+  return {
+    type: UPDATE_WEEK_FAIL,
+    payload: {
+      error:
+        error.response && error.data.message
+          ? error.response.data.message
+          : error.message,
+    },
   }
 }
 
