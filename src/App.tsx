@@ -12,7 +12,7 @@ import Charts from './screens/Charts'
 import useLogin from './hooks/useLogin'
 
 const App = () => {
-  //TODO: persistant login on profile page
+  //TODO: persistant login on the profile page
   useLogin()
   
   return (

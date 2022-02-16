@@ -15,13 +15,15 @@ const Sports = ({
   dayIndex,
   weekId,
 }: SportsProps) => {
-  const sports = useSelector((state: AppState) => state.sports.list)
-  const filteredSports = sports.filter((sport: any) => sport.week === weekId)
+  const weeks = useSelector((state: AppState) => state.weeks.list)
+  const sports = weeks
+    .map((week: any) => week.sports)
+    .filter((sport: any) => sport.week === weekId)
   
   return (
     <>
-      {filteredSports &&
-        filteredSports.map((s: any) => (
+      {sports &&
+        sports.map((s: any) => (
           <div key={s._id}>
             <Sport
               sportId={s._id}

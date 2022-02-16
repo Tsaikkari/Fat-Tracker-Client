@@ -16,8 +16,8 @@ const Weeks = () => {
     (state: AppState) => state.auth
   )
   const weeks = useSelector((state: AppState) => state.weeks.list)
-  const fattyFoods = useSelector((state: AppState) => state.fattyFoods.list)
-  const sports = useSelector((state: AppState) => state.sports.list)
+  // const fattyFoods = useSelector((state: AppState) => state.fattyFoods.list)
+  // const sports = useSelector((state: AppState) => state.sports.list)
 
   const dispatch = useDispatch()
 
@@ -33,6 +33,8 @@ const Weeks = () => {
 
   console.log('weeks', weeks)
 
+  console.log('weeks', weeks)
+
   return (
     <div className={styles.container}>
       <WeekHeader handleShowAddWeek={handleShowAddWeek} />
@@ -45,8 +47,8 @@ const Weeks = () => {
             <Week
               startDate={week.date}
               weekId={week._id}
-              fattyFoods={fattyFoods}
-              sports={sports}
+              fattyFoods={weeks.map((week: any) => week.fattyFoods)}
+              sports={weeks.map((week: any) => week.sports)}
             />
           </div>
         ))

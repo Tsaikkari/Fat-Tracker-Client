@@ -8,8 +8,6 @@ import fattyFood from './fattyFood'
 import fattyFoods from './fattyFoods'
 import sport from './sport'
 import sports from './sports'
-import weight from './weight'
-import weights from './weights'
 
 const rootReducer = () =>
   combineReducers({
@@ -20,9 +18,7 @@ const rootReducer = () =>
     fattyFood,
     fattyFoods,
     sport,
-    sports,
-    weight,
-    weights
+    sports
   })
 
 export default rootReducer

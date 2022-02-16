@@ -4,24 +4,19 @@ import { Form, Button } from 'react-bootstrap'
 
 import Message from './Message'
 import { AppState } from '../redux/types'
-import { createWeightRequest } from '../redux/actions/weight'
-import { getUserWeightsRequest } from '../redux/actions/weights'
+import { updateWeekRequest } from '../redux/actions/week'
 
-type AddWeightsProps = {
+type EditWeekProps = {
   addWeights: boolean
   setAddWeights: (arg0: boolean) => void
   weekId: string
 }
 
-const AddWeights = ({
-  addWeights,
-  setAddWeights,
-  weekId,
-}: AddWeightsProps) => {
+const AddWeights = ({ addWeights, setAddWeights, weekId }: EditWeekProps) => {
   const [data, setData] = useState({
     currentWeight: '',
     goalWeight: '',
-    weekId: ''
+    achievedWeight: '',
   })
   const { error, loading } = useSelector((state: AppState) => state.auth)
 
@@ -41,20 +36,22 @@ const AddWeights = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (weekId) {
-      dispatch(createWeightRequest({
-        currentWeight: Number(data.currentWeight),
-        goalWeight: Number(data.goalWeight),
+    dispatch(
+      updateWeekRequest({
+        weights: {
+          currentWeight: Number(data.currentWeight),
+          goalWeight: Number(data.goalWeight),
+          achievedWeight: Number(data.achievedWeight),
+        },
         weekId
-      }))
-      setData({
-        currentWeight: '',
-        goalWeight: '',
-        weekId: ''
       })
-      setAddWeights(!addWeights)
-      //dispatch(getUserWeightsRequest())
-    }
+    )
+    setData({
+      currentWeight: '',
+      goalWeight: '',
+      achievedWeight: '',
+    })
+    setAddWeights(!addWeights)
   }
 
   return (

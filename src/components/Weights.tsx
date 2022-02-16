@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import Weight from './Weight'
@@ -11,17 +11,15 @@ type WeightsProps = {
 const Weights = ({
   weekId,
 }: WeightsProps) => {
-  const weights = useSelector((state: AppState) => state.weights.list)
-  const filteredWeights = weights && weights.filter(
-    (weight: any) => weight.week === weekId
-  )
-
-  console.log(filteredWeights, 'filteredWeights')
+  // weeks list [ { id: '', date: '', fattyFoods: [], sports: [], user: 'id', weights: [] }]
+  const weeks = useSelector((state: AppState) => state.weeks.list)
+  const week = weeks.filter((week: any) => week._id === weekId)
+  console.log(weeks, 'weeks')
 
   return (
     <div className=''>
-      {filteredWeights &&
-        filteredWeights.map((weight: any) => (
+      {/* {weights ?
+        weights.map((weight: any) => (
           <div key={weight._id}>
             <Weight
               currentWeight={weight.currentWeight}
@@ -29,7 +27,7 @@ const Weights = ({
               weightId={weight._id}
             />
           </div>
-        ))}
+        )) : null} */}
     </div>
   )
 }

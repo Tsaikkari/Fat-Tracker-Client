@@ -2,7 +2,7 @@ import {
   GET_USER_FATTYFOODS_REQUEST,
   GET_USER_FATTYFOODS_SUCCESS,
   GET_USER_FATTYFOODS_FAIL,
-  FattyFoods
+  FattyFood
 } from './types'
 
 export const getUserFattyFoodsRequest = () => {
@@ -11,7 +11,7 @@ export const getUserFattyFoodsRequest = () => {
   }
 }
 
-export const getUserFattyFoodsSuccess = (list: FattyFoods[]) => {
+export const getUserFattyFoodsSuccess = (list: FattyFood[]) => {
   return {
     type: GET_USER_FATTYFOODS_SUCCESS,
     payload: list

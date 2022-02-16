@@ -2,7 +2,7 @@ import {
   GET_USER_SPORTS_REQUEST,
   GET_USER_SPORTS_SUCCESS,
   GET_USER_SPORTS_FAIL,
-  Sports
+  Sport
 } from './types'
 
 export const getUserSportsRequest = () => {
@@ -11,7 +11,7 @@ export const getUserSportsRequest = () => {
   }
 }
 
-export const getUserSportsSuccess = (list: Sports[]) => {
+export const getUserSportsSuccess = (list: Sport[]) => {
   return {
     type: GET_USER_SPORTS_SUCCESS,
     payload: list

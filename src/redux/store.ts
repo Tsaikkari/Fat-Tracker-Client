@@ -30,17 +30,12 @@ export const initState: AppState = {
     },
   },
   week: {
-    date: ''
-  },
-  weeks: {
-    list: []
-  },
-  weight: {
+    date: '',
     currentWeight: '',
     goalWeight: '',
-    weekId: ''
+    achievedWeight: ''
   },
-  weights: {
+  weeks: {
     list: []
   },
   fattyFood: {
@@ -48,18 +43,12 @@ export const initState: AppState = {
     chosenDate: '',
     weekId: ''
   },
-  fattyFoods: {
-    list: []
-  },
   sport: {
     sport: '',
     date: '',
     duration: '',
     weekId: ''
   },
-  sports: {
-    list: []
-  }
 }
 
 export default function makeStore(initialState = initState) {

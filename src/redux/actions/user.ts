@@ -42,14 +42,14 @@ export const getUserProfileFail = (error: any) => {
 export const updateUserRequest = (user: Partial<UserUpdate>) => {
   return {
     type: UPDATE_USER_REQUEST,
-    payload: user,
+    payload: user
   }
 }
 
 export const updateUserSuccess = (user: UserUpdate) => {
   return {
     type: UPDATE_USER_SUCCESS,
-    payload: user,
+    payload: user
   }
 }
 

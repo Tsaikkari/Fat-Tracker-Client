@@ -21,16 +21,12 @@ export const DELETE_USER_FAIL = 'DELETE_USER_FAIL'
 export const CREATE_WEEK_REQUEST = 'CREATE_WEEK_REQUEST'
 export const CREATE_WEEK_SUCCESS = 'CREATE_WEEK_SUCCESS'
 export const CREATE_WEEK_FAIL = 'CREATE_WEEK_FAIL'
+export const UPDATE_WEEK_REQUEST = 'UPDATE_WEEK_REQUEST'
+export const UPDATE_WEEK_SUCCESS = 'UPDATE_WEEK_SUCCESS'
+export const UPDATE_WEEK_FAIL = 'UPDATE_WEEK_FAIL'
 export const GET_USER_WEEKS_REQUEST = 'GET_USER_WEEKS_REQUEST'
 export const GET_USER_WEEKS_SUCCESS = 'GET_USER_WEEKS_SUCCESS'
 export const GET_USER_WEEKS_FAIL = 'GET_USER_WEEKS_FAIL'
-
-export const CREATE_WEIGHT_REQUEST = 'CREATE_WEIGHT_REQUEST'
-export const CREATE_WEIGHT_SUCCESS = 'CREATE_WEIGHT_SUCCESS'
-export const CREATE_WEIGHT_FAIL = 'CREATE_WEIGHT_FAIL'
-export const GET_USER_WEIGHTS_REQUEST = 'GET_USER_WEIGHTS_REQUEST'
-export const GET_USER_WEIGHTS_SUCCESS = 'GET_USER_WEIGHTS_SUCCESS'
-export const GET_USER_WEIGHTS_FAIL = 'GET_USER_WEIGHTS_FAIL'
 
 export const CREATE_FATTYFOOD_REQUEST = 'CREATE_FATTYFOOD_REQUEST'
 export const CREATE_FATTYFOOD_SUCCESS = 'CREATE_FATTYFOOD_SUCCESS'
@@ -68,24 +64,40 @@ export type User = SignupForm & {
   lifeStyles: string
 }
 
+// Type update user
+export type UserUpdate = {
+  email: string
+  name: string
+  lifeStyles: string
+}
+
 // Week types
 export type Week = {
   date: string
+  currentWeight: number | string
+  goalWeight: number | string
+  achievedWeight: number | string
+}
+
+// Type Date
+export type Date = {
+  date: string
+}
+
+export type Weights = {
+  currentWeight: number | string
+  goalWeight: number | string
+  achievedWeight: number | string
+}
+
+// Type update week
+export type WeekUpdate = {
+  weights: Weights
+  weekId: string
 }
 
 export type Weeks = {
   list: Week[]
-}
-
-// Weight types
-export type Weight = {
-  currentWeight: number | string
-  goalWeight: number | string
-  weekId: string
-}
-
-export type Weights = {
-  list: Weight[]
 }
 
 // Fatty food types
@@ -95,20 +107,12 @@ export type FattyFood = {
   weekId: string
 }
 
-export type FattyFoods = {
-  list: FattyFood[]
-}
-
 // Sport types
 export type Sport = {
   sport: string
   date: string
   duration: number | string
   weekId: string
-}
-
-export type Sports = {
-  list: Sport[]
 }
 
 /////// Action types ///////
@@ -159,13 +163,6 @@ export type GetUserProfileSuccessAction = {
 export type GetUserProfileFailAction = {
   type: typeof GET_USER_PROFILE_FAIL
   payload: Err
-}
-
-// Update user
-export type UserUpdate = {
-  email: string
-  name: string
-  lifeStyles: string
 }
 
 export type UpdateUserRequestAction = {
@@ -219,6 +216,22 @@ export type CreateWeekFailAction = {
   payload: Err
 }
 
+// Update week 
+export type UpdateWeekRequestAction = {
+  type: typeof UPDATE_WEEK_REQUEST
+  payload: Partial<WeekUpdate>
+}
+
+export type UpdateWeekSuccessAction = {
+  type: typeof UPDATE_WEEK_SUCCESS
+  payload: Week
+}
+
+export type UpdateWeekFailAction = {
+  type: typeof UPDATE_WEEK_FAIL
+  payload: Err
+}
+
 // Weeks actions
 // Get user weeks
 export type GetUserWeeksRequestAction = {
@@ -232,43 +245,6 @@ export type GetUserWeeksSuccessAction = {
 
 export type GetUserWeeksFailAction = {
   type: typeof GET_USER_WEEKS_FAIL
-  payload: Err
-}
-
-// Weight actions
-// Create weight
-export type CreateWeightRequestAction = {
-  type: typeof CREATE_WEIGHT_REQUEST
-  payload: {
-    weight: Weight
-  }
-}
-
-export type CreateWeightSuccessAction = {
-  type: typeof CREATE_WEIGHT_SUCCESS
-  payload: {
-    weight: Weight
-  }
-}
-
-export type CreateWeightFailAction = {
-  type: typeof CREATE_WEIGHT_FAIL
-  payload: Err
-}
-
-// Weights actions
-// Get user weights
-export type GetUserWeightsRequestAction = {
-  type: typeof GET_USER_WEIGHTS_REQUEST
-}
-
-export type GetUserWeightsSuccessAction = {
-  type: typeof GET_USER_WEIGHTS_SUCCESS
-  payload: Weights
-}
-
-export type GetUserWeightsFailAction = {
-  type: typeof GET_USER_WEIGHTS_FAIL
   payload: Err
 }
 
@@ -301,7 +277,7 @@ export type GetUserFattyFoodsRequestAction = {
 
 export type GetUserFattyFoodsSuccessAction = {
   type: typeof GET_USER_FATTYFOODS_SUCCESS
-  payload: FattyFoods
+  payload: FattyFood
 }
 
 export type GetUserFattyFoodsFailAction = {
@@ -371,21 +347,14 @@ export type WeekActions =
   | CreateWeekRequestAction
   | CreateWeekSuccessAction
   | CreateWeekFailAction
+  | UpdateWeekRequestAction
+  | UpdateWeekSuccessAction
+  | UpdateWeekFailAction
 
 export type WeeksActions =
   | GetUserWeeksRequestAction
   | GetUserWeeksSuccessAction
   | GetUserWeeksFailAction
-
-export type WeightActions =
-  | CreateWeightRequestAction
-  | CreateWeightSuccessAction
-  | CreateWeightFailAction
-
-export type WeightsActions =
-  | GetUserWeightsRequestAction
-  | GetUserWeightsSuccessAction
-  | GetUserWeightsFailAction
 
 export type FattyFoodActions =
   | CreateFattyFoodRequestAction
