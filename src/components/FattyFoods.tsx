@@ -16,11 +16,6 @@ const FattyFoods = ({
   dayIndex,
   weekId,
 }: FattyFoodsProps) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getUserFattyFoodsRequest())
-  }, [])
 
   const fattyFoods = useSelector((state: AppState) => state.fattyFoods.list)
   const filteredFattyFoods = fattyFoods.filter((ff: any) => ff.week === weekId)

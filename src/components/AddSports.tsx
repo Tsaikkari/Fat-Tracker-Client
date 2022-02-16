@@ -67,7 +67,7 @@ const AddSports = ({
       })
       setDate('')
       setAddSports(!addSports)
-      dispatch(getUserSportsRequest())
+      //dispatch(getUserSportsRequest())
     }
   }
 

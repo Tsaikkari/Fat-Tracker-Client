@@ -28,15 +28,15 @@ const Day = ({
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(getUserSportsRequest())
-    //eslint-disable-next-line
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getUserSportsRequest())
+  //   //eslint-disable-next-line
+  // }, [])
 
-  useEffect(() => {
-    dispatch(getUserFattyFoodsRequest())
-    //eslint-disable-next-line
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getUserFattyFoodsRequest())
+  //   //eslint-disable-next-line
+  // }, [])
 
   const handleShowAddFattyFoods = () => {
     setAddFattyFoods(!addFattyFoods)

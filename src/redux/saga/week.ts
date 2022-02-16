@@ -13,6 +13,7 @@ function* createWeekSaga(action: CreateWeekRequestAction) {
     //@ts-ignore
     const res = yield axios.post('weeks', week)
     yield put(createWeekSuccess(res.data.payload))
+    yield localStorage.setItem('week', res.data.payload)
   } catch (err) {
     yield put(createWeekFail(err))
   }

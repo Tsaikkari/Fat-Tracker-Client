@@ -53,7 +53,7 @@ const AddWeights = ({
         weekId: ''
       })
       setAddWeights(!addWeights)
-      dispatch(getUserWeightsRequest())
+      //dispatch(getUserWeightsRequest())
     }
   }
 

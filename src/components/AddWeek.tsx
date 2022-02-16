@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from './Message'
 import { AppState } from '../redux/types'
 import { createWeekRequest } from '../redux/actions/week'
+import { getUserWeeksRequest } from '../redux/actions/weeks'
 
 type AddWeekProps = {
   addWeek: boolean
@@ -29,8 +30,9 @@ const AddWeek = ({ addWeek, setAddWeek }: AddWeekProps) => {
       }, 3000)
     }
     dispatch(createWeekRequest({ date }))
-      setDate('')
-      setAddWeek(!addWeek)
+    setDate('')
+    setAddWeek(!addWeek)
+    dispatch(getUserWeeksRequest())
   }
 
   return (

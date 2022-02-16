@@ -28,15 +28,15 @@ const Week = ({
   const [editWeight, setEditWeight] = useState(false)
   const [message, setMessage] = useState('')
 
-  useEffect(() => {
-    dispatch(getUserWeightsRequest())
-    //eslint-disable-next-line
-  }, [])
+  const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   dispatch(getUserWeightsRequest())
+  //   //eslint-disable-next-line
+  // }, [])
 
   const weights = useSelector((state: AppState) => state.weights.list)
   const { error, loading } = useSelector((state: AppState) => state.auth)
-
-  const dispatch = useDispatch()
 
   const handleShowAddWeights = () => {
     setAddWeights(!addWeights)

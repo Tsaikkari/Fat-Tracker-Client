@@ -26,10 +26,12 @@ const Weeks = () => {
   }
 
   useEffect(() => {
-    if (userInfo) {
+    // if (userInfo) {
       dispatch(getUserWeeksRequest())
-    }
-  }, [userInfo, dispatch])
+    // }
+  }, [])
+
+  console.log('weeks', weeks)
 
   return (
     <div className={styles.container}>

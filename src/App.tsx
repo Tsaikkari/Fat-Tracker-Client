@@ -12,8 +12,9 @@ import Charts from './screens/Charts'
 import useLogin from './hooks/useLogin'
 
 const App = () => {
-  //TODO: persistant login
+  //TODO: persistant login on profile page
   useLogin()
+  
   return (
     <>
       <Header />

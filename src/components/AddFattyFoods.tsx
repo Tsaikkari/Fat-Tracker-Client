@@ -64,7 +64,7 @@ const AddFattyFoods = ({
       })
       setChosenDate('')
       setAddFattyFoods(!addFattyFoods)
-      dispatch(getUserFattyFoodsRequest())
+      //dispatch(getUserFattyFoodsRequest())
     }
   }
 
