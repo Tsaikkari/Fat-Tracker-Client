@@ -31,7 +31,7 @@ const Home = () => {
   }
 
   const responseFailureGoogle = (res: any) => {
-    setErrorMessage(res.data.message)
+    setErrorMessage(res.data)
   }
   return (
     <div

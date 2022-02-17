@@ -14,7 +14,7 @@ const AddLifeStyles = () => {
     e.preventDefault()
 
     // try {
-    //   await axios.put( `/api/users/${user._id}`, { lifeStyles }, config)
+    //   await axios.put( `/api/users/${userInfo_id}`, { lifeStyles }, config)
     //   setLifeStyles('')
     // } catch (err: any) {
     //   const errorMsg = err.message
@@ -27,7 +27,7 @@ const AddLifeStyles = () => {
         <Form.Control
           type='text'
           placeholder='Separate life styles with a comma'
-          value={lifeStyles}
+          value={userInfo.lifeStyles}
           onChange={(e) => setLifeStyles(e.target.value)}
         ></Form.Control>
       </Form.Group>

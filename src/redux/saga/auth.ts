@@ -24,7 +24,8 @@ function* signupUserSaga(action: SignupRequestAction) {
 }
 
 function* loginUserSaga(action: LoginRequestAction) {
-  const { email, password } = action.payload
+  const { email, password } = action.payload.userInfo
+  const navigate = action.payload.navigate
 
   try {
     //@ts-ignore
@@ -33,14 +34,14 @@ function* loginUserSaga(action: LoginRequestAction) {
       password,
     })
 
-    // TODO: redirect to profile page
     if (res.data.status === 200) {
       yield put(loginUserSuccess(res.data.payload))
       yield LocalStorage.saveToken(res.data.payload.token)
       yield put(setLoggedIn())
+      navigate('/profile')
     }
-  } catch (error) {
-    yield put(loginUserFail(error))
+  } catch (error: any) {
+    yield put(loginUserFail(error.message))
   }
 }
 

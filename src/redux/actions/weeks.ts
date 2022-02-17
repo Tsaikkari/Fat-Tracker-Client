@@ -2,7 +2,7 @@ import {
   GET_USER_WEEKS_REQUEST,
   GET_USER_WEEKS_SUCCESS,
   GET_USER_WEEKS_FAIL,
-  Week
+  Weeks
 } from './types'
 
 export const getUserWeeksRequest = () => {
@@ -11,7 +11,7 @@ export const getUserWeeksRequest = () => {
   }
 }
 
-export const getUserWeeksSuccess = (list: Week[]) => {
+export const getUserWeeksSuccess = (list: Weeks) => {
   return {
     type: GET_USER_WEEKS_SUCCESS,
     payload: list

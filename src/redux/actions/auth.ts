@@ -8,12 +8,10 @@ import {
   SET_LOGGED_IN,
   LOGOUT_USER,
   User,
-  SignupForm,
-  LoginForm,
   AuthActions
 } from './types'
 
-export const signupUserRequest = ({ name, email, password }: SignupForm): AuthActions => {
+export const signupUserRequest = (name: string, email: string, password: string): AuthActions => {
   return {
     type: SIGNUP_USER_REQUEST,
     payload: { name, email, password},
@@ -38,20 +36,23 @@ export const signupUserFail = (error: any) => {
   }
 }
 
-export const loginUserRequest = ({ email, password }: LoginForm): AuthActions => {
+export const loginUserRequest = (email: string, password: string, navigate: any) => {
   return {
     type: LOGIN_USER_REQUEST,
     payload: {
-      email,
-      password
+      userInfo: {
+        email,
+        password,
+      },
+      navigate
     }
   }
 }
 
-export const loginUserSuccess = (userInfo: User): AuthActions => {
+export const loginUserSuccess = (userData: User): AuthActions => {
   return {
     type: LOGIN_USER_SUCCESS,
-    payload: userInfo,
+    payload: userData,
   }
 }
 
@@ -78,7 +79,3 @@ export const setLoggedIn = () => {
     type: SET_LOGGED_IN,
   }
 }
-
-
-
-

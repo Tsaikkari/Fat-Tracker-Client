@@ -21,8 +21,8 @@ function* getUserProfileSaga(action: GetUserProfileRequestAction) {
     //@ts-ignore
     const res = yield axios.get(`users/${userId}`)
     yield put(getUserProfileSuccess(res.data.payload))
-  } catch (error) {
-    yield put(getUserProfileFail(error))
+  } catch (error: any) {
+    yield put(getUserProfileFail(error.message))
   }
 }
 

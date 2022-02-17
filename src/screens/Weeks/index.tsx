@@ -12,12 +12,8 @@ import { getUserWeeksRequest } from '../../redux/actions/weeks'
 
 const Weeks = () => {
   const [addWeek, setAddWeek] = useState(false)
-  const { error, loading, userInfo } = useSelector(
-    (state: AppState) => state.auth
-  )
+  const { error, loading } = useSelector((state: AppState) => state.auth)
   const weeks = useSelector((state: AppState) => state.weeks.list)
-  // const fattyFoods = useSelector((state: AppState) => state.fattyFoods.list)
-  // const sports = useSelector((state: AppState) => state.sports.list)
 
   const dispatch = useDispatch()
 
@@ -26,12 +22,10 @@ const Weeks = () => {
   }
 
   useEffect(() => {
-    // if (userInfo) {
+    if (weeks.length !== 0) {
       dispatch(getUserWeeksRequest())
-    // }
+    }
   }, [])
-
-  console.log('weeks', weeks)
 
   console.log('weeks', weeks)
 

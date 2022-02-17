@@ -6,20 +6,20 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../../components/Message'
 import FormContainer from '../../components/FormContainer'
 import { AppState } from '../../redux/types'
-import { loginUserRequest } from '../../redux/actions'
+import { loginUserRequest } from '../../redux/actions/auth'
 
 const Login = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const { error, loading, userInfo } = useSelector((state: AppState) => state.auth)
+  const { error } = useSelector((state: AppState) => state.auth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    dispatch(loginUserRequest({ email, password }))
+    dispatch(loginUserRequest(email, password, navigate))
     setEmail('')
     setPassword('')
     navigate('/profile')
@@ -45,7 +45,7 @@ const Login = () => {
             placeholder='Enter Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          ></Form.Control>
+          ></Form.Control>  
         </Form.Group>
         <Button type='submit' className='save-btn' variant='danger'>
           Login

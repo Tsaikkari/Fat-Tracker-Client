@@ -20,23 +20,11 @@ const FattyFood = ({
   dayIndex,
 }: FattyFoodProps) => {
   const [errorMessage, setErrorMessage] = useState(undefined)
+
+  console.log(dayIndex, 'dayIndex')
   const deleteFattyFoods = async () => {
-    const storedToken = localStorage.getItem('authToken')
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${storedToken}`,
-      },
-    }
-
     if (window.confirm('Delete fatty foods?')) {
-      try {
-        await axios.delete(`/api/fattyFoods/${fattyFoodId}`, config)
-      } catch (err: any) {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
-      }
+      
     }
   }
 

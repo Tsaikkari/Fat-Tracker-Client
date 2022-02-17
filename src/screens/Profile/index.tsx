@@ -22,38 +22,39 @@ const Profile = () => {
     password: '',
   })
 
-  const { error, loading, isLoggedIn, userInfo } = useSelector(
+  const { error, loading, isLoggedIn } = useSelector(
     (state: AppState) => state.auth
   )
+
+  const userInfo = useSelector((state: AppState) => state.auth.userInfo)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  console.log(isLoggedIn, userInfo && userInfo._id, loading)
+
   useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login')
+    if (isLoggedIn && userInfo.name !== '') {
+      dispatch(getUserProfileRequest(userInfo._id))
     } else {
-      if (!userInfo.name && userInfo._id !== '') {
-        dispatch(getUserProfileRequest(userInfo._id))
-      } else {
-        setFormData((prevValue: any) => {
-          return {
-            ...prevValue,
-            name: userInfo.name,
-            email: userInfo.email,
-            lifeStyles: userInfo.lifeStyles,
-          }
-        })
-      }
+      setFormData((prevValue: any) => {
+        return {
+          ...prevValue,
+          name: formData.name,
+          email: formData.email,
+          lifeStyles: formData.lifeStyles,
+        }
+      })
     }
   }, [
     dispatch,
-    userInfo.name,
-    userInfo.email,
-    userInfo.lifeStyles,
-    userInfo._id,
+    formData.name,
+    formData.email,
+    formData.lifeStyles,
     isLoggedIn,
     navigate,
+    userInfo._id,
+    userInfo.name
   ])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

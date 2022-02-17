@@ -13,41 +13,42 @@ export const initState: AppState = {
       email: '',
       password: '',
       isAdmin: false,
-      lifeStyles: ''
+      lifeStyles: '',
     },
-    isLoggedIn: false, 
+    isLoggedIn: false,
     loading: true,
     error: undefined,
   },
   user: {
-    userInfo: {
-      _id: '',
-      name: '',
-      email: '',
-      password: '',
-      isAdmin: false,
-      lifeStyles: ''
-    },
+    _id: '',
+    name: '',
+    email: '',
+    password: '',
+    isAdmin: false,
+    lifeStyles: '',
   },
   week: {
-    date: '',
-    currentWeight: '',
-    goalWeight: '',
-    achievedWeight: ''
+    weekInfo: {
+      date: '',
+      currentWeight: '',
+      goalWeight: '',
+      achievedWeight: '',
+    },
+    //fattyFoods: []
   },
   weeks: {
-    list: []
+    list: [],
   },
   fattyFood: {
     name: '',
     chosenDate: '',
-    weekId: ''
+    weekId: '',
   },
   sport: {
     sport: '',
     date: '',
     duration: '',
-    weekId: ''
+    weekId: '',
   },
 }
 
@@ -74,7 +75,7 @@ export default function makeStore(initialState = initState) {
   sagaMiddleware.run(rootSaga)
 
   if ((module as any).hot) {
-    ; (module as any).hot.accept('./reducers', () => {
+    ;(module as any).hot.accept('./reducers', () => {
       const nextReducer = require('./reducers').default
       store.replaceReducer(nextReducer)
     })

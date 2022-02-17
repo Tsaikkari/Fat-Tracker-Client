@@ -54,14 +54,19 @@ export type LoginForm = {
   password: string
 }
 
-export type SignupForm = LoginForm & {
+export type SignupForm = {
   name: string
+  email: string
+  password: string
 }
 
-export type User = SignupForm & {
+export type User = {
   _id: string
   isAdmin: false
   lifeStyles: string
+  name: string
+  email: string
+  password: string
 }
 
 // Type update user
@@ -135,7 +140,10 @@ export type SignupFailAction = {
 // Login
 export type LoginRequestAction = {
   type: typeof LOGIN_USER_REQUEST
-  payload: LoginForm
+  payload: {
+    userInfo: LoginForm
+    navigate: any
+  }
 }
 
 export type LoginSuccessAction = {

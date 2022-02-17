@@ -9,11 +9,13 @@ import { updateWeekRequest } from '../redux/actions/week'
 type EditAchievedWeightProps = {
   editWeight: boolean
   setEditWeight: (arg0: boolean) => void
+  weekId: string
 }
 
 const EditAchievedWeight = ({
   editWeight,
   setEditWeight,
+  weekId
 }: EditAchievedWeightProps) => {
   const [data, setData] = useState({
     currentWeight: '',
@@ -45,6 +47,7 @@ const EditAchievedWeight = ({
           goalWeight: Number(data.goalWeight),
           achievedWeight: Number(data.achievedWeight),
         },
+        weekId
       })
     )
     setData({

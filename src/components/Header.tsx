@@ -10,7 +10,7 @@ import LocalStorage from '../local-storage'
 
 const Header = () => {
   const { isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
-  const name = userInfo.name
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -36,7 +36,7 @@ const Header = () => {
               <LinkContainer to='/charts'>
                 <Nav.Link>Chart</Nav.Link>
               </LinkContainer>
-              <NavDropdown title={name && name.split(' ')[0]} id='name'>
+              <NavDropdown title={userInfo.name && userInfo.name.split(' ')[0]} id='name'>
                 <LinkContainer to='/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
                 </LinkContainer>
