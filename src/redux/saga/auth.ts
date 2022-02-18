@@ -1,4 +1,4 @@
-import { put, takeLatest, select } from 'redux-saga/effects'
+import { put, takeLatest } from 'redux-saga/effects'
 import axios from 'axios'
 
 import LocalStorage from '../../local-storage'
@@ -25,9 +25,6 @@ import {
   UpdateUserRequestAction,
   DeleteUserRequestAction,
 } from '../actions/types'
-import { AppState } from '../types'
-
-const userId = select((state: AppState) => state.auth._id)
 
 function* signupUserSaga(action: SignupRequestAction) {
   const { name, email, password } = action.payload
@@ -43,8 +40,7 @@ function* signupUserSaga(action: SignupRequestAction) {
 function* googleLoginSaga(action: GoogleLoginRequestAction) {
   const { idToken } = action.payload.googleLogin
   const navigate = action.payload.navigate
-  //const id = action.payload._id
- console.log(action.payload, 'saga')
+
   try {
     //@ts-ignore
     const res = yield axios.post('auth/login/google', { idToken })

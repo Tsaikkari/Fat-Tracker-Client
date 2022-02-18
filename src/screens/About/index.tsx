@@ -8,11 +8,10 @@ import { getUserProfileRequest } from '../../redux/actions'
 
 const About = () => {
   const auth = useSelector((state: AppState) => state.auth)
-  const {_id, name, lifeStyles, loading } = auth
+  const {_id, name, lifeStyles } = auth
 
   const dispatch = useDispatch()
 
-  // TODO: fix
   useEffect(() => {
     if (!name && _id !== undefined) {
       dispatch(getUserProfileRequest(_id))
@@ -21,8 +20,8 @@ const About = () => {
     dispatch,
     _id,
     name,
-    loading
   ])
+  
   return (
     <div>
       <h1 className='text-center m-4'>Hello {name} 🧡</h1>

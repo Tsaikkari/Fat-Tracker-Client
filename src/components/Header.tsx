@@ -6,22 +6,17 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { AppState } from '../redux/types'
 import { getUserWeeksRequest } from '../redux/actions/weeks'
-import { getUserProfileRequest } from '../redux/actions'
 import { logoutUser } from '../redux/actions/auth'
 import LocalStorage from '../local-storage'
 
 const Header = () => {
-  const { name, _id, isLoggedIn } = useSelector((state: AppState) => state.auth)
+  const { name, isLoggedIn } = useSelector((state: AppState) => state.auth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleWeeks = () => {
     dispatch(getUserWeeksRequest())
-  }
-
-  const handleGetProfile = () => {
-    dispatch(getUserProfileRequest(_id))
   }
 
   const handleLogout = () => {
@@ -45,7 +40,7 @@ const Header = () => {
               </LinkContainer>
               <NavDropdown title={name && name.split(' ')[0]} id='name'>
                 <LinkContainer to='/about'>
-                  <NavDropdown.Item onClick={handleGetProfile}>About</NavDropdown.Item>
+                  <NavDropdown.Item>About</NavDropdown.Item>
                 </LinkContainer>
                 <LinkContainer to='/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
