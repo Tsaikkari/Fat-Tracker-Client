@@ -6,7 +6,7 @@ import AddLifeStyles from '../../components/AddLifeStyles'
 import { AppState } from '../../redux/types'
 import { getUserProfileRequest } from '../../redux/actions'
 
-const Welcome = () => {
+const About = () => {
   const auth = useSelector((state: AppState) => state.auth)
   const {_id, name, lifeStyles, loading } = auth
 
@@ -41,4 +41,4 @@ const Welcome = () => {
   )
 }
 
-export default Welcome
+export default About

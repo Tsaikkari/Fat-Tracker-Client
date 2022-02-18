@@ -1,8 +1,7 @@
-import { put, takeLatest } from 'redux-saga/effects'
+import { put, takeLatest, select } from 'redux-saga/effects'
 import axios from 'axios'
 
 import LocalStorage from '../../local-storage'
-
 import {
   signupUserSuccess,
   signupUserFail,
@@ -26,6 +25,9 @@ import {
   UpdateUserRequestAction,
   DeleteUserRequestAction,
 } from '../actions/types'
+import { AppState } from '../types'
+
+const userId = select((state: AppState) => state.auth._id)
 
 function* signupUserSaga(action: SignupRequestAction) {
   const { name, email, password } = action.payload
@@ -41,19 +43,21 @@ function* signupUserSaga(action: SignupRequestAction) {
 function* googleLoginSaga(action: GoogleLoginRequestAction) {
   const { idToken } = action.payload.googleLogin
   const navigate = action.payload.navigate
- 
+  //const id = action.payload._id
+ console.log(action.payload, 'saga')
   try {
     //@ts-ignore
     const res = yield axios.post('auth/login/google', { idToken })
 
     if (res.data.status === 200) {
-      yield put(googleLoginSuccess(res.data.payload))
+      yield put(googleLoginSuccess(res.data.payload.userInfo))
       yield LocalStorage.saveToken(res.data.payload.token)
       yield put(setLoggedIn())
       navigate('/about')
     }
   } catch (err: any) {
     yield put(googleLoginFail(err.message))
+    yield put(getUserProfileFail(err.message))
   }
 }
 
@@ -69,9 +73,10 @@ function* loginUserSaga(action: LoginRequestAction) {
     })
 
     if (res.data.status === 200) {
-      yield put(loginUserSuccess(res.data.payload))
+      yield put(loginUserSuccess(res.data.payload.userInfo))
       yield LocalStorage.saveToken(res.data.payload.token)
       yield put(setLoggedIn())
+      yield put({ type: 'GET_USER_PROFILE_REQUEST' })
       navigate('/about')
     }
   } catch (error: any) {
