@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Message from './Message'
 import { AppState } from '../redux/types'
-import { updateUserRequest } from '../redux/actions/user'
+import { updateUserRequest } from '../redux/actions/auth'
 
 const AddLifeStyles = () => {
   const [lifeStyles, setLifeStyles] = useState('')
@@ -17,7 +17,7 @@ const AddLifeStyles = () => {
     e.preventDefault()
 
     dispatch(
-      updateUserRequest(_id, { lifeStyles })
+      updateUserRequest({ _id, lifeStyles })
     )
     setLifeStyles('')
   }

@@ -21,6 +21,7 @@ const initState = {
   isLoggedIn: false,
   loading: true,
   error: undefined,
+  weights: {}
 }
 
 const auth = (state = initState, action: AuthActions) => {

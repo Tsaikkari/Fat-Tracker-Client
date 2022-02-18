@@ -11,11 +11,8 @@ type WeightsProps = {
 const Weights = ({
   weekId,
 }: WeightsProps) => {
-  // weeks list [ { id: '', date: '', fattyFoods: [], sports: [], user: 'id', weights: [] }]
   const weeks = useSelector((state: AppState) => state.weeks.list)
-  const week = weeks.filter((week: any) => week._id === weekId)
-  console.log(weeks, 'weeks')
-
+  // TODO:
   return (
     <div className=''>
       {/* {weights ?

@@ -152,15 +152,10 @@ export const getUserProfileFail = (error: any) => {
   }
 }
 
-export const updateUserRequest = (id: string, user: Partial<UserUpdate>) => {
+export const updateUserRequest = (user: Partial<UserUpdate>) => {
   return {
     type: UPDATE_USER_REQUEST,
-    payload: {
-      id,
-      updatedUser: {
-        user
-      }
-    }
+    payload: user
   }
 }
 

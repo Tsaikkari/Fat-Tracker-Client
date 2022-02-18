@@ -92,11 +92,12 @@ function* getUserProfileSaga(action: GetUserProfileRequestAction) {
 }
 
 function* updateUserSaga(action: UpdateUserRequestAction) {
-  const { name, email, _id } = action.payload
-  
+  const { name, email } = action.payload
+  const userId = action.payload._id
+  console.log(action.payload.name, 'saga')
   try {
     //@ts-ignore
-    const res = yield axios.patch(`users/${_id}`, { name, email })
+    const res = yield axios.patch(`users/${userId}`, { name, email })
     yield put(updateUserSuccess(res.data.payload))
   } catch (err: any) {
     yield put(updateUserFail(err.message))
@@ -108,7 +109,7 @@ function* updateLifeStyleSaga(action: UpdateUserRequestAction) {
   const lifeStyles = action.payload.lifeStyles
   try {
     //@ts-ignore
-    const res = yield axios.patch(`users/${userId}`, lifeStyles)
+    const res = yield axios.patch(`users/${userId}`, { lifeStyles })
     yield put(updateUserSuccess(res.data.payload))
   } catch (err: any) {
     yield put(updateUserFail(err.message))
