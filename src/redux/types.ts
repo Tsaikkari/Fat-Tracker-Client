@@ -1,24 +1,18 @@
 import { User, Week, Weeks, FattyFood, Sport } from '../redux/actions/types'
 
+export type AuthState = User & {
+  isLoggedIn: boolean
+  loading: boolean
+  error: any
+}
+
+export type WeekState = Week & {
+  inWeek: any[]
+}
+
 export type AppState = {
-  auth: {
-    userInfo: {
-      _id: string
-      isAdmin: false
-      lifeStyles: string
-      name: string
-      email: string
-      password: string
-    }
-    loading: boolean
-    isLoggedIn: boolean
-    error: any
-  }
-  user: User
-  week: {
-    weekInfo: Week
-    //fattyFoods: FattyFood[]
-  }
+  auth: AuthState
+  week: WeekState
   weeks: Weeks
   fattyFood: FattyFood
   sport: Sport

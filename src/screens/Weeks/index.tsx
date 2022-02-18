@@ -27,8 +27,6 @@ const Weeks = () => {
     }
   }, [])
 
-  console.log('weeks', weeks)
-
   return (
     <div className={styles.container}>
       <WeekHeader handleShowAddWeek={handleShowAddWeek} />

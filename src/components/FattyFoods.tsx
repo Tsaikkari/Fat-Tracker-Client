@@ -11,19 +11,18 @@ type FattyFoodsProps = {
 }
 
 const FattyFoods = ({ days, dayIndex, weekId }: FattyFoodsProps) => {
+  // TODO: fix
   const weeks = useSelector((state: AppState) => state.weeks.list)
-
   const fattyFoods = weeks.map((week: any) => week.fattyFoods)
-  const filteredFattyFoods = fattyFoods.filter((ff: any) => ff.filter((f: any) => f.week === weekId))
 
-  console.log(filteredFattyFoods, 'FFF')
+  console.log(fattyFoods, 'fattyfoods')
   return (
     <div>
-      {filteredFattyFoods &&
-        filteredFattyFoods.map((ff: any) => (
+      {fattyFoods.map((ff: any) => (
           <div key={ff._id}>
             <FattyFood
-              fattyFoodId={ff._id}
+              weekId={weekId}
+              fattyFoodWeekId={ff.week}
               name={ff.name}
               chosenDate={ff.chosenDate}
               days={days}

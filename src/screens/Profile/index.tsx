@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
 import styles from './Profile.module.css'
 import Message from '../../components/Message'
-import LifeStyles from '../../components/LifeStyles'
-import AddLifeStyles from '../../components/AddLifeStyles'
 import { AppState } from '../../redux/types'
 import { updateUserRequest } from '../../redux/actions/user'
 import { getUserProfileRequest } from '../../redux/actions'
@@ -22,27 +19,23 @@ const Profile = () => {
     password: '',
   })
 
-  const { error, loading, isLoggedIn } = useSelector(
-    (state: AppState) => state.auth
-  )
-
-  const userInfo = useSelector((state: AppState) => state.auth.userInfo)
+  const auth = useSelector((state: AppState) => state.auth)
+  const { _id, name, email, isLoggedIn, error } = auth
 
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
-  console.log(isLoggedIn, userInfo && userInfo._id, loading)
+  console.log(isLoggedIn, _id, name, email)
 
+  // TODO: fix
   useEffect(() => {
-    if (isLoggedIn && userInfo.name !== '') {
-      dispatch(getUserProfileRequest(userInfo._id))
+    if (!name && _id !== undefined) {
+      dispatch(getUserProfileRequest(_id))
     } else {
       setFormData((prevValue: any) => {
         return {
           ...prevValue,
           name: formData.name,
           email: formData.email,
-          lifeStyles: formData.lifeStyles,
         }
       })
     }
@@ -50,11 +43,8 @@ const Profile = () => {
     dispatch,
     formData.name,
     formData.email,
-    formData.lifeStyles,
-    isLoggedIn,
-    navigate,
-    userInfo._id,
-    userInfo.name
+    _id,
+    name
   ])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +71,7 @@ const Profile = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     dispatch(
-      updateUserRequest({
+      updateUserRequest(_id, {
         email: formData.email,
         name: formData.name,
         lifeStyles: formData.lifeStyles,
@@ -101,23 +91,11 @@ const Profile = () => {
     <>
       {isLoggedIn && (
         <>
-          <h1 className='text-center m-4'>Hello {userInfo.name} 🧡</h1>
-          <section>
-            {/* {weeks.length === 0 &&  */}
-            <p>
-              Create your week plan(s) at the <span>Week</span> page. But first,
-              you might want to specify the life style changes that you are
-              taking on:
-            </p>
-            {/* }  */}
-            <LifeStyles lifeStyles={userInfo.lifeStyles} />
-            <AddLifeStyles />
-          </section>
           <div className={styles.container}>
             <Form onSubmit={handleSubmit}>
               <h3>Update your information</h3>
               <Form.Group controlId='name'>
-                <Form.Label>Name</Form.Label>
+                <Form.Label>New Name</Form.Label>
                 <Form.Control
                   type='text'
                   placeholder='Enter Name'
@@ -127,7 +105,7 @@ const Profile = () => {
                 ></Form.Control>
               </Form.Group>
               <Form.Group controlId='email'>
-                <Form.Label>Email Address</Form.Label>
+                <Form.Label>New Email Address</Form.Label>
                 <Form.Control
                   type='email'
                   placeholder='Enter Email'

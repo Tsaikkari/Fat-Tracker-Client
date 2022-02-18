@@ -4,9 +4,6 @@ import axios from 'axios'
 
 import { logoutUser, loginUserSuccess, setLoggedIn } from '../redux/actions/auth'
 
-// TODO: should stay on profile page when refresh
-// TODO: should logout without refresh
-
 const useLogin = () => {
   const dispatch = useDispatch()
 

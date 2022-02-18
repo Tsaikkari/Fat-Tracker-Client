@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import axios from 'axios'
 
 import Message from './Message'
+import { AppState } from '../redux/types'
+//TODO: create
+//import { deleteFattyFoodsRequest } from '../redux/actions/fattyFood'
 
 type FattyFoodProps = {
-  fattyFoodId: string
+  weekId: string
+  fattyFoodWeekId: string
   name: string
   chosenDate: string
   dayIndex: number
@@ -13,15 +17,14 @@ type FattyFoodProps = {
 }
 
 const FattyFood = ({
-  fattyFoodId,
+  weekId,
+  fattyFoodWeekId,
   name,
   chosenDate,
   days,
   dayIndex,
 }: FattyFoodProps) => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
-
-  console.log(dayIndex, 'dayIndex')
+  const dispatch = useDispatch()
   const deleteFattyFoods = async () => {
     if (window.confirm('Delete fatty foods?')) {
       
@@ -30,7 +33,7 @@ const FattyFood = ({
 
   return (
     <div className='fattyfood-container'>
-      {chosenDate === days[dayIndex] && (
+      {fattyFoodWeekId === weekId && chosenDate === days[dayIndex] && (
         <>
           <p>{name}</p>
           <Button
@@ -42,7 +45,6 @@ const FattyFood = ({
           </Button>
         </>
       )}
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
     </div>
   )
 }

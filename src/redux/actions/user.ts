@@ -16,14 +16,14 @@ import {
 export const getUserProfileRequest = (id: string) => {
   return {
     type: GET_USER_PROFILE_REQUEST,
-    payload: id,
+    payload: id
   }
 }
 
-export const getUserProfileSuccess = (payload: User) => {
+export const getUserProfileSuccess = (userData: User) => {
   return {
     type: GET_USER_PROFILE_SUCCESS,
-    payload,
+    payload: userData
   }
 }
 
@@ -39,10 +39,15 @@ export const getUserProfileFail = (error: any) => {
   }
 }
 
-export const updateUserRequest = (user: Partial<UserUpdate>) => {
+export const updateUserRequest = (id: string, user: Partial<UserUpdate>) => {
   return {
     type: UPDATE_USER_REQUEST,
-    payload: user
+    payload: {
+      id,
+      updatedUser: {
+        user
+      }
+    }
   }
 }
 

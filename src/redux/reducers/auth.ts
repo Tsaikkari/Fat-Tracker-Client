@@ -4,17 +4,18 @@ import {
   LOGIN_USER_SUCCESS,
   LOGOUT_USER,
   SET_LOGGED_IN,
+  GET_USER_PROFILE_SUCCESS,
+  UPDATE_USER_SUCCESS, 
+  DELETE_USER_SUCCESS,
 } from '../actions/types'
 
 const initState = {
-  userInfo: {
-    _id: '',
-    name: '',
-    email: '',
-    password: '',
-    isAdmin: false,
-    lifeStyles: '',
-  },
+  _id: '',
+  name: '',
+  email: '',
+  password: '',
+  isAdmin: false,
+  lifeStyles: '',
   isLoggedIn: false,
   loading: true,
   error: undefined,
@@ -25,17 +26,22 @@ const auth = (state = initState, action: AuthActions) => {
     case SINGUP_USER_SUCCESS:
       return { ...state }
     case LOGIN_USER_SUCCESS:
-      console.log(action.payload, 'reducer')
       return {
         ...state,
+        ...action.payload,
         isLoggedIn: true,
         loading: false,
-        userInfo: action.payload,
       }
     case SET_LOGGED_IN:
       return { ...state, isLoggedIn: true, loading: false }
     case LOGOUT_USER:
       return {}
+    case GET_USER_PROFILE_SUCCESS:
+      return { ...state, user: action.payload, isLoggedIn: true, loading: false }
+    case UPDATE_USER_SUCCESS:
+      return { ...state, ...action.payload, loading: false }
+    case DELETE_USER_SUCCESS:
+      return { ...state, loading: false }
     default:
       return state
   }

@@ -71,6 +71,7 @@ export type User = {
 
 // Type update user
 export type UserUpdate = {
+  _id: string
   email: string
   name: string
   lifeStyles: string
@@ -141,19 +142,27 @@ export type SignupFailAction = {
 export type LoginRequestAction = {
   type: typeof LOGIN_USER_REQUEST
   payload: {
-    userInfo: LoginForm
+    loginForm: LoginForm
     navigate: any
   }
 }
 
 export type LoginSuccessAction = {
-  type: string
+  type: typeof LOGIN_USER_SUCCESS
   payload: User
 }
 
 export type LoginFailAction = {
   type: typeof LOGIN_USER_FAIL
   payload: any
+}
+
+export type SetLoggedInAction = {
+  type: typeof SET_LOGGED_IN
+}
+
+export type LogoutAction = {
+  type: typeof LOGOUT_USER
 }
 
 // User actions
@@ -224,7 +233,7 @@ export type CreateWeekFailAction = {
   payload: Err
 }
 
-// Update week 
+// Update week
 export type UpdateWeekRequestAction = {
   type: typeof UPDATE_WEEK_REQUEST
   payload: Partial<WeekUpdate>
@@ -339,8 +348,8 @@ export type AuthActions =
   | LoginRequestAction
   | LoginSuccessAction
   | LoginFailAction
-
-export type UserActions =
+  | SetLoggedInAction
+  | LogoutAction
   | GetUserProfileRequestAction
   | GetUserProfileSuccessAction
   | GetUserProfileFailAction

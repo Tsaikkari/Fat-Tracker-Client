@@ -4,22 +4,22 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Message from './Message'
 import { AppState } from '../redux/types'
+import { updateUserRequest } from '../redux/actions/user'
 
 const AddLifeStyles = () => {
   const [lifeStyles, setLifeStyles] = useState('')
 
-  const { error, loading, isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
+  const {_id, error } = useSelector((state: AppState) => state.auth)
+
+  const dispatch = useDispatch()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // try {
-    //   await axios.put( `/api/users/${userInfo_id}`, { lifeStyles }, config)
-    //   setLifeStyles('')
-    // } catch (err: any) {
-    //   const errorMsg = err.message
-    //   setErrorMessage(errorMsg)
-    // }
+    dispatch(
+      updateUserRequest(_id, { lifeStyles })
+    )
+    setLifeStyles('')
   }
   return (
     <Form onSubmit={handleSubmit}>
@@ -27,7 +27,8 @@ const AddLifeStyles = () => {
         <Form.Control
           type='text'
           placeholder='Separate life styles with a comma'
-          value={userInfo.lifeStyles}
+          value={lifeStyles}
+          name='lifeStyles'
           onChange={(e) => setLifeStyles(e.target.value)}
         ></Form.Control>
       </Form.Group>

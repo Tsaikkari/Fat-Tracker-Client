@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { AppState } from '../redux/types'
 import { getUserWeeksRequest } from '../redux/actions/weeks'
+import { getUserProfileRequest } from '../redux/actions'
+import { logoutUser } from '../redux/actions/auth'
 import LocalStorage from '../local-storage'
 
 const Header = () => {
-  const { isLoggedIn, userInfo } = useSelector((state: AppState) => state.auth)
+  const { name, _id, isLoggedIn } = useSelector((state: AppState) => state.auth)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -18,9 +20,14 @@ const Header = () => {
     dispatch(getUserWeeksRequest())
   }
 
+  const handleGetProfile = () => {
+    dispatch(getUserProfileRequest(_id))
+  }
+
   const handleLogout = () => {
     LocalStorage.removeToken()
     navigate('/')
+    dispatch(logoutUser())
   }
 
   return (
@@ -36,7 +43,10 @@ const Header = () => {
               <LinkContainer to='/charts'>
                 <Nav.Link>Chart</Nav.Link>
               </LinkContainer>
-              <NavDropdown title={userInfo.name && userInfo.name.split(' ')[0]} id='name'>
+              <NavDropdown title={name && name.split(' ')[0]} id='name'>
+                <LinkContainer to='/about'>
+                  <NavDropdown.Item onClick={handleGetProfile}>About</NavDropdown.Item>
+                </LinkContainer>
                 <LinkContainer to='/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
                 </LinkContainer>

@@ -15,7 +15,7 @@ const VerifyEmail = () => {
     e.preventDefault()
 
     axios
-      .post('/api/auth/email-activate', { token })
+      .post('auth/email-activate', { token })
       .then((res) => {
         navigate('/login')
       })

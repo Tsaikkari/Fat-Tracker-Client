@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 
-import user from './user'
 import auth from './auth'
 import week from './week'
 import weeks from './weeks'
@@ -11,7 +10,6 @@ import sports from './sports'
 
 const rootReducer = () =>
   combineReducers({
-    user,
     auth,
     week,
     weeks,

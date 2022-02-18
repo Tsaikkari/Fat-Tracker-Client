@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Login from './screens/Login'
 import SignUp from './screens/SignUp'
+import About from './screens/About'
 import Home from './screens/Home'
 import Profile from './screens/Profile'
 import Weeks from './screens/Weeks'
@@ -12,13 +13,13 @@ import Charts from './screens/Charts'
 import useLogin from './hooks/useLogin'
 
 const App = () => {
-  //TODO: persistant login on the profile page
   useLogin()
   
   return (
     <>
       <Header />
       <Routes>
+        <Route path='/welcome' element={<About />} />
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />

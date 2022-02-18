@@ -7,34 +7,22 @@ import { AppState } from './types'
 
 export const initState: AppState = {
   auth: {
-    userInfo: {
-      _id: '',
-      name: '',
-      email: '',
-      password: '',
-      isAdmin: false,
-      lifeStyles: '',
-    },
+    _id: '',
+    email: '',
+    password: '',
+    name: '',
+    isAdmin: false,
+    lifeStyles: '',
     isLoggedIn: false,
     loading: true,
     error: undefined,
   },
-  user: {
-    _id: '',
-    name: '',
-    email: '',
-    password: '',
-    isAdmin: false,
-    lifeStyles: '',
-  },
   week: {
-    weekInfo: {
-      date: '',
-      currentWeight: '',
-      goalWeight: '',
-      achievedWeight: '',
-    },
-    //fattyFoods: []
+    date: '',
+    currentWeight: '',
+    goalWeight: '',
+    achievedWeight: '',
+    inWeek: []
   },
   weeks: {
     list: [],
