@@ -1,6 +1,9 @@
 export const SIGNUP_USER_REQUEST = 'SIGNUP_USER_REQUEST'
 export const SINGUP_USER_SUCCESS = 'SINGUP_USER_SUCCESS'
 export const SIGNUP_USER_FAIL = 'SIGNUP_USER_FAIL'
+export const GOOGLE_LOGIN_REQUEST = 'GOOGLE_LOGIN_REQUEST'
+export const GOOGLE_LOGIN_SUCCESS = 'GOOGLE_LOGIN_SUCCESS'
+export const GOOGLE_LOGIN_FAIL = 'GOOGLE_LOGIN_FAIL'
 export const LOGIN_USER_REQUEST = 'LOGIN_USER_REQUEST'
 export const LOGIN_USER_SUCCESS = 'LOGIN_USER_SUCCESS'
 export const LOGIN_USER_FAIL = 'LOGIN_USER_FAIL'
@@ -49,6 +52,10 @@ export type Err = {
 }
 
 // Auth types
+export type GoogleLogin = {
+  idToken: string
+}
+
 export type LoginForm = {
   email: string
   password: string
@@ -136,6 +143,25 @@ export type SignupSuccessAction = {
 export type SignupFailAction = {
   type: typeof SIGNUP_USER_FAIL
   payload: Err
+}
+
+// Google login
+export type GoogleLoginRequestAction = {
+  type: typeof GOOGLE_LOGIN_REQUEST
+  payload: {
+    googleLogin: GoogleLogin
+    navigate: any
+  }
+}
+
+export type GoogleLoginSuccessAction = {
+  type: typeof GOOGLE_LOGIN_SUCCESS
+  payload: User
+}
+
+export type GoogleLoginFailAction = {
+  type: typeof GOOGLE_LOGIN_FAIL
+  payload: any
 }
 
 // Login
@@ -359,6 +385,9 @@ export type AuthActions =
   | DeleteUserRequestAction
   | DeleteUserSuccessAction
   | DeleteUserFailAction
+  | GoogleLoginRequestAction
+  | GoogleLoginSuccessAction
+  | GoogleLoginFailAction
 
 export type WeekActions =
   | CreateWeekRequestAction

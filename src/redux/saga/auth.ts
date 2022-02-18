@@ -6,6 +6,8 @@ import LocalStorage from '../../local-storage'
 import {
   signupUserSuccess,
   signupUserFail,
+  googleLoginSuccess,
+  googleLoginFail,
   loginUserSuccess,
   loginUserFail,
   setLoggedIn,
@@ -18,6 +20,7 @@ import {
 } from '../actions/auth'
 import { 
   SignupRequestAction, 
+  GoogleLoginRequestAction,
   LoginRequestAction,
   GetUserProfileRequestAction,
   UpdateUserRequestAction,
@@ -32,6 +35,25 @@ function* signupUserSaga(action: SignupRequestAction) {
     yield put(signupUserSuccess())
   } catch (err) {
     yield put(signupUserFail(err))
+  }
+}
+
+function* googleLoginSaga(action: GoogleLoginRequestAction) {
+  const { idToken } = action.payload.googleLogin
+  const navigate = action.payload.navigate
+ 
+  try {
+    //@ts-ignore
+    const res = yield axios.post('auth/login/google', { idToken })
+
+    if (res.data.status === 200) {
+      yield put(googleLoginSuccess(res.data.payload))
+      yield LocalStorage.saveToken(res.data.payload.token)
+      yield put(setLoggedIn())
+      navigate('/about')
+    }
+  } catch (err: any) {
+    yield put(googleLoginFail(err.message))
   }
 }
 
@@ -50,7 +72,7 @@ function* loginUserSaga(action: LoginRequestAction) {
       yield put(loginUserSuccess(res.data.payload))
       yield LocalStorage.saveToken(res.data.payload.token)
       yield put(setLoggedIn())
-      navigate('/welcome')
+      navigate('/about')
     }
   } catch (error: any) {
     yield put(loginUserFail(error.message))
@@ -107,6 +129,7 @@ function* deleteUserSaga(action: DeleteUserRequestAction) {
 
 const sagaWatcher = [
   takeLatest('SIGNUP_USER_REQUEST', signupUserSaga),
+  takeLatest('GOOGLE_LOGIN_REQUEST', googleLoginSaga),
   takeLatest('LOGIN_USER_REQUEST', loginUserSaga),
   takeLatest('GET_USER_PROFILE_REQUEST', getUserProfileSaga),
   takeLatest('UPDATE_USER_REQUEST', updateUserSaga),

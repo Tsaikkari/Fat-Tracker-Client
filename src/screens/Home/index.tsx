@@ -1,19 +1,18 @@
 import React, { useState, useContext } from 'react'
 import GoogleLogin from 'react-google-login'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import axios from 'axios'
 
-import { AuthContext } from '../../context/auth'
 import fatTracker from '../../images/fat-tracker.jpg'
 import styles from './Home.module.css'
 import Message from '../../components/Message'
+import { googleLoginRequest } from '../../redux/actions'
 
 const Home = () => {
   const [errorMessage, setErrorMessage] = useState(undefined)
 
-  const { loginUser } = useContext(AuthContext)
-
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleClick = () => {
@@ -21,13 +20,7 @@ const Home = () => {
   }
 
   const responseSuccessGoogle = (response: any) => {
-    axios({
-      method: 'POST',
-      url: 'http://localhost:5000/api/auth/login/google',
-      data: { idToken: response.tokenId },
-    }).then((response) => {
-      loginUser(response.data.payload.token)
-    })
+    dispatch(googleLoginRequest(response.tokenId, navigate))
   }
 
   const responseFailureGoogle = (res: any) => {

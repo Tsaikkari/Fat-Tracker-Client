@@ -1,6 +1,7 @@
 import {
   AuthActions,
   SINGUP_USER_SUCCESS,
+  GOOGLE_LOGIN_SUCCESS,
   LOGIN_USER_SUCCESS,
   LOGOUT_USER,
   SET_LOGGED_IN,
@@ -10,6 +11,7 @@ import {
 } from '../actions/types'
 
 const initState = {
+  idToken: '',
   _id: '',
   name: '',
   email: '',
@@ -25,6 +27,13 @@ const auth = (state = initState, action: AuthActions) => {
   switch (action.type) {
     case SINGUP_USER_SUCCESS:
       return { ...state }
+    case GOOGLE_LOGIN_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        isLoggedIn: true,
+        loading: false
+      }
     case LOGIN_USER_SUCCESS:
       return {
         ...state,

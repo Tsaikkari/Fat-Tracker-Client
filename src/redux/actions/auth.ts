@@ -2,6 +2,9 @@ import {
   SIGNUP_USER_REQUEST,
   SINGUP_USER_SUCCESS,
   SIGNUP_USER_FAIL,
+  GOOGLE_LOGIN_REQUEST,
+  GOOGLE_LOGIN_SUCCESS,
+  GOOGLE_LOGIN_FAIL,
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAIL,
@@ -39,6 +42,37 @@ export const signupUserSuccess = () => {
 export const signupUserFail = (error: any) => {
   return {
     type: SIGNUP_USER_FAIL,
+    payload: {
+      error:
+        error.response && error.data.message
+          ? error.response.data.message
+          : error.message,
+    },
+  }
+}
+
+export const googleLoginRequest = (idToken: string, navigate: any) => {
+  return {
+    type: GOOGLE_LOGIN_REQUEST,
+    payload: {
+      googleLogin: {
+        idToken
+      },
+      navigate
+    }
+  }
+}
+
+export const googleLoginSuccess = (user: LoginForm) => {
+  return {
+    type: GOOGLE_LOGIN_SUCCESS,
+    payload: user,
+  }
+}
+
+export const googleLoginFail = (error: any) => {
+  return {
+    type: GOOGLE_LOGIN_FAIL,
     payload: {
       error:
         error.response && error.data.message
