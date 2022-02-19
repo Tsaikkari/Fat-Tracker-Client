@@ -19,17 +19,17 @@ const FattyFoods = ({ days, dayIndex, weekId }: FattyFoodsProps) => {
   return (
     <div>
       {fattyFoods.map((ff: any) => (
-          <div key={ff._id}>
-            <FattyFood
-              weekId={weekId}
-              fattyFoodWeekId={ff.week}
-              name={ff.name}
-              chosenDate={ff.chosenDate}
-              days={days}
-              dayIndex={dayIndex}
-            />
-          </div>
-        ))}
+        <div key={ff._id}>
+          <FattyFood
+            weekId={weekId}
+            fattyFoodWeekId={ff.week}
+            name={ff.name}
+            chosenDate={ff.chosenDate}
+            days={days}
+            dayIndex={dayIndex}
+          />
+        </div>
+      ))}
     </div>
   )
 }

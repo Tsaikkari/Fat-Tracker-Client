@@ -94,7 +94,7 @@ function* getUserProfileSaga(action: GetUserProfileRequestAction) {
 function* updateUserSaga(action: UpdateUserRequestAction) {
   const { name, email } = action.payload
   const userId = action.payload._id
-  console.log(action.payload.name, 'saga')
+
   try {
     //@ts-ignore
     const res = yield axios.patch(`users/${userId}`, { name, email })

@@ -16,18 +16,15 @@ export const initState: AppState = {
     isLoggedIn: false,
     loading: true,
     error: undefined,
-    weights: {
-      currentWeight: '',
-      goalWeight: '',
-      achievedWeight: ''
-    }
   },
   week: {
     date: '',
     currentWeight: '',
     goalWeight: '',
     achievedWeight: '',
-    inWeek: []
+    inWeek: [],
+    loading: true,
+    error: undefined,
   },
   weeks: {
     list: [],

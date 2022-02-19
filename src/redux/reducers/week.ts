@@ -9,7 +9,8 @@ const initState = {
     date: '',
     currentWeight: '',
     goalWeight: '',
-    achievedWeight: ''
+    achievedWeight: '',
+    inWeek: [] // !!!!!!!!!!!
   },
   loading: true,
   error: undefined

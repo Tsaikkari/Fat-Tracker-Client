@@ -22,7 +22,7 @@ const Login = () => {
     dispatch(loginUserRequest(email, password, navigate))
     setEmail('')
     setPassword('')
-    navigate('/welcome')
+    navigate('/about')
   }
 
   return (

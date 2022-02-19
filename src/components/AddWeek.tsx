@@ -16,7 +16,7 @@ const AddWeek = ({ addWeek, setAddWeek }: AddWeekProps) => {
   const [date, setDate] = useState('')
   const [message, setMessage] = useState('')
 
-  const { error, loading } = useSelector((state: AppState) => state.auth)
+  const { error } = useSelector((state: AppState) => state.auth)
 
   const dispatch = useDispatch()
 

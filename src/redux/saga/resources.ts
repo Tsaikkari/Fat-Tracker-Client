@@ -8,8 +8,8 @@ function* getUserWeeksSaga() {
     //@ts-ignore
     const res = yield axios.get('weeks/user')
     yield put(getUserWeeksSuccess(res.data.payload))
-  } catch (error) {
-    yield put(getUserWeeksFail(error))
+  } catch (error: any) {
+    yield put(getUserWeeksFail(error.message))
   }
 }
 

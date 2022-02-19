@@ -1,28 +1,23 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Form, Button } from 'react-bootstrap'
 
 import Message from './Message'
 import { AppState } from '../redux/types'
 import { updateWeekRequest } from '../redux/actions/week'
 
-type EditAchievedWeightProps = {
-  editWeight: boolean
-  setEditWeight: (arg0: boolean) => void
+type AddWeightsProps = {
+  addWeights: boolean
+  setAddWeights: (arg0: boolean) => void
   weekId: string
 }
 
-const EditAchievedWeight = ({
-  editWeight,
-  setEditWeight,
-  weekId
-}: EditAchievedWeightProps) => {
+const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
   const [data, setData] = useState({
     currentWeight: '',
     goalWeight: '',
-    achievedWeight: '',
   })
-  const { error } = useSelector((state: AppState) => state.auth)
+  const { error, loading } = useSelector((state: AppState) => state.auth)
 
   const dispatch = useDispatch()
 
@@ -42,28 +37,35 @@ const EditAchievedWeight = ({
 
     dispatch(
       updateWeekRequest({
-        weights: {
-          currentWeight: Number(data.currentWeight),
-          goalWeight: Number(data.goalWeight),
-          achievedWeight: Number(data.achievedWeight),
-        },
-        weekId
+        currentWeight: Number(data.currentWeight),
+        goalWeight: Number(data.goalWeight),
+        weekId,
       })
     )
     setData({
       currentWeight: '',
       goalWeight: '',
-      achievedWeight: '',
     })
-    setEditWeight(!editWeight)
+    setAddWeights(!addWeights)
   }
+
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Group controlId='achievedWeight'>
+      <Form.Group controlId='startingWeight'>
         <Form.Label>Current Weight</Form.Label>
         <Form.Control
           type='text'
-          value={data.achievedWeight}
+          name='currentWeight'
+          value={data.currentWeight}
+          onChange={handleChange}
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group controlId='goalWeight'>
+        <Form.Label>Goal Weight</Form.Label>
+        <Form.Control
+          type='text'
+          name='goalWeight'
+          value={data.goalWeight}
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>
@@ -71,8 +73,9 @@ const EditAchievedWeight = ({
         Save
       </Button>
       {error && <Message variant='danger'>{error.message}</Message>}
+      {loading && <p>... loading</p>}
     </Form>
   )
 }
 
-export default EditAchievedWeight
+export default AddWeights

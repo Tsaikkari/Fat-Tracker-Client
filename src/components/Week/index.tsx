@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Day from '../Day'
-import EditWeek from '../EditWeek'
-import EditAchievedWeight from '../EditAchievedWeight'
+import AddWeights from '../AddWeights'
+import AddAchievedWeight from '../AddAchievedWeight'
 import Weights from '../Weights'
 import styles from './Week.module.css'
 import Message from '../Message'
@@ -22,15 +22,14 @@ const Week = ({
   weekId,
 }: WeekProps) => {
   const [days, setDays] = useState<string[]>([])
-  const [achievedWeight, setAchievedWeight] = useState<number | string>('')
   const [addWeights, setAddWeights] = useState(false)
   const [editWeight, setEditWeight] = useState(false)
   const [message, setMessage] = useState('')
 
   const weeks = useSelector((state: AppState) => state.weeks.list)
-  // const weights = weeks
-  //   .map((week: any) => week.weights)
-  //   .filter((weight: any) => weight.week === weekId)
+  const weights = weeks
+    .map((week: any) => week.weights)
+    // .filter((weight: any) => weight.week === weekId)
   const { error, loading } = useSelector((state: AppState) => state.auth)
 
   const handleShowAddWeights = () => {
@@ -68,14 +67,14 @@ const Week = ({
     //eslint-disable-next-line
   }, [])
 
-  // const handleShowEditWeight = () => {
-  //   setEditWeight(!editWeight)
-  //   weights.filter((weight: any) => weight.currentWeight === 0) &&
-  //     setMessage('Please add your previous weight and goal weight first')
-  //     setTimeout(() => {
-  //       setMessage('')
-  //     }, 8000)
-  // }
+  const handleShowAddWeight = () => {
+    setEditWeight(!editWeight)
+    weights.filter((weight: any) => weight.currentWeight === 0) &&
+      setMessage('Please add your previous weight and goal weight first')
+      setTimeout(() => {
+        setMessage('')
+      }, 8000)
+  }
 
   return (
     <div className={styles.container}>
@@ -90,7 +89,7 @@ const Week = ({
         />
       </header>
       {addWeights && (
-        <EditWeek
+        <AddWeights
           addWeights={addWeights}
           setAddWeights={setAddWeights}
           weekId={weekId}
@@ -108,16 +107,16 @@ const Week = ({
           </div>
         ))}
         {message && <Message variant='danger'>{message}</Message>}
-        {/* <Button variant='warning' onClick={handleShowEditWeight}>
+        <Button variant='warning' onClick={handleShowAddWeight}>
           Weight at the End of the Week
-        </Button> */}
-        {/* {editWeight && (
-          <EditAchievedWeight
+        </Button> 
+        {editWeight && (
+          <AddAchievedWeight
             editWeight={editWeight}
             setEditWeight={setEditWeight}
             weekId={weekId}
           />
-        )} */}
+        )}
       </div>
       {error && <Message variant='danger'>{error.message}</Message>}
       {loading && <h3>Loading ...</h3>}

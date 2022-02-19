@@ -7,7 +7,9 @@ export type AuthState = User & {
 }
 
 export type WeekState = Week & {
-  inWeek: any[]
+  inWeek: any[],
+  loading: boolean
+  error: any
 }
 
 export type AppState = {

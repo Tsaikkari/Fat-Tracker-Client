@@ -14,37 +14,41 @@ function* createWeekSaga(action: CreateWeekRequestAction) {
   try {
     //@ts-ignore
     const res = yield axios.post('weeks', week)
-    yield put(createWeekSuccess(res.data.payload))
+    yield put(createWeekSuccess(res.data.payload)) 
     yield localStorage.setItem('week', res.data.payload)
-  } catch (err) {
-    yield put(createWeekFail(err))
+  } catch (err: any) {
+    yield put(createWeekFail(err.message))
   }
 }
 
-function* updateWeekSaga(action: UpdateWeekRequestAction) {
+function* addWeightsSaga(action: UpdateWeekRequestAction) {
+  const { currentWeight, goalWeight } = action.payload 
+  const weekId = action.payload.weekId 
   try {
     //@ts-ignore
-    const res = yield axios.put(`weeks/${action.payload.weekId}`)
-    yield put(updateWeekSuccess(res.data.payload.weights))
-  } catch (err) {
-    yield put(updateWeekFail(err))
+    const res = yield axios.patch(`weeks/${weekId}`, { currentWeight, goalWeight })
+    yield put(updateWeekSuccess(res.data.payload)) 
+  } catch (err: any) {
+    yield put(updateWeekFail(err.message))
   }
 }
 
-function* updateAchievedWeightSaga(action: UpdateWeekRequestAction) {
+function* addAchievedWeightSaga(action: UpdateWeekRequestAction) {
+  const achievedWeight = Number(action.payload.achievedWeight) 
+  const weekId = action.payload.weekId  
   try {
     //@ts-ignore
-    const res = yield axios.patch(`weeks/${action.payload.weekId}`)
-    yield put(updateWeekSuccess(res.data.payload.weights))
-  } catch (err) {
-    yield put(updateWeekFail(err))
+    const res = yield axios.patch(`weeks/${weekId}`, { achievedWeight }) 
+    yield put(updateWeekSuccess(res.data.payload)) 
+  } catch (err: any) {
+    yield put(updateWeekFail(err.message))
   }
 }
 
 const weekWatcher = [
   takeLatest('CREATE_WEEK_REQUEST', createWeekSaga),
-  takeLatest('UPDATE_WEEK_REQUEST', updateWeekSaga),
-  takeLatest('UPDATE_WEEK_REQUEST', updateAchievedWeightSaga)
+  takeLatest('UPDATE_WEEK_REQUEST', addWeightsSaga),
+  takeLatest('UPDATE_WEEK_REQUEST', addAchievedWeightSaga)
 ]
 
 export default weekWatcher

@@ -74,7 +74,6 @@ export type User = {
   name: string
   email: string
   password: string
-  weights: Weights
 }
 
 // Type update user
@@ -87,6 +86,7 @@ export type UserUpdate = {
 
 // Week types
 export type Week = {
+  //weekId: string            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   date: string
   currentWeight: number | string
   goalWeight: number | string
@@ -98,15 +98,11 @@ export type Date = {
   date: string
 }
 
-export type Weights = {
-  currentWeight: number | string
-  goalWeight: number | string
-  achievedWeight: number | string
-}
-
 // Type update week
 export type WeekUpdate = {
-  weights: Weights
+  currentWeight: number | string //////!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  goalWeight: number | string //!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  achievedWeight: number | string //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   weekId: string
 }
 
