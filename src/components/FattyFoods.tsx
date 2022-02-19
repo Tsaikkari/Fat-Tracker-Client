@@ -22,6 +22,7 @@ const FattyFoods = ({ days, dayIndex, weekId }: FattyFoodsProps) => {
           <div key={ff._id}>
             <FattyFood
               weekId={weekId}
+              fattyFoodId={ff._id}
               fattyFoodWeekId={ff.week}
               name={ff.name}
               chosenDate={ff.chosenDate}

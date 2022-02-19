@@ -5,13 +5,7 @@ import {
 } from '../actions/types'
 
 const initState = {
-  week: {
-    date: '',
-    currentWeight: '',
-    goalWeight: '',
-    achievedWeight: '',
-    inWeek: [] // !!!!!!!!!!!
-  },
+  week: {},
   loading: true,
   error: undefined
 }

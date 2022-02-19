@@ -10,21 +10,7 @@ import {
   DELETE_USER_SUCCESS,
 } from '../actions/types'
 
-const initState = {
-  idToken: '',
-  _id: '',
-  name: '',
-  email: '',
-  password: '',
-  isAdmin: false,
-  lifeStyles: '',
-  isLoggedIn: false,
-  loading: true,
-  error: undefined,
-  weights: {}
-}
-
-const auth = (state = initState, action: AuthActions) => {
+const auth = (state = {}, action: AuthActions) => {
   switch (action.type) {
     case SINGUP_USER_SUCCESS:
       return { ...state }

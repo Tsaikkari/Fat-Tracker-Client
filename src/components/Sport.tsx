@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
 import axios from 'axios'
 
 import Message from './Message'
+import { AppState } from '../redux/types'
+
+import { deleteSportRequest } from '../redux/actions/sport'
 
 type SportProps = {
+  weekId: string
   sportId: string
+  sportWeekId: string
   sport: string
   duration: number
   date: string
@@ -13,38 +19,27 @@ type SportProps = {
   days: string[]
 }
 const Sport = ({
+  weekId,
   sportId,
+  sportWeekId,
   sport,
   duration,
   date,
   dayIndex,
   days,
 }: SportProps) => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const error = useSelector((state: AppState) => state.week.error)
+  const dispatch = useDispatch()
 
   const deleteSports = async () => {
-    const storedToken = localStorage.getItem('authToken')
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${storedToken}`,
-      },
-    }
-
     if (window.confirm('Delete sports?')) {
-      try {
-        await axios.delete(`/api/sports/${sportId}`, config)
-      } catch (err: any) {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
-      }
+      dispatch(deleteSportRequest(sportId))
     }
   }
 
   return (
     <>
-      {date === days[dayIndex] && (
+      {sportWeekId === weekId && date === days[dayIndex] && (
         <div className='sport-container'>
           <p>{sport}</p>
           <p>{duration} min</p>
@@ -53,7 +48,7 @@ const Sport = ({
           </Button>
         </div>
       )}
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
     </>
   )
 }
