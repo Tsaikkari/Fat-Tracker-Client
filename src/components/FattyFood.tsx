@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
 
 import Message from './Message'
 import { AppState } from '../redux/types'
-//TODO: create
+
+//TODO: 
 //import { deleteFattyFoodsRequest } from '../redux/actions/fattyFood'
 
 type FattyFoodProps = {
@@ -25,6 +26,7 @@ const FattyFood = ({
   dayIndex,
 }: FattyFoodProps) => {
   const dispatch = useDispatch()
+
   const deleteFattyFoods = async () => {
     if (window.confirm('Delete fatty foods?')) {
       

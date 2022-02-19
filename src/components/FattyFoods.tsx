@@ -10,26 +10,27 @@ type FattyFoodsProps = {
   dayIndex: number
 }
 
-const FattyFoods = ({ days, dayIndex, weekId }: FattyFoodsProps) => {
-  // TODO: fix
-  const weeks = useSelector((state: AppState) => state.weeks.list)
-  const fattyFoods = weeks.map((week: any) => week.fattyFoods)
+//TODO: should update weeks without refresh
 
-  console.log(fattyFoods, 'fattyfoods')
+const FattyFoods = ({ days, dayIndex, weekId }: FattyFoodsProps) => {
+  const weeks = useSelector((state: AppState) => state.weeks.list)
+
   return (
     <div>
-      {fattyFoods.map((ff: any) => (
-        <div key={ff._id}>
-          <FattyFood
-            weekId={weekId}
-            fattyFoodWeekId={ff.week}
-            name={ff.name}
-            chosenDate={ff.chosenDate}
-            days={days}
-            dayIndex={dayIndex}
-          />
-        </div>
-      ))}
+      {weeks.map((week: any) =>
+        week.fattyFoods.map((ff: any) => (
+          <div key={ff._id}>
+            <FattyFood
+              weekId={weekId}
+              fattyFoodWeekId={ff.week}
+              name={ff.name}
+              chosenDate={ff.chosenDate}
+              days={days}
+              dayIndex={dayIndex}
+            />
+          </div>
+        ))
+      )}
     </div>
   )
 }
