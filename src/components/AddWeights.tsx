@@ -13,7 +13,7 @@ type AddWeightsProps = {
 }
 
 const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
-  const [data, setData] = useState({
+  const [weights, setWeights] = useState({
     currentWeight: '',
     goalWeight: '',
   })
@@ -24,7 +24,7 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
 
-    setData((prevValue: any) => {
+    setWeights((prevValue: any) => {
       return {
         ...prevValue,
         [name]: value,
@@ -37,12 +37,12 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
 
     dispatch(
       updateWeekRequest({
-        currentWeight: Number(data.currentWeight),
-        goalWeight: Number(data.goalWeight),
+        currentWeight: Number(weights.currentWeight),
+        goalWeight: Number(weights.goalWeight),
         weekId,
       })
     )
-    setData({
+    setWeights({
       currentWeight: '',
       goalWeight: '',
     })
@@ -56,7 +56,7 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
         <Form.Control
           type='text'
           name='currentWeight'
-          value={data.currentWeight}
+          value={weights.currentWeight}
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>
@@ -65,7 +65,7 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
         <Form.Control
           type='text'
           name='goalWeight'
-          value={data.goalWeight}
+          value={weights.goalWeight}
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>

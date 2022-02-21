@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
 import Weight from './Weight'
@@ -8,23 +8,21 @@ type WeightsProps = {
   weekId: string
 }
 
-const Weights = ({
-  weekId,
-}: WeightsProps) => {
+const Weights = ({ weekId }: WeightsProps) => {
   const weeks = useSelector((state: AppState) => state.weeks.list)
-  // TODO:
+
   return (
     <div className=''>
-      {/* {weights ?
-        weights.map((weight: any) => (
-          <div key={weight._id}>
-            <Weight
-              currentWeight={weight.currentWeight}
-              goalWeight={weight.goalWeight}
-              weightId={weight._id}
-            />
-          </div>
-        )) : null} */}
+      {weeks.map((week: any) => (
+        <div key={week.weights._id}>
+          <Weight
+            currentWeight={week.weights.currentWeight}
+            goalWeight={week.weights.goalWeight}
+            weightId={week.weights._id}
+            weekId={weekId}
+          />
+        </div>
+      ))}
     </div>
   )
 }

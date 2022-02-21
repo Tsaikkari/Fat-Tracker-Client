@@ -7,15 +7,14 @@ import {
 const initState = {
   week: {},
   loading: true,
-  error: undefined
 }
 
 const week = (state = initState, action: WeekActions) => {
   switch (action.type) {
     case CREATE_WEEK_SUCCESS:
-      return { ...state, week: action.payload }
+      return { ...state, week: action.payload, loading: false }
     case UPDATE_WEEK_SUCCESS:
-      return { ...state, week: action.payload }
+      return { ...state, week: action.payload, loading: false }
     default: 
       return state
   }

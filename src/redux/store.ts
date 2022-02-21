@@ -22,7 +22,6 @@ export const initState: AppState = {
     currentWeight: '',
     goalWeight: '',
     achievedWeight: '',
-    inWeek: [],
     loading: true,
     error: undefined,
   },

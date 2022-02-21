@@ -26,7 +26,7 @@ function* addWeightsSaga(action: UpdateWeekRequestAction) {
   const weekId = action.payload.weekId 
   try {
     //@ts-ignore
-    const res = yield axios.patch(`weeks/${weekId}`, { currentWeight, goalWeight })
+    const res = yield axios.patch(`weeks/${weekId}`, { weights: { currentWeight, goalWeight }})
     yield put(updateWeekSuccess(res.data.payload)) 
   } catch (err: any) {
     yield put(updateWeekFail(err.message))

@@ -48,7 +48,6 @@ export const updateWeekRequest = (week: Partial<WeekUpdate>) => {
 }
 
 export const updateWeekSuccess = (week: WeekUpdate) => {
-  console.log(week, 'weekinactions')
   return {
     type: UPDATE_WEEK_SUCCESS,
     payload: week

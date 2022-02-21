@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button } from 'react-bootstrap'
-import axios from 'axios'
 
 import Message from './Message'
 import { AppState } from '../redux/types'

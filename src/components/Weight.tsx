@@ -8,12 +8,14 @@ type WeightProps = {
   currentWeight: number | string
   goalWeight: number | string
   weightId: string
+  weekId: string
 }
 
 const Weight = ({
   currentWeight,
   goalWeight,
   weightId,
+  weekId
 }: WeightProps) => {
   const [errorMessage, setErrorMessage] = useState(undefined)
   const deleteWeights = async () => {
