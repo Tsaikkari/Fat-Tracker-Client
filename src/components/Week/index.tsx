@@ -5,13 +5,14 @@ import { useSelector } from 'react-redux'
 import Day from '../Day'
 import AddWeights from '../AddWeights'
 import AddAchievedWeight from '../AddAchievedWeight'
-import Weights from '../Weights'
+import Weight from '../Weight'
 import styles from './Week.module.css'
 import Message from '../Message'
 import { AppState } from '../../redux/types'
 
 type WeekProps = {
   startDate: string
+  weights: any
   fattyFoods: any[]
   sports: any[]
   weekId: string
@@ -20,6 +21,7 @@ type WeekProps = {
 const Week = ({
   startDate,
   weekId,
+  weights
 }: WeekProps) => {
   const [days, setDays] = useState<string[]>([])
   const [addWeights, setAddWeights] = useState(false)
@@ -27,9 +29,6 @@ const Week = ({
   const [message, setMessage] = useState('')
 
   const weeks = useSelector((state: AppState) => state.weeks.list)
-  const weights = weeks
-    .map((week: any) => week.weights)
-    // .filter((weight: any) => weight.week === weekId)
   const { error, loading } = useSelector((state: AppState) => state.auth)
 
   const handleShowAddWeights = () => {
@@ -69,11 +68,12 @@ const Week = ({
 
   const handleShowAddWeight = () => {
     setEditWeight(!editWeight)
-    weights.filter((weight: any) => weight.currentWeight === 0) &&
-      setMessage('Please add your previous weight and goal weight first')
-      setTimeout(() => {
-        setMessage('')
-      }, 8000)
+    const week = weeks.find((week: any) => week._id === weekId) 
+    week?.currentWeight === null &&
+    setMessage('Please add your previous weight and goal weight first')
+    setTimeout(() => {
+      setMessage('')
+    }, 8000)
   }
 
   return (
@@ -83,10 +83,14 @@ const Week = ({
         <Button variant='light' onClick={handleShowAddWeights}>
           <i className='fas fa-weight'></i>
         </Button>
-
-        <Weights
-          weekId={weekId}
-        />
+        <div>
+          {weights && weights.currentWeight && weekId && 
+          <Weight
+            currentWeight={weights.currentWeight}
+            goalWeight={weights.goalWeight}
+            weekId={weekId}
+          />}
+        </div>
       </header>
       {addWeights && (
         <AddWeights

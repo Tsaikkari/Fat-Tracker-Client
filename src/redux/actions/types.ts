@@ -31,6 +31,10 @@ export const GET_USER_WEEKS_REQUEST = 'GET_USER_WEEKS_REQUEST'
 export const GET_USER_WEEKS_SUCCESS = 'GET_USER_WEEKS_SUCCESS'
 export const GET_USER_WEEKS_FAIL = 'GET_USER_WEEKS_FAIL'
 
+export const DELETE_WEIGHTS_REQUEST = 'DELETE_WEIGHTS_REQUEST'
+export const DELETE_WEIGHTS_SUCCESS = 'DELETE_WEIGHTS_SUCCESS'
+export const DELETE_WEIGHTS_FAIL = 'DELETE_WEIGHTS_FAIL'
+
 export const CREATE_FATTYFOOD_REQUEST = 'CREATE_FATTYFOOD_REQUEST'
 export const CREATE_FATTYFOOD_SUCCESS = 'CREATE_FATTYFOOD_SUCCESS'
 export const CREATE_FATTYFOOD_FAIL = 'CREATE_FATTYFOOD_FAIL'
@@ -293,6 +297,22 @@ export type GetUserWeeksFailAction = {
   payload: Err
 }
 
+// Delete weights
+export type DeleteWeightsRequestAction = {
+  type: typeof DELETE_WEIGHTS_REQUEST
+  payload: Partial<WeekUpdate>
+}
+
+export type DeleteWeightsSuccessAction = {
+  type: typeof DELETE_WEIGHTS_SUCCESS
+  payload: Week
+}
+
+export type DeleteWeightsFailAction = {
+  type: typeof DELETE_WEIGHTS_FAIL
+  payload: Err
+}
+
 /////// Fatty food actions
 // Create user fatty foods
 export type CreateFattyFoodRequestAction = {
@@ -425,6 +445,9 @@ export type WeekActions =
   | UpdateWeekRequestAction
   | UpdateWeekSuccessAction
   | UpdateWeekFailAction
+  | DeleteWeightsRequestAction
+  | DeleteWeightsSuccessAction
+  | DeleteWeightsFailAction
 
 export type WeeksActions =
   | GetUserWeeksRequestAction

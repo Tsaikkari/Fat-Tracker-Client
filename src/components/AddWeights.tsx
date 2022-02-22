@@ -15,7 +15,7 @@ type AddWeightsProps = {
 const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
   const [weights, setWeights] = useState({
     currentWeight: '',
-    goalWeight: '',
+    goalWeight: ''
   })
   const { error, loading } = useSelector((state: AppState) => state.auth)
 

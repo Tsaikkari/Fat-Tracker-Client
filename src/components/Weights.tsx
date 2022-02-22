@@ -11,14 +11,15 @@ type WeightsProps = {
 const Weights = ({ weekId }: WeightsProps) => {
   const weeks = useSelector((state: AppState) => state.weeks.list)
 
+  console.log(weeks, 'weeks')
   return (
     <div className=''>
       {weeks.map((week: any) => (
-        <div key={week.weights._id}>
+        week.weights &&
+        <div key={week._id}>
           <Weight
             currentWeight={week.weights.currentWeight}
             goalWeight={week.weights.goalWeight}
-            weightId={week.weights._id}
             weekId={weekId}
           />
         </div>

@@ -1,6 +1,5 @@
 import {
   CREATE_SPORT_SUCCESS,
-  DELETE_FATTYFOOD_SUCCESS,
   DELETE_SPORT_SUCCESS,
   SportActions
 } from '../actions/types'

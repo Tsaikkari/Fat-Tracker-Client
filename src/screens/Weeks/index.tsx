@@ -39,6 +39,7 @@ const Weeks = () => {
             <Week
               startDate={week.date}
               weekId={week._id}
+              weights={week.weights}
               fattyFoods={weeks.map((week: any) => week.fattyFoods)}
               sports={weeks.map((week: any) => week.sports)}
             />

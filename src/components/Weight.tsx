@@ -1,40 +1,29 @@
-import React, { useState } from 'react'
-import { Button } from 'react-bootstrap'
-import axios from 'axios'
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { Button } from 'react-bootstrap'
 import Message from './Message'
+import { AppState } from '../redux/types'
+
+import { updateWeekRequest } from '../redux/actions/week'
 
 type WeightProps = {
   currentWeight: number | string
   goalWeight: number | string
-  weightId: string
   weekId: string
 }
 
 const Weight = ({
   currentWeight,
   goalWeight,
-  weightId,
-  weekId
+  weekId,
 }: WeightProps) => {
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const error = useSelector((state: AppState) => state.week.error)
+  const dispatch = useDispatch()
+
   const deleteWeights = async () => {
-    const storedToken = localStorage.getItem('authToken')
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${storedToken}`,
-      },
-    }
-
     if (window.confirm('Delete weights?')) {
-      try {
-        await axios.delete(`/api/weights/${weightId}`, config)
-      } catch (err: any) {
-        const errorMsg = err.message
-        setErrorMessage(errorMsg)
-      }
+      dispatch(updateWeekRequest({ weekId, currentWeight: '', goalWeight: '' }))
     }
   }
 
@@ -46,7 +35,7 @@ const Weight = ({
       <Button variant='danger' className='btn-sm' onClick={deleteWeights}>
         <i className='fas fa-trash'></i>
       </Button>
-      {errorMessage && <Message variant='danger'>{errorMessage}</Message>}
+      {error && <Message variant='danger'>{error.message}</Message>}
     </div>
   )
 }

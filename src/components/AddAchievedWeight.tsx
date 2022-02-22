@@ -26,7 +26,7 @@ const AddAchievedWeight = ({
     e.preventDefault()
 
     dispatch(
-      updateWeekRequest({ weekId, achievedWeight })
+      updateWeekRequest({ weekId, achievedWeight: Number(achievedWeight) })
     )
     setAchievedWeight('')
     setEditWeight(!editWeight)
