@@ -11,10 +11,15 @@ export type WeekState = Week & {
   error: any
 }
 
+export type SportState = Sport & {
+  error: any
+  loading: boolean
+}
+
 export type AppState = {
   auth: AuthState
   week: WeekState
   weeks: Weeks
   fattyFood: FattyFood
-  sport: Sport
+  sport: SportState
 }

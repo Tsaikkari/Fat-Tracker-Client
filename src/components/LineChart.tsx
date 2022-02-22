@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from 'react'
-import { WeekContext } from '../context/week'
-import { WeightContext } from '../context/weight'
+import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { AppState } from '../redux/types'
 import { Line } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
@@ -24,9 +24,9 @@ ChartJS.register(
 )
 
 const LineChart = () => {
-  const { weeks } = useContext(WeekContext)
-  const { weights } = useContext(WeightContext)
-  const [sortedWeeks, setSortedWeeks] = useState([])
+  const weeks = useSelector((state: AppState) => state.weeks.list)
+  const weights = weeks.map((week: any) => week.weights)
+  const [sortedWeeks, setSortedWeeks] = useState<any[]>([])
 
   useEffect(() => {
     if (weeks && weeks.length !== 0) {

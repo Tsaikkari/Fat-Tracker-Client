@@ -92,13 +92,16 @@ export type UserUpdate = {
   email: string
   name: string
   lifeStyles: string
+  weekId: string
 }
 
 // Week types
 export type Week = {
   date: string
-  currentWeight: number | string
-  goalWeight: number | string
+  weights: {
+    currentWeight: number | string
+    goalWeight: number | string
+  },
   achievedWeight: number | string
 }
 

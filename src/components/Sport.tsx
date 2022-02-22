@@ -6,6 +6,7 @@ import Message from './Message'
 import { AppState } from '../redux/types'
 
 import { deleteSportRequest } from '../redux/actions/sport'
+import { getUserWeeksRequest } from '../redux/actions/weeks'
 
 type SportProps = {
   weekId: string
@@ -33,6 +34,7 @@ const Sport = ({
   const deleteSports = async () => {
     if (window.confirm('Delete sports?')) {
       dispatch(deleteSportRequest(sportId))
+      dispatch(getUserWeeksRequest())
     }
   }
 

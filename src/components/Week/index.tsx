@@ -13,27 +13,16 @@ import { AppState } from '../../redux/types'
 type WeekProps = {
   startDate: string
   weights: any
-  fattyFoods: any[]
-  sports: any[]
   weekId: string
 }
 
-const Week = ({
-  startDate,
-  weekId,
-  weights
-}: WeekProps) => {
+const Week = ({ startDate, weekId, weights }: WeekProps) => {
   const [days, setDays] = useState<string[]>([])
   const [addWeights, setAddWeights] = useState(false)
   const [editWeight, setEditWeight] = useState(false)
   const [message, setMessage] = useState('')
 
   const weeks = useSelector((state: AppState) => state.weeks.list)
-  const { error, loading } = useSelector((state: AppState) => state.auth)
-
-  const handleShowAddWeights = () => {
-    setAddWeights(!addWeights)
-  }
 
   const getWeekDays = () => {
     const weekdays = [
@@ -66,11 +55,15 @@ const Week = ({
     //eslint-disable-next-line
   }, [])
 
+  const handleShowAddWeights = () => {
+    setAddWeights(!addWeights)
+  }
+
   const handleShowAddWeight = () => {
     setEditWeight(!editWeight)
-    const week = weeks.find((week: any) => week._id === weekId) 
-    week?.currentWeight === null &&
-    setMessage('Please add your previous weight and goal weight first')
+    const week = weeks.find((week: any) => week._id === weekId)
+    !week?.weights.currentWeight &&
+      setMessage('Please add your previous weight and goal weight first')
     setTimeout(() => {
       setMessage('')
     }, 8000)
@@ -84,12 +77,12 @@ const Week = ({
           <i className='fas fa-weight'></i>
         </Button>
         <div>
-          {weights && weights.currentWeight && weekId && 
-          <Weight
-            currentWeight={weights.currentWeight}
-            goalWeight={weights.goalWeight}
-            weekId={weekId}
-          />}
+          {weights && weights.currentWeight && weekId && (
+            <Weight
+              currentWeight={weights.currentWeight}
+              goalWeight={weights.goalWeight}
+            />
+          )}
         </div>
       </header>
       {addWeights && (
@@ -102,18 +95,13 @@ const Week = ({
       <div>
         {days.map((day: string, index) => (
           <div key={index}>
-            <Day
-              day={day}
-              days={days}
-              dayIndex={index}
-              weekId={weekId}
-            />
+            <Day day={day} days={days} dayIndex={index} weekId={weekId} />
           </div>
         ))}
         {message && <Message variant='danger'>{message}</Message>}
         <Button variant='warning' onClick={handleShowAddWeight}>
           Weight at the End of the Week
-        </Button> 
+        </Button>
         {editWeight && (
           <AddAchievedWeight
             editWeight={editWeight}
@@ -122,8 +110,8 @@ const Week = ({
           />
         )}
       </div>
-      {error && <Message variant='danger'>{error.message}</Message>}
-      {loading && <h3>Loading ...</h3>}
+      {/* {error && <Message variant='danger'>{error.message}</Message>} */}
+      {/* {loading && <h3>Loading ...</h3>} */}
     </div>
   )
 }

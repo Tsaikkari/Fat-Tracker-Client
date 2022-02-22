@@ -38,6 +38,10 @@
     font-size: 1.2em;
   }
 
+  .container > header > div {
+    font-size: 1.3em;
+  }
+
   .container > div {
     flex-direction: row;
     flex-wrap: wrap;

@@ -36,7 +36,7 @@ const Header = () => {
                 <Nav.Link onClick={handleWeeks}>Week</Nav.Link>
               </LinkContainer>
               <LinkContainer to='/charts'>
-                <Nav.Link>Chart</Nav.Link>
+                <Nav.Link onClick={handleWeeks}>Chart</Nav.Link>
               </LinkContainer>
               <NavDropdown title={name && name.split(' ')[0]} id='name'>
                 <LinkContainer to='/about'>

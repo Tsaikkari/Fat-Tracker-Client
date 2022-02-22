@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import Message from './Message'
 import { AppState } from '../redux/types'
 import { createFattyFoodRequest } from '../redux/actions/fattyFood'
+import { getUserWeeksRequest } from '../redux/actions/weeks'
 
 type AddFattyFoodsProps = {
   weekId: string
@@ -63,6 +64,9 @@ const AddFattyFoods = ({
       })
       setChosenDate('')
       setAddFattyFoods(!addFattyFoods)
+      setTimeout(() => {
+        dispatch(getUserWeeksRequest())
+      }, 500)
     }
   }
 

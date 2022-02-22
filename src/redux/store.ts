@@ -19,8 +19,10 @@ export const initState: AppState = {
   },
   week: {
     date: '',
-    currentWeight: '',
-    goalWeight: '',
+    weights: {
+      currentWeight: '',
+      goalWeight: '',
+    },
     achievedWeight: '',
     loading: true,
     error: undefined,
@@ -38,6 +40,8 @@ export const initState: AppState = {
     date: '',
     duration: '',
     weekId: '',
+    error: undefined,
+    loading: true
   },
 }
 

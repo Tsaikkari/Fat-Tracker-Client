@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import Message from './Message'
 import { AppState } from '../redux/types'
 import { updateWeekRequest } from '../redux/actions/week'
+import { getUserWeeksRequest } from '../redux/actions/weeks'
 
 type AddWeightsProps = {
   addWeights: boolean
@@ -47,6 +48,9 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
       goalWeight: '',
     })
     setAddWeights(!addWeights)
+    setTimeout(() => {
+      dispatch(getUserWeeksRequest())
+    }, 500)
   }
 
   return (

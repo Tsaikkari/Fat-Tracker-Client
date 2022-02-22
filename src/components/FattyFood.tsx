@@ -6,6 +6,7 @@ import Message from './Message'
 import { AppState } from '../redux/types'
 
 import { deleteFattyFoodRequest } from '../redux/actions/fattyFood'
+import { getUserWeeksRequest } from '../redux/actions/weeks'
 
 type FattyFoodProps = {
   weekId: string
@@ -32,6 +33,7 @@ const FattyFood = ({
   const deleteFattyFoods = async () => {
     if (window.confirm('Delete fatty foods?')) {
       dispatch(deleteFattyFoodRequest(fattyFoodId))
+      dispatch(getUserWeeksRequest())
     }
   }
 

@@ -5,6 +5,7 @@ import { Form, Button } from 'react-bootstrap'
 import Message from './Message'
 import { AppState } from '../redux/types'
 import { createSportRequest } from '../redux/actions/sport'
+import { getUserWeeksRequest } from '../redux/actions/weeks'
 
 type AddSportsProps = {
   weekId: string
@@ -26,7 +27,7 @@ const AddSports = ({
     weekId: ''
   })
   const [date, setDate] = useState('')
-  const { error, loading } = useSelector((state: AppState) => state.auth)
+  const { error, loading } = useSelector((state: AppState) => state.sport)
 
   const dispatch = useDispatch()
 
@@ -66,6 +67,9 @@ const AddSports = ({
       })
       setDate('')
       setAddSports(!addSports)
+      setTimeout(() => {
+        dispatch(getUserWeeksRequest())
+      }, 500)
     }
   }
 

@@ -2,11 +2,16 @@ import {
   WeekActions,
   CREATE_WEEK_SUCCESS,
   UPDATE_WEEK_SUCCESS,
-  DELETE_WEIGHTS_SUCCESS,
 } from '../actions/types'
 
 const initState = {
-  week: {},
+  week: {
+    achievedWeight: null,
+    weights: {
+      currentWeight: null,
+      goalWeight: null,
+    },
+  },
   loading: true,
 }
 
@@ -15,17 +20,20 @@ const week = (state = initState, action: WeekActions) => {
     case CREATE_WEEK_SUCCESS:
       return { ...state, week: action.payload, loading: false }
     case UPDATE_WEEK_SUCCESS:
+      console.log(action.payload, 'reducerweek')
+      const achievedWeight = action.payload.achievedWeight
+      // TODO: fix
+      if (!achievedWeight) {
+        return {
+          ...state,
+          ...action.payload,
+          loading: false,
+        }
+      } 
       return {
         ...state,
-        week: {
-          ...state, 
-          weights: {
-            currentWeight: action.payload.currentWeight,
-            goalWeight: action.payload.goalWeight,
-            achievedWeight: action.payload.achievedWeight
-          },
-          loading: false,
-        },
+        achievedWeight,
+        loading: false,
       }
     default:
       return state

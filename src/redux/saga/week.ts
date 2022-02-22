@@ -22,25 +22,25 @@ function* createWeekSaga(action: CreateWeekRequestAction) {
 }
 
 function* addWeightsSaga(action: UpdateWeekRequestAction) {
-  const { currentWeight, goalWeight } = action.payload 
+  const { currentWeight, goalWeight } = action.payload
   const weekId = action.payload.weekId 
   try {
     //@ts-ignore
     const res = yield axios.patch(`weeks/${weekId}`, { weights: { currentWeight, goalWeight }})
-    console.log(res.data.payload, 'sagaresdatapayload')
     yield put(updateWeekSuccess(res.data.payload)) 
   } catch (err: any) {
     yield put(updateWeekFail(err.message))
   }
 }
 
+// TODO: fix
 function* addAchievedWeightSaga(action: UpdateWeekRequestAction) {
   const { achievedWeight }= action.payload
   const weekId = action.payload.weekId  
   try {
     //@ts-ignore
-    const res = yield axios.patch(`weeks/${weekId}`, { weights: { achievedWeight }}) 
-    console.log(res.data.payload)
+    const res = yield axios.patch(`weeks/${weekId}`, { achievedWeight }) 
+    console.log(res.data.payload, 'saga')
     yield put(updateWeekSuccess(res.data.payload)) 
   } catch (err: any) {
     yield put(updateWeekFail(err.message))
@@ -64,7 +64,7 @@ function* deleteWeightsSaga(action: DeleteWeightsRequestAction) {
 const weekWatcher = [
   takeLatest('CREATE_WEEK_REQUEST', createWeekSaga),
   takeLatest('UPDATE_WEEK_REQUEST', addWeightsSaga),
-  //takeLatest('UPDATE_WEEK_REQUEST', addAchievedWeightSaga),
+  takeLatest('UPDATE_USER_REQUEST', addAchievedWeightSaga),
   takeLatest('UPDATE_WEEK_REQUEST', deleteWeightsSaga)
 ]
 
