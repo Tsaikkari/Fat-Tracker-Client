@@ -69,10 +69,10 @@ const LineChart = () => {
               {
                 label: 'Actual',
                 data:
-                  weights &&
-                  weights
+                  weeks &&
+                  weeks
                     .slice(0, 8)
-                    .map((weight: any) => weight.achievedWeight),
+                    .map((week: any) => week.achievedWeight),
                 backgroundColor: 'orange',
                 borderWidth: 1,
                 borderColor: 'orange',
