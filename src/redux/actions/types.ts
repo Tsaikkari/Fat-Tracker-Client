@@ -112,8 +112,10 @@ export type Date = {
 
 // Type update week
 export type WeekUpdate = {
-  currentWeight: number | string
-  goalWeight: number | string
+  weights: {
+    currentWeight: number | string
+    goalWeight: number | string
+  }
   achievedWeight: number | string
   weekId: string
 }

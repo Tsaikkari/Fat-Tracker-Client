@@ -14,7 +14,7 @@ type AddWeightsProps = {
 }
 
 const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
-  const [weights, setWeights] = useState({
+  const [weightsItem, setWeightsItem] = useState({
     currentWeight: '',
     goalWeight: ''
   })
@@ -25,7 +25,7 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target
 
-    setWeights((prevValue: any) => {
+    setWeightsItem((prevValue: any) => {
       return {
         ...prevValue,
         [name]: value,
@@ -35,15 +35,18 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const weights = {
+      currentWeight: Number(weightsItem.currentWeight),
+      goalWeight: Number(weightsItem.goalWeight)
+    }
 
     dispatch(
       updateWeekRequest({
-        currentWeight: Number(weights.currentWeight),
-        goalWeight: Number(weights.goalWeight),
+        weights,
         weekId,
       })
     )
-    setWeights({
+    setWeightsItem({
       currentWeight: '',
       goalWeight: '',
     })
@@ -60,7 +63,7 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
         <Form.Control
           type='text'
           name='currentWeight'
-          value={weights.currentWeight}
+          value={weightsItem.currentWeight}
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>
@@ -69,7 +72,7 @@ const AddWeights = ({ addWeights, setAddWeights, weekId }: AddWeightsProps) => {
         <Form.Control
           type='text'
           name='goalWeight'
-          value={weights.goalWeight}
+          value={weightsItem.goalWeight}
           onChange={handleChange}
         ></Form.Control>
       </Form.Group>

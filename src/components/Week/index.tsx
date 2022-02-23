@@ -23,6 +23,7 @@ const Week = ({ startDate, weekId, weights }: WeekProps) => {
   const [message, setMessage] = useState('')
 
   const weeks = useSelector((state: AppState) => state.weeks.list)
+  console.log(weeks, 'weeks')
 
   const getWeekDays = () => {
     const weekdays = [

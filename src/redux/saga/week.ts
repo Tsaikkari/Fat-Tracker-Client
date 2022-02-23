@@ -22,18 +22,17 @@ function* createWeekSaga(action: CreateWeekRequestAction) {
 }
 
 function* addWeightsSaga(action: UpdateWeekRequestAction) {
-  const { currentWeight, goalWeight } = action.payload
+  const { weights } = action.payload
   const weekId = action.payload.weekId 
   try {
     //@ts-ignore
-    const res = yield axios.patch(`weeks/${weekId}`, { weights: { currentWeight, goalWeight }})
+    const res = yield axios.patch(`weeks/${weekId}`, { weights })
     yield put(updateWeekSuccess(res.data.payload)) 
   } catch (err: any) {
     yield put(updateWeekFail(err.message))
   }
 }
 
-// TODO: fix
 function* addAchievedWeightSaga(action: UpdateWeekRequestAction) {
   const { achievedWeight }= action.payload
   const weekId = action.payload.weekId  
@@ -48,12 +47,12 @@ function* addAchievedWeightSaga(action: UpdateWeekRequestAction) {
 }
 
 function* deleteWeightsSaga(action: DeleteWeightsRequestAction) {
-  const { currentWeight, goalWeight } = action.payload
+  const { weights } = action.payload
   const weekId = action.payload.weekId
   console.log(action.payload.weekId, 'weekidsaga')
   try {
     //@ts-ignore
-    const res = yield axios.patch(`weeks/${weekId}`, { weights: { currentWeight, goalWeight }})
+    const res = yield axios.patch(`weeks/${weekId}`, { weights })
     console.log(res.data.payload, 'resdatapayload')
     yield put(updateWeekSuccess(res.data.payload))
   } catch (err: any) {
