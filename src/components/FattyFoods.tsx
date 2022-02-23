@@ -10,8 +10,6 @@ type FattyFoodsProps = {
   dayIndex: number
 }
 
-//TODO: should update weeks without refresh
-
 const FattyFoods = ({ days, dayIndex, weekId }: FattyFoodsProps) => {
   const weeks = useSelector((state: AppState) => state.weeks.list)
 

@@ -27,21 +27,20 @@ const LineChart = () => {
   const weeks = useSelector((state: AppState) => state.weeks.list)
   const weights = weeks.map((week: any) => week.weights)
   const [sortedWeeks, setSortedWeeks] = useState<any[]>([])
+  const [sortedWeights, setSortedWeights] = useState<any[]>([])
 
   useEffect(() => {
     if (weeks && weeks.length !== 0) {
       setSortedWeeks(weeks.reverse())
+      setSortedWeights(weights.reverse())
     }
-  }, [weeks, sortedWeeks])
+  }, [])
 
   const startingDates = sortedWeeks.slice(0, 8).map((week: any) => week.date)
 
-  console.log(sortedWeeks, 'sortedWeeks')
-  console.log(weights, 'weights')
-
   return (
     <div>
-      {sortedWeeks.length !== 0 && weights ? (
+      {weeks.length !== 0 && weights ? (
         <Line
           data={{
             labels: startingDates,
@@ -49,8 +48,8 @@ const LineChart = () => {
               {
                 label: 'Starting Weight',
                 data:
-                  weights &&
-                  weights
+                  sortedWeights &&
+                  sortedWeights
                     .slice(0, 8)
                     .map((weight: any) => weight.currentWeight),
                 backgroundColor: 'red',
@@ -60,8 +59,8 @@ const LineChart = () => {
               {
                 label: 'Goal',
                 data:
-                  weights &&
-                  weights.slice(0, 8).map((weight: any) => weight.goalWeight),
+                  sortedWeights &&
+                  sortedWeights.slice(0, 8).map((weight: any) => weight.goalWeight),
                 backgroundColor: '#1f805e',
                 borderWidth: 1,
                 borderColor: '#1f805e',
@@ -69,8 +68,8 @@ const LineChart = () => {
               {
                 label: 'Actual',
                 data:
-                  weeks &&
-                  weeks
+                  sortedWeeks &&
+                  sortedWeeks
                     .slice(0, 8)
                     .map((week: any) => week.achievedWeight),
                 backgroundColor: 'orange',

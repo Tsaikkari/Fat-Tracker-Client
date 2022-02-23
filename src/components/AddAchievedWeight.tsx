@@ -15,9 +15,10 @@ type AddAchievedWeightProps = {
 const AddAchievedWeight = ({
   editWeight,
   setEditWeight,
-  weekId
+  weekId,
 }: AddAchievedWeightProps) => {
   const [achievedWeight, setAchievedWeight] = useState('')
+  const [message, setMessage] = useState('')
   const { error } = useSelector((state: AppState) => state.week)
 
   const dispatch = useDispatch()
@@ -29,7 +30,12 @@ const AddAchievedWeight = ({
       updateWeekRequest({ weekId, achievedWeight: Number(achievedWeight) })
     )
     setAchievedWeight('')
-    setEditWeight(!editWeight)
+    setMessage(
+      'Your current weight is saved. Check out your progress on the Chart page.'
+    )
+    setTimeout(() => {
+      setEditWeight(!editWeight)
+    }, 4000)
   }
   return (
     <Form onSubmit={handleSubmit}>
@@ -45,7 +51,11 @@ const AddAchievedWeight = ({
       <Button type='submit' className='mt-2' variant='dark'>
         Save
       </Button>
-      {error && <Message variant='danger'>{error.message}</Message>}
+      {error ? (
+        <Message variant='danger'>{error.message}</Message>
+      ) : (
+        <Message>{message}</Message>
+      )}
     </Form>
   )
 }

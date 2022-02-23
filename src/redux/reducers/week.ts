@@ -20,21 +20,7 @@ const week = (state = initState, action: WeekActions) => {
     case CREATE_WEEK_SUCCESS:
       return { ...state, week: action.payload, loading: false }
     case UPDATE_WEEK_SUCCESS:
-      console.log(action.payload, 'reducerweek')
-      const achievedWeight = action.payload.achievedWeight
-      // TODO: fix
-      if (!achievedWeight) {
-        return {
-          ...state,
-          ...action.payload,
-          loading: false,
-        }
-      } 
-      return {
-        ...state,
-        achievedWeight,
-        loading: false,
-      }
+      return { ...state, ...action.payload, loading: false }
     default:
       return state
   }

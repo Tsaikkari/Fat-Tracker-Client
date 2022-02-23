@@ -39,7 +39,6 @@ function* addAchievedWeightSaga(action: UpdateWeekRequestAction) {
   try {
     //@ts-ignore
     const res = yield axios.patch(`weeks/${weekId}`, { achievedWeight }) 
-    console.log(res.data.payload, 'saga')
     yield put(updateWeekSuccess(res.data.payload)) 
   } catch (err: any) {
     yield put(updateWeekFail(err.message))
