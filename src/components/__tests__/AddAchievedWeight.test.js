@@ -17,7 +17,7 @@ afterEach(() => {
   wrapped.unmount()
 })
 
-it('has an input and a button', () => {
+it('has an input field and a button', () => {
   expect(wrapped.find('input').length).toEqual(1)
   expect(wrapped.find('button').length).toEqual(1)
 })

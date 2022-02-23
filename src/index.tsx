@@ -11,8 +11,6 @@ import Root from './Root'
 import LocalStorage from './local-storage'
 axios.defaults.baseURL = 'http://localhost:5000/api'
 
-//const store = makeStore()
-
 axios.interceptors.request.use((config: any) => {
   const token = LocalStorage.getToken()
   if (token) {

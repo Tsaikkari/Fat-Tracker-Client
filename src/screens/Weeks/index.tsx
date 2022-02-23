@@ -25,6 +25,7 @@ const Weeks = () => {
     if (weeks.length !== 0) {
       dispatch(getUserWeeksRequest())
     }
+    //eslint-disable-next-line
   }, [])
 
   return (

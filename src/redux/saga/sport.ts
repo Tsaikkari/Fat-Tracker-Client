@@ -14,7 +14,6 @@ function* createSportSaga(action: CreateSportRequestAction) {
   try {
     //@ts-ignore
     const res = yield axios.post('sports', sport)
-    console.log(res.data.payload, 'createsportsaga')
     yield put(createSportSuccess(res.data.payload))
   } catch (err) {
     yield put(createSportFail(err))

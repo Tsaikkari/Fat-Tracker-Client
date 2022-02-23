@@ -6,10 +6,10 @@ import {
 
 const initState = {
   week: {
-    achievedWeight: null,
+    achievedWeight: 0,
     weights: {
-      currentWeight: null,
-      goalWeight: null,
+      currentWeight: 0,
+      goalWeight: 0,
     },
   },
   loading: true,
