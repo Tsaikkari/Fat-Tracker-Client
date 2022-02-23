@@ -67,6 +67,7 @@ const Profile = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    
     const user = { _id, email: formData.email, name: formData.name }
     if (_id) {
       dispatch(

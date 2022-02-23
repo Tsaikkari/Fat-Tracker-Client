@@ -19,6 +19,7 @@ const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    
     dispatch(loginUserRequest(email, password, navigate))
     setEmail('')
     setPassword('')

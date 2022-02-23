@@ -18,7 +18,7 @@ const AddAchievedWeight = ({
   weekId
 }: AddAchievedWeightProps) => {
   const [achievedWeight, setAchievedWeight] = useState('')
-  const { error } = useSelector((state: AppState) => state.auth)
+  const { error } = useSelector((state: AppState) => state.week)
 
   const dispatch = useDispatch()
 

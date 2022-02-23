@@ -27,7 +27,7 @@ const AddSports = ({
     weekId: ''
   })
   const [date, setDate] = useState('')
-  const { error, loading } = useSelector((state: AppState) => state.sport)
+  const { error } = useSelector((state: AppState) => state.sport)
 
   const dispatch = useDispatch()
 
@@ -99,7 +99,6 @@ const AddSports = ({
         Save
       </Button>
       {error && <Message variant='danger'>{error.message}</Message>}
-      {loading && <p>... loading</p>}
     </Form>
   )
 }

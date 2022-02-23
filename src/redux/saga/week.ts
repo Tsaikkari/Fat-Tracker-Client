@@ -64,7 +64,7 @@ function* deleteWeightsSaga(action: DeleteWeightsRequestAction) {
 const weekWatcher = [
   takeLatest('CREATE_WEEK_REQUEST', createWeekSaga),
   takeLatest('UPDATE_WEEK_REQUEST', addWeightsSaga),
-  takeLatest('UPDATE_USER_REQUEST', addAchievedWeightSaga),
+  takeLatest('UPDATE_WEEK_REQUEST', addAchievedWeightSaga),
   takeLatest('UPDATE_WEEK_REQUEST', deleteWeightsSaga)
 ]
 

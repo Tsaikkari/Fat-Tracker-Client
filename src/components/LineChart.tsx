@@ -36,9 +36,12 @@ const LineChart = () => {
 
   const startingDates = sortedWeeks.slice(0, 8).map((week: any) => week.date)
 
+  console.log(sortedWeeks, 'sortedWeeks')
+  console.log(weights, 'weights')
+
   return (
     <div>
-      {sortedWeeks && weights && (
+      {sortedWeeks.length !== 0 && weights ? (
         <Line
           data={{
             labels: startingDates,
@@ -82,6 +85,8 @@ const LineChart = () => {
             maintainAspectRatio: false,
           }}
         />
+      ) : (
+        <div>Please, add your weights on the week page</div>
       )}
     </div>
   )
