@@ -1,18 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { Provider } from 'react-redux'
 import axios from 'axios'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './css/index.css'
 
 import App from './App'
-import makeStore from './redux/store'
+import Root from './Root'
 import LocalStorage from './local-storage'
 axios.defaults.baseURL = 'http://localhost:5000/api'
 
-const store = makeStore()
+//const store = makeStore()
 
 axios.interceptors.request.use((config: any) => {
   const token = LocalStorage.getToken()
@@ -24,9 +23,9 @@ axios.interceptors.request.use((config: any) => {
 
 ReactDOM.render(
   <Router>
-    <Provider store={store}>
+    <Root>
       <App />
-    </Provider>
+    </Root>
   </Router>,
   document.getElementById('root')
 )
